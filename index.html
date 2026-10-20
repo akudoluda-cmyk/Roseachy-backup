@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Roseachy · Sales &amp; Financial Desk</title>
-<meta name="roseachy-version" content="2.14.2-optimization-cp1">
+<meta name="roseachy-version" content="2.14.2-optimization-cp2">
 <meta name="theme-color" content="#163E32">
 <meta name="application-name" content="Roseachy">
 <meta name="mobile-web-app-capable" content="yes">
@@ -4068,6 +4068,14 @@ Dettol 250ml | Essentials | 1800 | 2200 | 24u | |"></textarea>
   async function readStoreRec(store, key) { const db = await openDb(), t = db.transaction(store, 'readonly'); return reqP(t.objectStore(store).get(key)); }
   async function writeStoreRec(store, key, value) { const db = await openDb(), t = newTx(db, store, 'readwrite'); t.objectStore(store).put(value, key); await txDone(t); }
   async function getAll(store) { const db = await openDb(), t = db.transaction(store, 'readonly'); return reqP(t.objectStore(store).getAll()); }
+  async function readKnownState() {
+    // One readonly snapshot for compact state; keep the existing final revision check.
+    const db = await openDb(), t = db.transaction([...new Set(Object.values(STORE_OF))], 'readonly');
+    const values = await Promise.all(KEYS.map(k => reqP(t.objectStore(STORE_OF[k]).get(storageKey(k)))));
+    const out = {};
+    KEYS.forEach((k, i) => { const value = decode(values[i]); if (value != null) out[k] = value; });
+    return out;
+  }
   
 
   function normalizeCollectionForStore(key, values) {
@@ -4341,8 +4349,7 @@ Dettol 250ml | Essentials | 1800 | 2200 | 24u | |"></textarea>
       migrationInfo = { status: 'fallback' }; loaded = true; await checkRevision(); return status();
     }
     dataRevision = revisionOf(await readStoreRec('metadata', 'dataRevision'));
-    const cur = {};
-    for (const k of KEYS) { const v = decode(await readStoreRec(STORE_OF[k], storageKey(k))); if (v != null) cur[k] = v; }
+    const cur = await readKnownState();
     const meta = await readStoreRec('metadata', 'migration');
     if (meta && meta.status === 'complete') {
       KEYS.forEach(function (k) { if (!COLLECTIONS[k] && cur[k] != null) MEM[k] = cur[k]; });
@@ -4662,11 +4669,11 @@ const CHANGE_TYPES=['sale_cash','sale_cash_banked','sale_cashout'];
 function txChangeOwed(t){return n(t.changeOwed)}
 const stateFields=['business','date','openingCash','posOpeningCash','posOpeningElectronic','openingDebt','actualCash','actualPosCash','actualPosElectronic','actualBankMovement'];
 /* Long-run performance state. All limits affect rendering only; records remain complete in storage. */
-const PERF={ledgerPage:120,stockPage:160,savedPage:30,ledgerLimit:120,stockLimit:160,savedLimit:30,stockRev:0,savedRev:0,marketRev:0,historyIndexRev:-1,supplierIndexRev:-1,historyIndex:null,supplierIndex:null,stockOptionsRev:-1,datalistRev:-1,recordCalc:new WeakMap(),parsed:new Map()};
+const PERF={ledgerPage:120,stockPage:160,savedPage:30,ledgerLimit:120,stockLimit:160,savedLimit:30,stockRev:0,savedRev:0,marketRev:0,historyIndexRev:-1,supplierIndexRev:-1,historyIndex:null,supplierIndex:null,normalizedSaved:null,stockOptionsRev:-1,datalistRev:-1,recordCalc:new WeakMap(),parsed:new Map()};
 function debounce(fn,ms=120){let t;return function(...a){clearTimeout(t);t=setTimeout(()=>fn.apply(this,a),ms)}}
 function idleTask(fn){if('requestIdleCallback'in window)return requestIdleCallback(()=>fn(),{timeout:600});return setTimeout(fn,0)}
 function markStockChanged(){PERF.stockRev++;PERF.stockOptionsRev=-1;PERF.datalistRev=-1}
-function markSavedChanged(){PERF.savedRev++;PERF.historyIndexRev=-1;PERF.supplierIndexRev=-1;PERF.recordCalc=new WeakMap();}
+function markSavedChanged(){PERF.normalizedSaved=null;PERF.savedRev++;PERF.historyIndexRev=-1;PERF.supplierIndexRev=-1;PERF.recordCalc=new WeakMap();}
 function resetLedgerWindow(){PERF.ledgerLimit=PERF.ledgerPage}
 function resetStockWindow(){PERF.stockLimit=PERF.stockPage}
 function resetSavedWindow(){PERF.savedLimit=PERF.savedPage}
@@ -4736,7 +4743,15 @@ function normalizeStockArray(a,pricingOverride=null){return(Array.isArray(a)?a:[
 function getStock(){let raw=parsedJson(KEY.stock,[]),norm=Array.isArray(raw)?raw:[];let needs=false;for(const x of norm){if(!x||!x.id||!Array.isArray(x.batches)||x.totalUnits==null||x.packRepresentationVersion!==1){needs=true;break}}if(needs){if(norm.some(p=>!p||!String(p.name||'').trim()))throw Error('A stock record has no product name. Existing data was preserved.');validateInventoryBackup({stock:norm});norm=normalizeStockArray(norm);cacheJson(KEY.stock,norm);markStockChanged()}return norm}
 function setStock(a,changedIds=null){let norm;if(changedIds&&changedIds.length){norm=Array.isArray(a)?a:[];for(const id of changedIds){const i=norm.findIndex(x=>x&&String(x.id)===String(id));if(i>=0)norm[i]=normalizeProduct(norm[i])}}else norm=normalizeStockArray(a);validateInventoryBackup({stock:changedIds?norm.filter(p=>changedIds.includes(p.id)):norm});cacheJson(KEY.stock,norm,changedIds);auditObserve(norm,changedIds);markStockChanged();return norm}
 function normalizeTxIds(list){const seen=new Set();let changed=false;const out=(Array.isArray(list)?list:[]).map(raw=>{const t={...raw};if(!t.id||seen.has(String(t.id))){t.id=uid('t');changed=true}seen.add(String(t.id));const cat=TYPES[t.type]?.cat;if(!t.domain){t.domain=cat==='pos'||cat==='posadj'?'pos':cat==='cashxfer'?'internal':'retail';changed=true}if(!t.refKind){t.refKind=cat==='pos'||cat==='posadj'?'pos':cat==='cashxfer'?'internal':'product';changed=true}return t});return{list:out,changed}}
-function getSaved(){let out=parsedJson(KEY.saved,[]);if(!Array.isArray(out))out=[];let changed=false;for(const r of out){if(!r)continue;const z=normalizeTxIds(r.tx);if(z.changed){r.tx=z.list;changed=true}if(r.archived==null)r.archived=false}if(changed){cacheJson(KEY.saved,out);markSavedChanged()}return out}
+function getSaved(){
+ let out=parsedJson(KEY.saved,[]);if(!Array.isArray(out))out=[];
+ // Cache only schema normalization, never balances. setSaved and rollback invalidate
+ // this marker; storage hydration/import also replaces the collection reference.
+ if(PERF.normalizedSaved===out)return out;
+ let changed=false;for(const r of out){if(!r)continue;const z=normalizeTxIds(r.tx);if(z.changed){r.tx=z.list;changed=true}if(r.archived==null)r.archived=false}
+ if(changed){cacheJson(KEY.saved,out);markSavedChanged()}
+ PERF.normalizedSaved=out;return out;
+}
 function setSaved(a,changedIds=null){const out=Array.isArray(a)?a:[];cacheJson(KEY.saved,out,changedIds);markSavedChanged();return out}
 function getNotes(){const a=parsedJson(KEY.notes,[]);return Array.isArray(a)?a:[]}
 function setNotes(a){cacheJson(KEY.notes,Array.isArray(a)?a:[])}
@@ -7305,7 +7320,6 @@ function installUI(){
 })();
 
 async function init(){const t0=performance.now();await hydrateFromIDB();await migrateSavedTheme();migrateLegacy();await finalizeMigration();if(!loadDraft()){$('date').value=today();openingStock=stockSnapshot()}if(!tx.length&&$('date').value!==today()){$('date').value=today();openingStock=stockSnapshot()}ensureOpeningStock();loadHoldState();await cleanAdjustmentHistory();initializeInventoryAudit();setupInventoryUpgrade();await inventoryCommit(migrateInventoryPricing,'Migration','Current purchase cost reference corrected');validateSystemIntegrity({repair:true});await SmartSync.start();refreshTypeUI();ensureWeekDefaults();render();renderAppearanceControls();renderPricingSettings();syncStockPricing('system');syncStockInventoryCollapse(getUIState().stockInventoryCollapsed);updateStockPackUI();adjustmentUI();updateTxPackUI();updatePreImportButton();if(holdMode)renderHoldPanel();window.__roseachyFirstUsableMs=Math.round(performance.now()-t0);idleTask(()=>{renderSaved();renderTrash();renderTxTrash();renderNotes();if(!$('tabAnalytics').classList.contains('hidden'))renderAnalytics();if(!$('marketDesk').classList.contains('hidden'))renderMarket();monitorStorageSize()});if(holdMode)toast('Held customer purchase restored');finReminder()}
-window.__roseachyDebug={setTx(v){tx=v;resetLedgerWindow()},renderLedger,renderStock,renderSaved,renderAnalytics,setSaved,setStock,getSaved,getStock,PERF};
 init().then(()=>{backupSetupWorking();setupAdaptiveNavigation();window.RoseachyNav?.init();window.dispatchEvent(new Event('roseachy:ready'))}).catch(err=>{roseachyDiag('startup',err,'initialization');const o=document.createElement('div');o.id='loadErrorOverlay';o.style.cssText='position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:var(--navy)';o.innerHTML='<div>Roseachy could not load its data.<br><small>'+esc(err&&err.message||err)+'</small><br><button style="margin-top:14px;padding:12px 22px;border-radius:12px;border:0;background:var(--navy);color:#fff;font-size:14px" onclick="location.reload()">Retry</button></div>';document.body.appendChild(o)});
 refreshDivisionSelectStyles();
 })();
@@ -7320,7 +7334,9 @@ if(c.id==='rsMainTabs'){x-=c.clientLeft;y-=c.clientTop}x=Math.round(x*100)/100;y
 if(still)ind.classList.add('still');ind.style.width=w+'px';ind.style.height=h+'px';ind.style.transform='translate('+x+'px,'+y+'px)';ind.classList.add('on');ind._rsKey=key;if(still){void ind.offsetWidth;ind.classList.remove('still')}else if(moved){ind.classList.remove('rsTabGlint');void ind.offsetWidth;ind.classList.add('rsTabGlint');clearTimeout(ind._rsTabGlintTimer);ind._rsTabGlintTimer=setTimeout(function(){ind.classList.remove('rsTabGlint')},460)}}
 function setup(c){if(c._ind)return;var ind=document.createElement('span');ind.className='tabInd';ind.setAttribute('aria-hidden','true');c.appendChild(ind);c._ind=ind;c.classList.add('hasInd');
 var raf=0;function q(still){cancelAnimationFrame(raf);raf=requestAnimationFrame(function(){place(c,still)})}
-new MutationObserver(function(){q(false)}).observe(c,{attributes:true,attributeFilter:['class'],subtree:true});
+// Indicator class changes are our own output, not a new navigation input.
+// Observing them scheduled eight perpetual animation-frame loops while idle.
+new MutationObserver(function(records){if(records.some(function(r){return r.target!==ind}))q(false)}).observe(c,{attributes:true,attributeFilter:['class'],subtree:true});
 if(window.ResizeObserver){new ResizeObserver(function(){q(true)}).observe(c)}else window.addEventListener('resize',function(){q(true)});
 q(true)}
 function init(){document.querySelectorAll(SEL).forEach(setup)}

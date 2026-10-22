@@ -6212,6 +6212,7 @@ function supplierPaymentPreview(){
 function refreshSupplierPaymentForm(prefill=false,requestedTarget=undefined){
  const model=supplierDebtModel(),supplier=model.suppliers.get(supplierPaymentSupplierId),rows=supplierPaymentRows(model),select=$('supplierPaymentPurchase');
  const previous=requestedTarget===undefined?select.value:requestedTarget;
+ $('supplierPaymentName').readOnly=!!supplier;
  select.innerHTML='<option value="manual">Separate payment — no purchase allocation</option>'+(supplier&&rows.length?'<option value="all">All outstanding purchases — oldest first</option>':'')+rows.map(row=>'<option value="'+esc(row.id)+'">'+esc(marketLocalDateKey(row.purchase.completedAt))+' · '+esc(row.id)+' · '+esc(fmt(row.outstandingK/100))+(row.pendingK?' (payment pending)':'')+'</option>').join('');
  select.value=[...select.options].some(o=>o.value===previous)?previous:'manual';
  const total=supplier?supplier.outstandingK:rows.reduce((sum,row)=>sum+row.outstandingK,0),pending=rows.reduce((sum,row)=>sum+row.pendingK,0);

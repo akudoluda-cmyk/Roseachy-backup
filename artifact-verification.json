@@ -1,0 +1,16 @@
+{
+  "Roseachy-Desk-2.16.8-Cloudflare-Pages.zip": {
+    "bytes": 394318,
+    "sha256": "4e66d9c7ac6a3876d3f0e0a47428010f431af34283ce3e6cfe3295d1c107dba5",
+    "entries": 13,
+    "crcVerified": true,
+    "allEntryHashesVerified": true
+  },
+  "Roseachy-Desk-2.16.8-Source-and-Reports.zip": {
+    "bytes": 30369106,
+    "sha256": "c74ebc2f32685510a3254e6a4d59f1bc36c90e24768fcf52aa459252e8d9429c",
+    "entries": 297,
+    "crcVerified": true,
+    "allEntryHashesVerified": true
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "version": "2.16.8",
+  "sourceCommit": "7033e4a861491820075f302f9bb65ff0b0f8bd05",
+  "githubBranch": "release-2.16.8",
+  "verifiedRemoteCommit": "7033e4a861491820075f302f9bb65ff0b0f8bd05",
+  "sourceFiles": {
+    "_headers": "6f189d91b18d2bc4efcb109f6eb50c0515bab4692c09825f56581791d6d211a6",
+    "_redirects": "6036983e5fc00f0169c9e939b1816ed771eee00e27f2fcc517b819041460b9ef",
+    "icons/apple-touch-icon.png": "34594d00ff16323379bc1c25e8d3f644c0cc3db1c3f24204471e7ed62eddaf15",
+    "icons/icon-192.png": "5a7a36e48ee7ab2ae094440aef46e9610f28fe9a07c15c54e638e52be56a1f2c",
+    "icons/icon-48.png": "b882aad82498324620c17ec7ec4e976a6f393e9d3226816501a0e1e8ae6b7a92",
+    "icons/icon-512.png": "f21642d8d7276d10a0a48dcf072e92244a4cef30e0f711b927404550aa0efe64",
+    "icons/icon-maskable-512.png": "c8fbe9fee181d10f8f45fad63a103a977fd53c2c80fa655b2b736f80a06f5f79",
+    "icons/roseachy-logo.svg": "724b316fcdc1ce317dab61c826e35b56672ab4fb1e90bc2c103cff9b0183107e",
+    "index.html": "21d2667c2a83332acdef30edd1a41e17b9c5c04f4b218f2c100f6898096af6e8",
+    "js/android-sync-files.js": "92e46f87d5b2904b1413e8cd69e875e14e244a625d9ef1007cc82787ea20e6c8",
+    "js/pwa.js": "36c93b10687024e60bc4e68d993965ce59c75b12b3842d1cf9a8e77a21b89aa5",
+    "manifest.json": "f2ab1ff7d090f833d90221761c9499cde5971a38d17b6c674535400c09e3a628",
+    "sw.js": "3f7d32f6f37adcd70b9c4fc84772208ae16b56d752c095954bf43d95173319b2"
+  },
+  "validation": {
+    "sourceSHA256": "21d2667c2a83332acdef30edd1a41e17b9c5c04f4b218f2c100f6898096af6e8",
+    "jobs": [
+      {
+        "command": "node static_check.cjs",
+        "exitCode": 0,
+        "seconds": 0.26
+      },
+      {
+        "command": "python ux_workflows.py",
+        "exitCode": 0,
+        "seconds": 2.37
+      },
+      {
+        "command": "python cart_items.py",
+        "exitCode": 0,
+        "seconds": 3.81
+      },
+      {
+        "command": "python pricing.py app",
+        "exitCode": 0,
+        "seconds": 2.21
+      },
+      {
+        "command": "python cart_setup.py",
+        "exitCode": 0,
+        "seconds": 2.42
+      },
+      {
+        "command": "python credit_analytics.py",
+        "exitCode": 0,
+        "seconds": 2.4
+      },
+      {
+        "command": "python payment_matrix.py",
+        "exitCode": 0,
+        "seconds": 2.27
+      },
+      {
+        "command": "python safety.py",
+        "exitCode": 0,
+        "seconds": 3.35
+      },
+      {
+        "command": "python regression.py app",
+        "exitCode": 0,
+        "seconds": 3.31
+      },
+      {
+        "command": "python sync.py",
+        "exitCode": 0,
+        "seconds": 9.37
+      },
+      {
+        "command": "python item_sync.py",
+        "exitCode": 0,
+        "seconds": 4.78
+      },
+      {
+        "command": "python ux_mobile.py",
+        "exitCode": 0,
+        "seconds": 35.96
+      },
+      {
+        "command": "python compatibility_ui.py",
+        "exitCode": 0,
+        "seconds": 23.43
+      },
+      {
+        "command": "python pwa_update.py",
+        "exitCode": 0,
+        "seconds": 8.21
+      }
+    ],
+    "passed": true
+  },
+  "browserCheckGroups": 91,
+  "cloudflareDeployed": false
+}

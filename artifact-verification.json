@@ -1,0 +1,28 @@
+{
+  "Roseachy-Desk-2.16.9-Cloudflare-Pages.zip": {
+    "bytes": 389412,
+    "sha256": "33fa2c8b129f55153c9e840bbcb9d3dc6440c305cc372c8742e90dfe7256915d",
+    "entries": 13,
+    "crcVerified": true,
+    "allEntryHashesVerified": true
+  },
+  "Roseachy-Desk-2.16.9-Source-and-Reports.zip": {
+    "bytes": 67255637,
+    "sha256": "2f3d17ea314ae83d253e74211de88dee1935bad3b54e7bbc53e9fec74fe9f4eb",
+    "entries": 576,
+    "crcVerified": true,
+    "allEntryHashesVerified": true
+  },
+  "Roseachy-Desk-2.16.9-Preview.html": {
+    "bytes": 1336825,
+    "sha256": "705d2ceb4472bcb918787e3f9865152801b4c8332a3bdec72f2773b58b779c2c"
+  },
+  "Roseachy-Desk-2.16.9-Visual-Report.html": {
+    "bytes": 1258522,
+    "sha256": "33bcf9cc436d65269e16088dc883ec937e722bb4716e1d90e48c5b38690e9cb8"
+  },
+  "VERIFICATION.md": {
+    "bytes": 6049,
+    "sha256": "9256462a16495358a9c2ee587b5f81e88147c3a1980614e4615708f3ccc15059"
+  }
+}

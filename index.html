@@ -3590,6 +3590,7 @@ html body[data-theme] #recordsTable tr.heldGroupRow.heldGroupAlternate>td{backgr
 .cartItemEditor{flex:1;min-width:0;margin:6px 0;padding:8px;border-bottom:1px solid var(--line)}
 .cartItemEditor summary{cursor:pointer;display:list-item;font-size:14px;overflow-wrap:anywhere}
 .cartItemEditor summary b{float:right;margin-left:8px}
+.cartItemEditor summary::after{content:"";display:block;clear:both}
 .cartItemEditor summary small{color:var(--muted)}
 .cartItemEditor .split{margin-top:12px;grid-template-columns:repeat(2,minmax(0,1fr))}
 .cartItemEditor input{width:100%;min-width:0}
@@ -8688,6 +8689,8 @@ const CartCorrections=(()=>{
   try{validateBackupTransactions(rows,'corrected cart')}catch(e){return e.message}
   return '';
  }
+ function paymentDraft(){return JSON.stringify(['cartCorrectionType','cartCorrectionPaid','cartCorrectionBank','cartCorrectionReturned','cartCorrectionDestination'].map(id=>$(id).value).concat($('cartCorrectionRecover').checked));}
+ function comparable(t){const o=clone(t);delete o.editedAt;delete o.creditEditHistory;for(const key of ['splitCash','splitBank','splitCredit','customerPaid','changeReturned','changeOwed','recoverableChange','electronicReceived','cashOut','reconciliationDifference'])o[key]=n(o[key]);for(const key of ['paymentReconciliationV2','autoCustomerDebt'])o[key]=!!o[key];for(const key of ['basketTotal','electronicDestination','originSaleType'])o[key]=o[key]??null;return stableBackupText(o);}
  function open(id){
   if(historical||holdMode)return toast('Finish the open cart and return to the current business day before correcting a completed cart.');
   const rows=tx.filter(t=>groupOf(t)===String(id));if(!rows.length||rows.some(t=>!methods.includes(t.type)))return toast('This transaction uses its dedicated account workflow.');
@@ -8701,7 +8704,7 @@ const CartCorrections=(()=>{
   $('cartCorrectionDestination').value=anchor.electronicDestination||'pos';
   $('cartCorrectionLines').innerHTML=rows.map((t,i)=>cartItemEditor(t,i,'cartCorrectionItem')).join('');
   updateItemTotals();
-  $('cartCorrectionError').textContent='';$('cartCorrectionOverlay').classList.remove('hidden');update();$('cartCorrectionType').focus();
+  $('cartCorrectionError').textContent='';$('cartCorrectionOverlay').classList.remove('hidden');update();session.payment=paymentDraft();$('cartCorrectionType').focus();
  }
  function editedRows(){if(!session)throw Error('Reopen this cart before editing.');return [...$('cartCorrectionLines').querySelectorAll('[data-cart-item]')].map(card=>readCartItemEditor(card,session.rows[Number(card.dataset.cartItem)]));}
  function updateItemTotals(){try{const rows=editedRows();$('cartCorrectionSummary').textContent='Cart Purchase · '+rows.length+' item(s) · '+fmt(rows.reduce((sum,t)=>sum+n(t.amount),0));return true;}catch{$('cartCorrectionSummary').textContent='Cart Purchase · Check item quantities and amounts';return false;}}
@@ -8709,6 +8712,7 @@ const CartCorrections=(()=>{
  function money(id){const el=$(id),v=Number(el.value);if(!el.value.trim()||!Number.isFinite(v)||v<0||v>1e12||Math.abs(v*100-Math.round(v*100))>1e-6)throw Error('Enter nonnegative amounts with at most two decimal places.');return roundMoney(v);}
  function prepare(original){
   const rows=editedRows();
+  if(paymentDraft()===session.payment&&stableBackupText(rows)===stableBackupText(original))return clone(original);
   const type=$('cartCorrectionType').value,total=roundMoney(rows.reduce((s,t)=>s+n(t.amount),0)),paid=type==='sale_credit'?0:money('cartCorrectionPaid'),returned=money('cartCorrectionReturned'),bank=type==='sale_split'?money('cartCorrectionBank'):0;
   if(!methods.includes(type))throw Error('Select a supported sales type.');
   if(type==='sale_split'&&(bank>paid||paid>total||returned>0))throw Error('Split payments must be within the cart total; the bank part cannot exceed the amount paid.');
@@ -8726,7 +8730,7 @@ const CartCorrections=(()=>{
    for(const t of changed){let capacity=Math.round(n(t.amount)*100);const cash=Math.min(capacity,remainingCash);remainingCash-=cash;capacity-=cash;const electronic=Math.min(capacity,remainingBank);remainingBank-=electronic;capacity-=electronic;t.splitCash=cash/100;t.splitBank=electronic/100;t.splitCredit=capacity/100;}
   }else if(paid<total)distributePartialBasket(changed,total,paid,type);
   else{const anchor=changed.at(-1);anchor.customerPaid=paid;anchor.changeReturned=returned;anchor.changeOwed=Math.max(0,roundMoney(paid-total-returned));anchor.recoverableChange=excess;anchor.basketTotal=total;anchor.paymentReconciliationV2=type==='sale_transfer';if(type==='sale_cashout'){anchor.electronicReceived=paid;anchor.cashOut=returned;anchor.electronicDestination=$('cartCorrectionDestination').value;for(const t of changed)t.electronicDestination=anchor.electronicDestination;}}
-  for(let i=0;i<changed.length;i++){const t=changed[i],snapshot=x=>Object.fromEntries(['id','type','amount','qty','unitPrice','unitSellingPrice','productId','productName',...fields.filter(k=>!['creditEditHistory','editedAt'].includes(k))].map(k=>[k,x[k]??null]));t.editedAt=stamp;t.creditEditHistory=[...(t.creditEditHistory||[]),{id:historyId,at:stamp,before:snapshot(original[i]),after:snapshot(t)}];}
+  for(let i=0;i<changed.length;i++){const t=changed[i];if(comparable(t)===comparable(original[i])){changed[i]=clone(original[i]);continue;}const snapshot=x=>Object.fromEntries(['id','type','amount','qty','unitPrice','unitSellingPrice','productId','productName',...fields.filter(k=>!['creditEditHistory','editedAt'].includes(k))].map(k=>[k,x[k]??null]));t.editedAt=stamp;t.creditEditHistory=[...(t.creditEditHistory||[]),{id:historyId,at:stamp,before:snapshot(original[i]),after:snapshot(t)}];}
   return changed;
  }
  async function save(){if(busy||!session||$('cartCorrectionOverlay').classList.contains('hidden'))return;busy=true;$('cartCorrectionSave').disabled=true;try{

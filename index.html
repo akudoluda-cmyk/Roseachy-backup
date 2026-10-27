@@ -2090,9 +2090,9 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
 /* One component colour system. Existing geometry and motion live in the legacy
    layer; the historical theme paint overrides have been retired. */
 @media screen {
- body[data-theme]{background:var(--rt-shell,var(--page-background));color:var(--page-text);--local-text:var(--page-text);--local-muted:var(--page-muted)}
+ body[data-theme]{background:var(--page-background);color:var(--page-text);--local-text:var(--page-text);--local-muted:var(--page-muted)}
  :where(body *){-webkit-text-fill-color:currentColor}
- :where(h1,h2,h3,h4,h5,h6,label,p,span,small,strong,b,summary,th,td,em,.line){color:var(--local-text)}
+ :where(div,h1,h2,h3,h4,h5,h6,label,p,span,small,strong,b,summary,th,td,em,.line,.qtyMain){color:var(--local-text)}
  :where(.small,.help,.sub,.muted,.stamp,.marketMeta,.marketHint,.settingSub,.previewEyebrow,.qtySub,.rsTrendMeta,.rsCreditNote small,.finTx small){color:var(--local-muted)}
  :where(.card,.collapse,.marketSection,.settingsGroup,.finGroup,.finGate,.studioPreview,.settingsPreview,.themeCard,.activeListCard,.supplierDebtGroup,.supplierDebtItem){--local-text:var(--text-primary);--local-muted:var(--text-secondary);background:var(--surface-paint);color:var(--local-text);border-color:var(--border-subtle)}
  :where(.marketPanel,.dupModal,.creditPanel,.syncPanel,.deskMenu,.finMenu,.marketUtilityMenu,.productSuggestDrop,.supplierDrop,.marketSearchDrop){--local-text:var(--text-primary);--local-muted:var(--text-secondary);background:var(--surface-elevated);color:var(--local-text);border-color:var(--border-strong)}
@@ -2103,12 +2103,11 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
  :where(.collapseHead,.settingsGroup>summary){background:var(--surface-secondary);color:var(--text-primary)}
  :where(.collapse:has(>.collapseHead[aria-expanded="true"]),details[open],.rsRecordExpanded){border-color:var(--accent-text)}
  :where(details[open]>summary,.cartItemEditor[open]>summary){color:var(--accent-text);font-weight:700}
- :where(.card>h2,.card>h3,.marketSection>.marketHead,.marketSection>h3){border-inline-start:3px solid var(--accent-text);padding-inline-start:10px}
- :where(button,.primaryBtn){--local-text:var(--text-primary);--local-muted:var(--text-secondary);background:var(--surface-secondary);color:var(--local-text);border-color:var(--border-strong)}
+ :where(button,.primaryBtn){--local-text:var(--text-primary);--local-muted:var(--text-secondary);background:var(--surface-secondary);color:var(--local-text);border-color:var(--border-strong);box-shadow:none}
  :where(button.ghost){background:transparent;color:var(--local-text);border-color:var(--border-strong)}
- :where(.iconbtn,.linkbtn,.rowToggle,button[data-private-credit]){background:transparent;color:var(--accent-text);border-color:transparent}
+ :where(.iconbtn,.linkbtn,.rowToggle,button[data-private-credit]){background:transparent;color:var(--text-primary);border-color:transparent}
  :where(.deskName){color:var(--page-text)}
- :where(.deskMenuBtn,.marketMoreBtn,#finMenuBtn,#openSmartSyncMarket,#marketNewActiveList){--local-text:var(--page-text);background:transparent;color:var(--page-text);border-color:var(--focus-on-page)}
+ :where(.deskMenuBtn,.marketMoreBtn,#finMenuBtn,#openSmartSyncMarket,#marketNewActiveList,#marketDebtSummary){--local-text:var(--page-text);background:transparent;color:var(--page-text);border-color:var(--page-muted)}
  :where(.marketPanel,.creditPanel,.card) :where(.iconClose,.deskMenuBtn,.marketMoreBtn){color:var(--text-primary);border-color:var(--border-subtle)}
  :where(button.primary,.primaryBtn,.marketAddBtn.primary){--local-text:var(--btn-text);--local-muted:var(--btn-text);background:var(--btn-bg);color:var(--btn-text);border-color:var(--btn-bg)}
  :where(button:not(:disabled):hover){background:var(--accent-soft);color:var(--text-primary);--local-text:var(--text-primary);--local-muted:var(--text-secondary)}
@@ -2123,7 +2122,7 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
  /* Market keeps its existing underline indicator, rather than a second pill. */
  :where(.marketViewTabs button.active){background:transparent;color:var(--accent-text);font-weight:750;--local-text:var(--accent-text);text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:2px}
  :where(.marketViewTabs>.tabInd){background:var(--accent-text)}
- :where(.hasInd .tabBtn.active,.hasInd.seg button.active,.hasInd.marketCalcTabs button.active){background:transparent}
+ :where(.hasInd .tabBtn.active){background:transparent}
  #rsMainTabs[data-rs-swipe-tracking="true"]>.tabBtn{color:transparent;-webkit-text-fill-color:transparent}
  .rs-swipe-labels.rs-label-base{color:var(--text-secondary)}.rs-swipe-labels.rs-label-active{color:var(--tab-active-text)}
  :where(.deskMenu button.active,.activeListCard.active,.themeCard.active,.productSuggestItem.active,.productSuggestItem:hover,.supplierDrop button:hover,.marketSearchDrop button:hover){--local-text:var(--text-primary);--local-muted:var(--text-secondary);background:var(--accent-soft);color:var(--text-primary);border-color:var(--accent-text)}
@@ -2139,7 +2138,7 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
  :where(button,input,select,textarea):disabled{opacity:1;background-color:var(--disabled-bg);color:var(--text-disabled);-webkit-text-fill-color:var(--text-disabled);--local-text:var(--text-disabled);--local-muted:var(--text-disabled);border-color:var(--border-subtle);border-style:dashed;box-shadow:none;cursor:not-allowed}
  :where(input:disabled,textarea:disabled)::placeholder{color:var(--text-disabled);-webkit-text-fill-color:var(--text-disabled);opacity:1}
  :where([aria-busy="true"]){cursor:progress;border-style:dashed}
- :where(.metric.hero,.finBalanceCard,.marketSummaryBar){--local-text:var(--hero-text);--local-muted:var(--hero-text);background:var(--hero-bg);color:var(--hero-text);border-color:var(--accent-text)}
+ :where(.metric.hero,.finBalanceCard,.marketSummaryBar){--local-text:var(--hero-text);--local-muted:var(--hero-text);background:var(--hero-bg);color:var(--hero-text);border-color:var(--border-subtle)}
  :where(.metric strong,.metric b,.purchaseDetailMetric strong,.supplierDebtAmount,.supplierDebtTotal,.rsCreditBalance,.purchaseBalance){font-variant-numeric:tabular-nums;font-weight:700}
  :where(#holdPanel,.rsTotalRow,.saleTotalField){--local-text:var(--text-primary);--local-muted:var(--text-secondary);background:var(--accent-soft);border-color:var(--accent-text)}
  #holdPanel{border-inline-start:3px solid var(--accent-text)}
@@ -2152,22 +2151,22 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
  #recordsTable tr.heldGroupRow>td{background:var(--accent-soft)}
  #recordsTable tr.heldGroupRow.heldGroupAlternate>td{background:var(--surface-secondary)}
  :where(.badge,.status,.rsCreditStatus,.supplierDebtStatus){border:1px solid currentColor;font-style:normal}
- :where(.status.ok,.badge.ok,.rsCreditStatus.settled,[data-tone="success"]){--local-text:var(--status-success);--local-muted:var(--status-success);background:var(--status-success-soft);color:var(--status-success);border-color:var(--status-success)}
+ :where(.status.ok,.badge.ok,.rsCreditStatus.settled,[data-tone="success"]){--local-text:var(--status-success);--local-muted:var(--status-success);background:var(--surface-secondary);color:var(--status-success);border-color:var(--border-subtle)}
  :where(.status.warn,.badge.low,.badge.expiry,.rsCreditStatus.unpaid,.supplierDebtStatus,.lowMark,.syncWarning,[data-tone="warning"]){--local-text:var(--status-warning);--local-muted:var(--status-warning);background:var(--status-warning-soft);color:var(--status-warning);border-color:var(--status-warning)}
  :where(.status.bad,.badge.expired,.syncConflict,[data-tone="danger"]){--local-text:var(--status-danger);--local-muted:var(--status-danger);background:var(--status-danger-soft);color:var(--status-danger);border-color:var(--status-danger)}
  :where(.rsCreditStatus.partial,[data-tone="pending"]){--local-text:var(--status-pending);--local-muted:var(--status-pending);background:var(--status-pending-soft);color:var(--status-pending);border-color:var(--status-pending)}
  :where([data-tone="info"]){--local-text:var(--status-info);--local-muted:var(--status-info);background:var(--status-info-soft);color:var(--status-info);border-color:var(--status-info)}
  :where(.warnText,.rsWorkflowWarn,.rsInvalidInput,[aria-invalid="true"]){color:var(--status-danger-text);border-color:var(--status-danger-text)}
  :where(.rsWorkflowWarn.visible,.posShort,.syncWarning){background:var(--status-warning-soft);color:var(--status-warning);--local-text:var(--status-warning);--local-muted:var(--status-warning);border-color:var(--status-warning)}
- :where(tr.lowRow,tr.expiringRow){background:var(--status-warning-soft)}
- :where(tr.expiredRow){background:var(--status-danger-soft)}
+ :where(tr.lowRow,tr.expiringRow){background:transparent}
+ :where(tr.expiredRow){background:transparent}
  :where(tr.lowRow td,tr.expiringRow td,tr.expiredRow td){color:var(--text-primary)}
  :where(.badge.pharmacy,.badge.dpharm,.badge.dp,.divPharm,.pharmacyBadge){color:var(--division-pharmacy);background:var(--surface-secondary)}
  :where(.badge.essentials,.badge.dess,.badge.de,.divEss,.essentialsBadge){color:var(--division-essentials);background:var(--surface-secondary)}
  #finOverview{padding:20px;border:1px solid var(--border-subtle);border-radius:var(--r)}
- :where(.finPlus){color:var(--status-success-text)}
- :where(.finMinus){color:var(--status-danger-text)}
- :where(.finTransfer){color:var(--status-info-text)}
+ :where(.finPlus){color:var(--text-primary)}
+ :where(.finMinus){color:var(--text-primary)}
+ :where(.finTransfer){color:var(--text-primary)}
  :where(.finBalanceCard .finPlus,.finBalanceCard .finMinus,.finBalanceCard .linkbtn){color:var(--hero-text)}
  :where(#finPendingConfirmations>summary,#finReviewStatus){color:var(--status-pending-text)}
  :where(.rsHistoryTotal){color:var(--text-primary)}
@@ -2175,16 +2174,32 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
  :where(.noteHead,.recordMetaGrid,.rsCreditHeader){background:var(--surface-secondary);--local-text:var(--text-secondary);--local-muted:var(--text-secondary)}
  :where(.cartItemEditor,.editableNote,.savedItem,.marketRow){border-color:var(--border-subtle)}
  :where(.marketPurchaseRow){border-inline-start:3px solid var(--border-subtle);padding-inline-start:12px}
- :where(.marketPurchaseRow[data-payment-state="unpaid"]){border-inline-start-color:var(--status-warning-text)}
+ :where(.marketPurchaseRow[data-payment-state="unpaid"]){border-inline-start-color:var(--border-strong)}
  :where(.marketPurchaseRow[data-payment-state="partial"]){border-inline-start-color:var(--status-pending-text)}
- :where(.marketPurchaseRow[data-payment-state="settled"]){border-inline-start-color:var(--status-success-text)}
+ :where(.marketPurchaseRow[data-payment-state="settled"]){border-inline-start-color:var(--border-subtle)}
  :where(.settingsDanger){border-color:var(--status-danger-text)}
  :where(.rsTrendCard,.rsAnaProductDetail){background:var(--surface-secondary);--local-text:var(--text-primary);--local-muted:var(--text-secondary)}
  #toast{--local-text:var(--status-info);--local-muted:var(--status-info);background:var(--status-info-soft);color:var(--status-info);border-color:var(--status-info)}
- #toast[data-tone="success"]{background:var(--status-success-soft);color:var(--status-success);border-color:var(--status-success)}
+ #toast[data-tone="success"]{background:var(--surface-secondary);color:var(--status-success);border-color:var(--border-subtle)}
  #toast[data-tone="warning"]{background:var(--status-warning-soft);color:var(--status-warning);border-color:var(--status-warning)}
  #toast[data-tone="danger"]{background:var(--status-danger-soft);color:var(--status-danger);border-color:var(--status-danger)}
+ :where(.supplierDebtItem,.marketChip,.themeCard,#marketReviewBtn,#finMaskToggle,#finRemove){white-space:normal;overflow-wrap:anywhere}
+ :where(.themeCard b,.themeCard small){max-width:100%;white-space:normal;overflow-wrap:anywhere}
+ :where(.supplierDebtItemTitle,.supplierDebtItemInfo){white-space:normal}
+ :where(.marketSuggest){--local-text:var(--page-text);--local-muted:var(--page-muted)}
+ #marketSuggestions>.small{color:var(--page-muted)!important}
+ :where(.finBetween){flex-wrap:wrap}
+ :where(#finMaskToggle){flex-shrink:0}
+ /* Ordinary controls and records share the neutral foundation. Text, numeric
+    signs and status labels carry meaning without decorative icon tiles. */
+ :where(.iconClose){background:transparent;color:var(--local-text);border-color:transparent;box-shadow:none}
+ :where(.marketStatus,.marketStatus.idle,.marketAutoLow,.rsSavedBadge,.rsTrendTag){background:var(--surface-secondary);color:var(--text-secondary);border-color:var(--border-subtle)}
+ :where(.marketSummaryBar){box-shadow:none}
+ :where(.themeCard,.card,.marketSection,.finGroup){box-shadow:0 2px 8px rgba(0,0,0,.06)}
+ :where(.marketActions button.primary){background:var(--surface-secondary);color:var(--text-primary);border-color:var(--border-strong)}
+ :where(.finBalanceCard strong,.metric.hero strong){font-size:clamp(1.25rem,4vw,1.8rem);font-variant-numeric:tabular-nums}
 }
+
 
 
 @media screen {
@@ -3177,8 +3192,8 @@ html body[data-theme] #recordsTable tr.heldGroupRow.heldGroupAlternate>td{backgr
       <div class="footerActions noPrint dayExportTools"><button class="ghost" id="printBtn">Print / PDF</button><button class="ghost" id="csvBtn">Export CSV</button></div>
     </section>
     <div class="dayManageRow noPrint" id="dayManageRow" role="group" aria-label="Business day actions">
-      <button class="ghost daySaveBtn" id="saveBtn" type="button"><span class="dayBtnIcon" aria-hidden="true">▣</span> <span>Save Day</span></button>
-      <button class="primary dayStartBtn" id="clearBtn" type="button"><span>Start New Day</span> <span class="dayBtnIcon" aria-hidden="true">→</span></button>
+      <button class="ghost daySaveBtn" id="saveBtn" type="button"><span>Save Day</span></button>
+      <button class="primary dayStartBtn" id="clearBtn" type="button"><span>Start New Day</span> </button>
     </div>
 
     <div class="collapse">
@@ -3604,14 +3619,14 @@ Dettol 250ml | Essentials | 1800 | 2200 | 24u | |"></textarea>
   <div class="studioGroups">
     <details class="settingsGroup" open><summary><span>Appearance</span><small>Theme &amp; density</small></summary><div class="settingsBody">
       <div class="settingRow"><div><label>Dark Mode</label><div class="settingSub">Choose Off, On, or follow your device. Roseachy keeps the selected palette tuned for comfortable dark-mode reading.</div></div><div class="segChoice" data-setting-buttons="colorMode"><button data-value="light">Off</button><button data-value="dark">On</button><button data-value="system">System</button></div></div>
-      <div class="settingBlock"><div class="settingBlockHead"><div><label>Theme</label><div class="settingSub">Three original themes and seven reference designs. Each theme includes coordinated surfaces, controls and readable light/dark variants.</div></div></div>
+      <div class="settingBlock"><div class="settingBlockHead"><div><label>Theme</label><div class="settingSub">Six established themes. Each theme includes coordinated surfaces, controls and readable light/dark variants.</div></div></div>
         <div class="themeGrid" id="themeGrid">
   <button type="button" class="themeCard" data-theme-choice="cobalt" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#111B32"></i><i style="--sw:#366FB9"></i><i style="--sw:#F3F6FC"></i></span><b>Cobalt Studio</b><small>Original midnight blue · rich cobalt · ice</small></button>
   <button type="button" class="themeCard" data-theme-choice="pearl" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#F1F2F7"></i><i style="--sw:#FFFFFF"></i><i style="--sw:#001351"></i></span><b>Pearl & Royal Blue</b><small>Pearl · deep blue</small></button>
   <button type="button" class="themeCard" data-theme-choice="ember" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#FFECCF"></i><i style="--sw:#1E223D"></i><i style="--sw:#F74E1C"></i></span><b>Midnight & Ember</b><small>Navy · vivid ember</small></button>
-  <button type="button" class="themeCard" data-theme-choice="cyanflux" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#1c2330"></i><i style="--sw:#252e3f"></i><i style="--sw:#59a7ed"></i></span><b>Cyan Flux</b><small>Reference 1 · Graphite · cyan · electric violet</small></button>
-  <button type="button" class="themeCard" data-theme-choice="coralbank" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#182227"></i><i style="--sw:#253037"></i><i style="--sw:#ff8987"></i></span><b>Coral Carbon</b><small>Reference 3 · Carbon · coral · soft glow</small></button>
-  <button type="button" class="themeCard" data-theme-choice="monomint" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#e9eae7"></i><i style="--sw:#ffffff"></i><i style="--sw:#222627"></i></span><b>Mono Mint</b><small>Reference 4 · Porcelain · charcoal · mint</small></button>
+  <button type="button" class="themeCard" data-theme-choice="cyanflux" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#1c2330"></i><i style="--sw:#252e3f"></i><i style="--sw:#59a7ed"></i></span><b>Cyan Flux</b><small>Graphite · clear blue</small></button>
+  <button type="button" class="themeCard" data-theme-choice="coralbank" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#182227"></i><i style="--sw:#253037"></i><i style="--sw:#ff8987"></i></span><b>Coral Carbon</b><small>Carbon · soft coral</small></button>
+  <button type="button" class="themeCard" data-theme-choice="monomint" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#e9eae7"></i><i style="--sw:#ffffff"></i><i style="--sw:#222627"></i></span><b>Mono Mint</b><small>Porcelain · charcoal · mint</small></button>
         </div>
       </div>
       <div class="settingRow"><div><label>Interface density</label><div class="settingSub">Controls vertical rhythm without scaling the whole app.</div></div><div class="segChoice" data-setting-buttons="density"><button data-value="compact">Compact</button><button data-value="balanced">Balanced</button><button data-value="comfortable">Comfortable</button></div></div>
@@ -6419,19 +6434,19 @@ function rsApplyAuditContrast(a,dark){
  const line=rsMixHex(p.card,text,.27),boundary=rsContrastGuard(p.border,p.card,3.1),fieldLine=rsContrastGuard(p.border,p.input,3.1);
  const buttonText=rsContrastGuard(p.onButton||rsOn(p.buttons),p.buttons,4.7),focus=rsContrastGuard(p.buttons,p.input,3.2),accent=ink(p.buttons);
  const roles={'--page-background':p.shell,'--page-text':page,'--page-muted':rsContrastGuard(rsMixHex(page,p.shell,.22),p.shell,4.7),
-  '--surface-primary':p.card,'--surface-secondary':secondary,'--surface-elevated':elevated,'--surface-paint':style.getPropertyValue('--rt-card')||p.card,
+  '--surface-primary':p.card,'--surface-secondary':secondary,'--surface-elevated':elevated,'--surface-paint':p.card,
   '--text-primary':text,'--text-secondary':muted,'--text-muted':muted,'--muted':muted,'--text':text,
   '--field-bg':p.input,'--field-text':rsContrastGuard(p.onInput,p.input,7),'--text-placeholder':rsContrastGuard(rsMixHex(p.onInput,p.input,.35),p.input,4.7),
   '--border-subtle':line,'--border-strong':boundary,'--field-border':fieldLine,'--line':line,'--line2':line,
   '--accent-primary':p.buttons,'--accent-contrast':buttonText,'--accent-text':accent,'--accent-deep':accent,'--accent-soft':soft,
   '--btn-bg':p.buttons,'--btn-text':buttonText,'--tab-active-bg':p.buttons,'--tab-active-text':buttonText,'--focus-ring':focus,
   '--focus-on-surface':rsContrastGuard(p.buttons,p.card,3.2),'--focus-on-page':rsContrastGuard(p.buttons,p.shell,3.2),
-  '--disabled-bg':secondary,'--text-disabled':muted,'--hero-bg':p.contrast,'--hero-text':rsContrastGuard(p.onContrast||rsOn(p.contrast),p.contrast,4.7)};
+  '--disabled-bg':secondary,'--text-disabled':muted,'--hero-bg':secondary,'--hero-text':text};
  Object.entries(roles).forEach(([k,v])=>set(k,v));
- const tones={success:isDark?'#83d5ac':'#206b46',warning:isDark?'#f1bc76':'#89500a',danger:isDark?'#ff9f9f':'#a52932',info:isDark?'#9ec9ff':'#245b9c',pending:isDark?'#cfb4ff':'#6d4199'};
+ const tones={success:muted,warning:isDark?'#f1bc76':'#89500a',danger:isDark?'#ff9f9f':'#a52932',info:accent,pending:accent};
  for(const [name,seed]of Object.entries(tones)){const bg=rsMixHex(p.card,seed,.11),fg=rsContrastGuard(seed,bg,4.8);set('--status-'+name,fg);set('--status-'+name+'-soft',bg);set('--status-'+name+'-text',ink(seed));}
  for(const [legacy,role]of [['green','success'],['amber','warning'],['red','danger']]){set('--'+legacy,style.getPropertyValue('--status-'+role));set('--'+legacy+'-soft',style.getPropertyValue('--status-'+role+'-soft'));}
- set('--division-pharmacy',ink(isDark?'#81c6a3':'#216c4b'));set('--division-essentials',ink(isDark?'#c8a4ee':'#765296'));
+ set('--division-pharmacy',muted);set('--division-essentials',muted);
  // Compatibility aliases for existing components and exported reports.
  for(const [key,value]of Object.entries({'card-bg':p.card,'card-text':text,'card-muted':muted,'field-text':roles['--field-text'],'accent':accent,'history-text':buttonText,'warning-bg':style.getPropertyValue('--status-warning-soft'),'warning':style.getPropertyValue('--status-warning'),'danger-bg':style.getPropertyValue('--status-danger-soft'),'danger':style.getPropertyValue('--status-danger')}))set('--audit-'+key,value);
 }

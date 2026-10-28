@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Roseachy · Sales &amp; Financial Desk</title>
-<meta name="roseachy-version" content="2.16.10-premium-appearance">
+<meta name="roseachy-version" content="2.16.11-premium-redesign">
 <meta name="theme-color" content="#163E32">
 <meta name="application-name" content="Roseachy">
 <meta name="mobile-web-app-capable" content="yes">
@@ -2081,7 +2081,7 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
 /* One component colour system. Existing geometry and motion live in the legacy
    layer; the historical theme paint overrides have been retired. */
 @media screen {
- body[data-theme]{background:var(--page-background);color:var(--page-text);--local-text:var(--page-text);--local-muted:var(--page-muted)}
+ body[data-theme]{background-color:var(--page-background);background-image:var(--page-paint);background-attachment:fixed;color:var(--page-text);--local-text:var(--page-text);--local-muted:var(--page-muted)}
  :where(body *){-webkit-text-fill-color:currentColor}
  :where(div,h1,h2,h3,h4,h5,h6,label,p,span,small,strong,b,summary,th,td,em,.line,.qtyMain){color:var(--local-text)}
  :where(.small,.help,.sub,.muted,.stamp,.marketMeta,.marketHint,.settingSub,.previewEyebrow,.qtySub,.rsTrendMeta,.rsCreditNote small,.finTx small){color:var(--local-muted)}
@@ -2100,17 +2100,17 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
  :where(.deskName){color:var(--page-text)}
  :where(.deskMenuBtn,.marketMoreBtn,#finMenuBtn,#openSmartSyncMarket,#marketNewActiveList,#marketDebtSummary){--local-text:var(--page-text);background:transparent;color:var(--page-text);--edge-color:var(--page-muted)}
  :where(.marketPanel,.creditPanel,.card) :where(.iconClose,.deskMenuBtn,.marketMoreBtn){color:var(--text-primary);--edge-color:var(--border-subtle)}
- :where(button.primary,.primaryBtn,.marketAddBtn.primary){--local-text:var(--btn-text);--local-muted:var(--btn-text);background:var(--btn-bg);color:var(--btn-text);--edge-color:color-mix(in srgb,var(--btn-text) 24%,var(--btn-bg))}
+ :where(button.primary,.primaryBtn,.marketAddBtn.primary){--local-text:var(--btn-text);--local-muted:var(--btn-text);background-color:var(--btn-bg);background-image:var(--btn-paint);color:var(--btn-text);--edge-color:color-mix(in srgb,var(--btn-text) 24%,var(--btn-bg))}
  :where(button:not(:disabled):hover){background:var(--accent-soft);color:var(--text-primary);--local-text:var(--text-primary);--local-muted:var(--text-secondary)}
- :where(button.primary:not(:disabled):hover){background:var(--btn-bg);color:var(--btn-text);--local-text:var(--btn-text);--local-muted:var(--btn-text);--surface-depth:inset 0 0 0 2px var(--btn-text)}
- :where(button:not(:disabled):active){--surface-depth:inset 0 0 0 2px var(--focus-on-surface)}
+ :where(button.primary:not(:disabled):hover){background-color:var(--btn-bg);background-image:var(--btn-paint);color:var(--btn-text);--local-text:var(--btn-text);--local-muted:var(--btn-text);--surface-depth:var(--shadow-sm)}
+ :where(button:not(:disabled):active){--surface-depth:0 0 0 transparent}
  :where(button.danger,.iconbtn.del,.settingsDanger button){--local-text:var(--status-danger);--local-muted:var(--status-danger);background:var(--status-danger-soft);color:var(--status-danger);--edge-color:var(--status-danger)}
  :where(button.danger:not(:disabled):hover,.iconbtn.del:not(:disabled):hover){background:var(--status-danger-soft);color:var(--status-danger);--surface-depth:inset 0 0 0 1px var(--status-danger)}
  :where(.tabs,.seg,.segChoice,.marketViewTabs,.marketCalcTabs,.rsHistoryToggle,.rsHistoryStatus,.rsAnaSwitch,.previewTabs){--local-text:var(--text-primary);--local-muted:var(--text-secondary);background:var(--surface-primary);color:var(--local-text);--edge-color:var(--border-strong)}
  :where(.tabBtn,.seg button,.segChoice button,.marketViewTabs button,.marketCalcTabs button,.rsHistoryToggle button,.rsHistoryStatus button,.rsAnaSwitch button,.previewTabs button){background:transparent;color:var(--text-secondary);--local-text:var(--text-secondary);--edge-color:transparent}
  :where(.tabBtn.active,.seg button.active,.segChoice button.active,.marketCalcTabs button.active,.rsHistoryToggle button.active,.rsHistoryStatus button.active,.rsAnaSwitch button.active,.previewTabs button.active){background:var(--tab-active-bg);color:var(--tab-active-text);--local-text:var(--tab-active-text);--local-muted:var(--tab-active-text);font-weight:750}
  :where(.tabInd){background:var(--tab-active-bg)}
- /* Market keeps its existing underline indicator, rather than a second pill. */
+ /* Market keeps its existing functional underline indicator. */
  :where(.marketViewTabs button.active){background:transparent;color:var(--accent-text);font-weight:750;--local-text:var(--accent-text);text-decoration:underline;text-underline-offset:7px;text-decoration-thickness:2px}
  :where(.marketViewTabs>.tabInd){background:var(--accent-text)}
  :where(.hasInd .tabBtn.active){background:transparent}
@@ -2130,7 +2130,7 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
  :where(button,input,select,textarea):disabled{opacity:1;background-color:var(--disabled-bg);color:var(--text-disabled);-webkit-text-fill-color:var(--text-disabled);--local-text:var(--text-disabled);--local-muted:var(--text-disabled);--edge-color:var(--border-subtle);border-style:solid;--surface-depth:0 0 0 transparent;cursor:not-allowed;--surface-depth:0 0 0 transparent}
  :where(input:disabled,textarea:disabled)::placeholder{color:var(--text-disabled);-webkit-text-fill-color:var(--text-disabled);opacity:1}
  :where([aria-busy="true"]){cursor:progress;border-style:solid}
- :where(.metric.hero,.finBalanceCard,.marketSummaryBar){--local-text:var(--hero-text);--local-muted:var(--hero-text);background:var(--hero-bg);color:var(--hero-text);--edge-color:var(--border-subtle)}
+ :where(.metric.hero,.finBalanceCard,.marketSummaryBar){--local-text:var(--hero-text);--local-muted:var(--hero-text);background-color:var(--hero-bg);background-image:var(--hero-paint);color:var(--hero-text);--edge-color:var(--border-subtle)}
  :where(.metric strong,.metric b,.purchaseDetailMetric strong,.supplierDebtAmount,.supplierDebtTotal,.rsCreditBalance,.purchaseBalance){font-variant-numeric:tabular-nums;font-weight:700}
  :where(#holdPanel,.rsTotalRow){--local-text:var(--text-primary);--local-muted:var(--text-secondary);background:var(--accent-soft);--edge-color:var(--accent-text)}
 
@@ -2187,28 +2187,28 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
     signs and status labels carry meaning without decorative icon tiles. */
  :where(.iconClose){background:transparent;color:var(--local-text);--edge-color:transparent;--surface-depth:0 0 0 transparent}
  :where(.marketStatus,.marketStatus.idle,.marketAutoLow,.rsSavedBadge,.rsTrendTag){background:var(--surface-secondary);color:var(--text-secondary);--edge-color:var(--border-subtle)}
- :where(.marketSummaryBar){--surface-depth:0 0 0 transparent}
- :where(.themeCard,.card,.marketSection,.finGroup){--surface-depth:0 4px 16px -4px rgb(0 0 0 / calc(var(--rs-shadow-level) * .22))}
+ :where(.marketSummaryBar){--surface-depth:var(--shadow)}
+ :where(.themeCard,.card,.marketSection,.finGroup){--surface-depth:var(--shadow)}
  :where(.marketActions button.primary){background:var(--surface-secondary);color:var(--text-primary);--edge-color:var(--border-strong)}
  :where(.finBalanceCard strong,.metric.hero strong){font-size:clamp(1.45rem,4.5vw,2.15rem);font-variant-numeric:tabular-nums}
 /* Shared geometry: fractional inset edges never change the layout box. */
 :where(.finReviewBar,.finReviewTotal,.finRecoveryValue,.inventoryAuditEntry,.adjComputedSummary,.overallStrip,.dayManageRow,.backupWarn,.creditLine,.noteItem,.card,.collapse,.marketSection,.settingsGroup,.finGroup,.finGate,.studioPreview,.previewBrand,.themeCard,.activeListCard,.supplierDebtGroup,.supplierDebtItem,.marketPanel,.dupModal,.creditPanel,.syncPanel,.deskMenu,.finMenu,.marketUtilityMenu,.productSuggestDrop,.supplierDrop,.marketSearchDrop,.metric,.packBox,.previewCard,.previewStock,.previewMiniRow,.marketCurrent,.marketChoice,.marketUpdateOnly,.supplierMini,.purchasePayBox,.activeSupplierBox,.purchaseDetailMetric,.marketSummaryMetric,.marketCalcStat,.creditSummary,.posEffect,.pricingDefaultCard,.supplierPaySummary,.marketListBadge,.settingsDanger,.tabs,.seg,.segChoice,.marketViewTabs,.marketCalcTabs,.rsHistoryToggle,.rsHistoryStatus,.rsAnaSwitch,.previewTabs,.finBalanceCard,.marketSummaryBar,.rsTrendCard,.rsAnaProductDetail,#holdPanel,.cartItemEditor,.editableNote,.marketPurchaseRow,#toast,button,.primaryBtn,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),select,textarea){
  box-sizing:border-box;border:1px solid transparent;border-radius:var(--rs-radius-md);background-clip:padding-box;
- box-shadow:inset 0 0 0 var(--rs-border-width) var(--edge-color,var(--border-subtle)),var(--surface-depth,0 0 0 transparent);
+ box-shadow:inset 0 0 0 var(--rs-border-width) var(--edge-color,var(--border-subtle)),var(--surface-depth,0 0 0 transparent),var(--surface-light,0 0 0 transparent);
  transition:background-color 140ms ease,color 140ms ease;
 }
 :where(.card,.collapse,.marketSection,.settingsGroup,.finGroup,.finGate,.studioPreview,.marketPanel,.dupModal,.creditPanel,.syncPanel,.finBalanceCard,.metric.hero){border-radius:var(--rs-radius-lg)}
-:where(button,.primaryBtn,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),select,.tabs,.seg,.segChoice,.marketViewTabs,.marketCalcTabs,.rsHistoryToggle,.rsHistoryStatus,.rsAnaSwitch,.previewTabs,.tabInd){border-radius:var(--rs-radius-control)}
-:where(.tabBtn,.seg button,.segChoice button,.marketCalcTabs button,.previewTabs button){border-radius:var(--rs-radius-control)}
+:where(button,.primaryBtn,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),select,.tabs,.seg,.segChoice,.marketViewTabs,.marketCalcTabs,.rsHistoryToggle,.rsHistoryStatus,.rsAnaSwitch,.previewTabs,.tabInd){border-radius:calc(var(--rs-roundness) * var(--rs-control-half,22px))}
+:where(.tabBtn,.seg button,.segChoice button,.marketCalcTabs button,.previewTabs button){border-radius:calc(var(--rs-roundness) * var(--rs-control-half,22px))}
 :where(.tablewrap,.previewBrand,.themeCard,.productSuggestDrop,.supplierDrop,.marketSearchDrop,.deskMenu,.finMenu,.marketUtilityMenu,.supplierDebtGroup,.supplierDebtItem,.rsTrendCard,.cartItemEditor,.editableNote){border-radius:var(--rs-radius-md)}
 :where(.collapseHead,.settingsGroup>summary){border-radius:var(--rs-radius-lg) var(--rs-radius-lg) 0 0}
 :where(details:not([open])>.collapseHead,.settingsGroup:not([open])>summary){border-radius:var(--rs-radius-lg)}
-:where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),select,textarea){border-radius:calc(var(--rs-input-h) * var(--rs-roundness) / 2);border-style:solid;appearance:none;-webkit-appearance:none;transform:none;filter:none;mask:none;-webkit-mask:none;background-clip:border-box;--edge-color:var(--field-border);--surface-depth:0 0 0 transparent}
+:where(input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),select,textarea){border-radius:calc(var(--rs-roundness) * var(--rs-control-half,calc(var(--rs-input-h) / 2)));border-style:solid;appearance:none;-webkit-appearance:none;transform:none;filter:none;mask:none;-webkit-mask:none;background-clip:border-box;--edge-color:var(--field-border);--surface-depth:0 0 0 transparent}
 :where(input,textarea)::placeholder{text-decoration:none;text-shadow:none;filter:none;transform:none}
 :where(input:not(:disabled):hover,select:not(:disabled):hover,textarea:not(:disabled):hover){--edge-color:var(--focus-ring)}
 :where(input,select,textarea):focus{--edge-color:var(--focus-ring)}
 :where(.iconbtn,.linkbtn,.rowToggle,.iconClose){--edge-color:transparent;--surface-depth:0 0 0 transparent}
-:where(.metric.hero,.finBalanceCard,.marketSummaryBar){--edge-color:color-mix(in srgb,var(--hero-text) 24%,var(--hero-bg));--surface-depth:0 6px 18px -8px rgb(0 0 0 / calc(var(--rs-shadow-level) * .6))}
+:where(.metric.hero,.finBalanceCard,.marketSummaryBar){--edge-color:color-mix(in srgb,var(--hero-text) 24%,var(--hero-bg));--surface-depth:var(--shadow-lg)}
 :where(.finBalanceCard,.metric.hero){padding:clamp(20px,3vw,28px);overflow-wrap:anywhere}
 :where(.finBalanceCard .small,.metric.hero .small){color:var(--hero-text);line-height:1.5}
 :where(.finBalanceCard .linkbtn){--local-text:var(--hero-text);--local-muted:var(--hero-text);color:var(--hero-text)}
@@ -2244,9 +2244,45 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
 
 
 @media screen {
-:where(body:not(:has(#holdPanel:not(.hidden))) #txEntryCard:not(:has(#cancelEditBtn:not(.hidden))):has(#type option:checked[value^="sale_"]) #holdBtn){background:var(--btn-bg);color:var(--btn-text);--edge-color:color-mix(in srgb,var(--btn-text) 24%,var(--btn-bg))}
+:where(body:not(:has(#holdPanel:not(.hidden))) #txEntryCard:not(:has(#cancelEditBtn:not(.hidden))):has(#type option:checked[value^="sale_"]) #holdBtn){background-color:var(--btn-bg);background-image:var(--btn-paint);color:var(--btn-text);--edge-color:color-mix(in srgb,var(--btn-text) 24%,var(--btn-bg))}
 :where(body:not(:has(#holdPanel:not(.hidden))) #txEntryCard:not(:has(#cancelEditBtn:not(.hidden))):has(#type option:checked[value^="sale_"]) #addBtn):not(:disabled){background:var(--surface-secondary);color:var(--text-primary);--edge-color:var(--border-strong)}
 :where(body:has(#holdPanel:not(.hidden)) #holdBtn){background:var(--surface-secondary);color:var(--text-primary);--edge-color:var(--border-strong)}
+}
+
+@media screen {
+/* Premium surfaces: hierarchy through lighting, elevation and restrained colour. */
+:where(h2,h3,h4,.collapseHead,.settingsGroup>summary,.tabBtn,.seg button,.segChoice button){font-family:var(--rs-font-family)}
+:where(.collapseHead,.settingsGroup>summary){font-size:1rem;letter-spacing:-.015em;line-height:1.4}
+:where(.collapseHead){border-top-left-radius:max(0px,calc(var(--rs-radius-lg) - 2px));border-top-right-radius:max(0px,calc(var(--rs-radius-lg) - 2px))}
+:where(.collapse:has(>.collapseHead[aria-expanded="true"]),details[open],.rsRecordExpanded){--edge-color:var(--border-subtle)}
+
+:where(.card,.collapse,.marketSection,.settingsGroup,.finGroup,.finGate,.studioPreview,.settingsPreview){--surface-depth:var(--shadow);--surface-light:inset 0 1px 0 rgb(var(--rs-highlight) / calc(var(--rs-shadow-level) * .5))}
+:where(.metric:not(.hero),.previewCard,.previewStock,.activeListCard,.supplierDebtGroup,.rsTrendCard){background-color:var(--surface-secondary);background-image:linear-gradient(145deg,var(--surface-primary),var(--surface-secondary));--surface-depth:var(--shadow-sm)}
+:where(.marketPanel,.dupModal,.creditPanel,.syncPanel,.deskMenu,.finMenu,.marketUtilityMenu,.productSuggestDrop,.supplierDrop,.marketSearchDrop){background:var(--surface-paint);--surface-depth:var(--shadow-lg);--surface-light:inset 0 1px 0 rgb(var(--rs-highlight) / calc(var(--rs-shadow-level) * .4))}
+:where(.metric.hero,.finBalanceCard,.marketSummaryBar){--surface-depth:var(--shadow-lg);--surface-light:inset 0 1px 0 rgb(var(--rs-highlight) / calc(var(--rs-shadow-level) * .45));isolation:isolate}
+:where(.metric.hero,.finBalanceCard){min-height:132px;display:flex;flex-direction:column;justify-content:space-between;gap:12px}
+:where(.metric.hero strong,.metric.hero b,.finBalanceCard strong){font-weight:750;letter-spacing:-.04em}
+:where(button.primary,.primaryBtn){--surface-depth:var(--shadow-sm);--surface-light:inset 0 1px 0 rgb(var(--rs-highlight) / calc(var(--rs-shadow-level) * .55));font-weight:700}
+:where(button:not(:disabled):hover){translate:0 -1px}
+:where(button:not(:disabled):active){translate:0 0;--surface-light:inset 0 1px 2px rgb(var(--rs-shadow-rgb) / calc(var(--rs-shadow-level) * .18))}
+:where(button:disabled){background-image:none;--surface-depth:0 0 0 transparent;--surface-light:0 0 0 transparent;translate:none}
+:where(.deskMenuBtn,.marketMoreBtn,#finMenuBtn){background:var(--surface-paint);color:var(--text-primary);--local-text:var(--text-primary);--edge-color:var(--border-subtle);--surface-depth:var(--shadow-sm)}
+:where(.tabs,.seg,.segChoice,.previewTabs){background:var(--surface-paint);padding:6px;--surface-depth:var(--shadow-sm);--surface-light:inset 0 1px 0 rgb(var(--rs-highlight) / calc(var(--rs-shadow-level) * .45))}
+:where(.tabInd,.seg button.active,.segChoice button.active,.previewTabs button.active){background-color:var(--tab-active-bg);background-image:var(--btn-paint);--surface-depth:var(--shadow-sm)}
+:where(.deskMenu button){padding:12px 16px}
+:where(.deskMenu button.active){--surface-depth:var(--shadow-sm);background:var(--accent-soft)}
+:where(.collapseHead,.settingsGroup>summary){background:linear-gradient(140deg,var(--surface-primary),var(--surface-secondary))}
+:where(.tablewrap){border:0;box-shadow:inset 0 0 0 var(--rs-border-width) var(--border-subtle)}
+:where(th){padding-top:14px;padding-bottom:14px;font-size:.82em;letter-spacing:.025em}
+:where(td){padding-top:13px;padding-bottom:13px}
+:where(.settingRange input){min-height:32px;cursor:pointer;box-shadow:none}
+:where(.settingRange output){background:var(--surface-secondary);border-radius:var(--rs-radius-sm);padding:6px 8px;min-width:4.5ch}
+:where(.settingRange input:focus-visible){outline:2px solid var(--focus-ring);outline-offset:3px}
+:where(.settingRow){gap:18px;padding-block:14px}
+:where(.metric,.previewCard,.marketSummaryMetric){min-width:0}
+@media(max-width:600px){.tabs{max-width:100%;margin-bottom:22px;padding:6px}.card{margin-bottom:20px}.metric.hero{min-height:120px}.finBalanceCard{padding:24px}.marketSummaryBar{padding:20px}}
+@media(prefers-reduced-motion:reduce){button{translate:none!important;transition:none!important}}
+html.rs-reduce-motion button,html.rs-animations-off button{translate:none}
 }
 </style>
 <style id="roseachy-v294-cobalt-backup-stock-layout">@layer roseachyLegacy {
@@ -3721,7 +3757,7 @@ Dettol 250ml | Essentials | 1800 | 2200 | 24u | |"></textarea>
     </div></details>
 
     <details class="settingsGroup"><summary><span>Effects</span><small>Restrained interaction polish</small></summary><div class="settingsBody">
-      <div class="settingRow"><div><label>Shadow</label><div class="settingSub">0 is completely flat; 100 creates a deliberately deep shadow. The upper half increases depth more aggressively and applies live to cards, panels, menus and overlays.</div></div><div class="settingRange"><input data-setting="shadowLevel" type="range" min="0" max="100" step="1" aria-label="Shadow strength"><output data-range-value="shadowLevel">28</output></div></div>
+      <div class="settingRow"><div><label for="appearanceShadow">Shadow effect</label><div class="settingSub">From flat at 0 to soft, dimensional depth at 100. Adjusts elevation and light continuously without changing borders.</div></div><div class="settingRange"><input id="appearanceShadow" data-setting="shadowLevel" type="range" min="0" max="100" step="1" aria-label="Shadow effect"><output for="appearanceShadow" data-range-value="shadowLevel">28</output></div></div>
       <div class="settingRow"><div><label>Glint</label><div class="settingSub">Subtle light sweep on buttons and tab indicators.</div></div><label class="studioSwitch"><input data-setting="glint" type="checkbox"><span></span></label></div>
       <div class="settingRow"><div><label>Press response</label><div class="settingSub">Small physical compression on touch.</div></div><label class="studioSwitch"><input data-setting="pressResponse" type="checkbox"><span></span></label></div>
 
@@ -6256,7 +6292,7 @@ $('stockTotalCost')?.addEventListener('input',()=>syncStockCost('total'));$('sto
 
 
 /* ===================== APPEARANCE SETTINGS ===================== */
-const APPEARANCE_DEFAULTS={version:16,colorMode:'light',theme:'monomint',density:'balanced',fieldScale:'balanced',sectionScale:'balanced',fontScale:'default',textHierarchy:'balanced',shape:'rounded',roundnessLevel:55,borderWeight:'fine',spacing:'balanced',verticalRhythm:'refined',borderWeightLevel:30,shadowLevel:28,spacingLevel:50,fieldSizeLevel:50,sectionSizeLevel:50,verticalRhythmLevel:32,previewBehavior:'compact',headerSpace:'balanced',titleSize:'medium',headerComposition:'balanced',animation:'refined',speed:'balanced',rippleEnabled:true,rippleIntensity:40,glint:true,pressResponse:true,softElevation:true,reduceMotion:false,pricing:{...PRICING_DEFAULTS}};
+const APPEARANCE_DEFAULTS={version:17,colorMode:'light',theme:'monomint',density:'balanced',fieldScale:'balanced',sectionScale:'balanced',fontScale:'default',textHierarchy:'balanced',shape:'rounded',roundnessLevel:80,borderWeight:'fine',spacing:'balanced',verticalRhythm:'refined',borderWeightLevel:30,shadowLevel:50,spacingLevel:50,fieldSizeLevel:50,sectionSizeLevel:50,verticalRhythmLevel:32,previewBehavior:'compact',headerSpace:'balanced',titleSize:'medium',headerComposition:'balanced',animation:'refined',speed:'balanced',rippleEnabled:true,rippleIntensity:40,glint:true,pressResponse:true,softElevation:true,reduceMotion:false,pricing:{...PRICING_DEFAULTS}};
 const APPEARANCE_GROUPS={appearance:['colorMode','theme','density'],typography:['fontScale','textHierarchy'],shape:['roundnessLevel','borderWeightLevel'],spacing:['spacingLevel','fieldSizeLevel','sectionSizeLevel','verticalRhythmLevel','previewBehavior'],header:['headerSpace','titleSize','headerComposition'],motion:['animation','speed'],effects:['shadowLevel','glint','pressResponse','rippleEnabled','rippleIntensity']};
 /* Three protected palettes plus three isolated reference themes. */
 const RS_THEME_SEEDS=Object.freeze({
@@ -6324,8 +6360,8 @@ function appearanceSafe(v){const old=v&&typeof v==='object'&&!Array.isArray(v)?v
   a.theme=supportedTheme(a.theme);
   pick('colorMode',['light','dark','system']);pick('density',['compact','balanced','comfortable']);pick('fieldScale',['compact','balanced','large']);pick('sectionScale',['compact','balanced','spacious']);pick('fontScale',['compact','small','default','comfortable','large']);pick('textHierarchy',['compact','balanced','editorial']);pick('shape',['compact','refined','rounded','soft']);pick('borderWeight',['hairline','fine','standard']);pick('spacing',['tight','balanced','airy']);pick('verticalRhythm',['compact','refined','relaxed','editorial']);pick('previewBehavior',['compact','full','minimal']);pick('headerSpace',['tight','balanced','spacious','editorial']);pick('titleSize',['small','medium','large','display']);pick('headerComposition',['compact','balanced','spacious','editorial']);pick('animation',['off','minimal','refined','expressive']);pick('speed',['fast','balanced','relaxed']);
   const level=(key,fallback)=>{const raw=Number(old[key]);a[key]=Number.isFinite(raw)?Math.max(0,Math.min(100,Math.round(raw))):fallback};
-  level('roundnessLevel',({compact:25,refined:40,rounded:55,soft:75}[a.shape]??55));level('borderWeightLevel',({hairline:0,fine:30,standard:78}[old.borderWeight]??30));level('shadowLevel',old.softElevation===false?0:28);level('rippleIntensity',40);level('spacingLevel',({tight:0,balanced:50,airy:100}[old.spacing]??50));level('fieldSizeLevel',({compact:0,balanced:50,large:100}[old.fieldScale]??50));level('sectionSizeLevel',({compact:0,balanced:50,spacious:100}[old.sectionScale]??50));level('verticalRhythmLevel',({compact:0,refined:32,relaxed:66,editorial:100}[old.verticalRhythm]??32));
-  ['glint','pressResponse','softElevation','reduceMotion','rippleEnabled'].forEach(k=>a[k]=typeof a[k]==='boolean'?a[k]:APPEARANCE_DEFAULTS[k]);delete a.font;delete a.titleFont;delete a.stockInventoryCollapsed;a.pricing=pricingSafe(a.pricing);a.softElevation=n(a.shadowLevel)>0;a.version=16;return a}
+  level('roundnessLevel',({compact:25,refined:40,rounded:55,soft:75}[old.shape]??80));level('borderWeightLevel',({hairline:0,fine:30,standard:78}[old.borderWeight]??30));level('shadowLevel',old.softElevation===false?0:50);level('rippleIntensity',40);level('spacingLevel',({tight:0,balanced:50,airy:100}[old.spacing]??50));level('fieldSizeLevel',({compact:0,balanced:50,large:100}[old.fieldScale]??50));level('sectionSizeLevel',({compact:0,balanced:50,spacious:100}[old.sectionScale]??50));level('verticalRhythmLevel',({compact:0,refined:32,relaxed:66,editorial:100}[old.verticalRhythm]??32));
+  ['glint','pressResponse','softElevation','reduceMotion','rippleEnabled'].forEach(k=>a[k]=typeof a[k]==='boolean'?a[k]:APPEARANCE_DEFAULTS[k]);delete a.font;delete a.titleFont;delete a.stockInventoryCollapsed;a.pricing=pricingSafe(a.pricing);a.softElevation=n(a.shadowLevel)>0;a.version=17;return a}
 function getAppearanceSettings(){try{return appearanceSafe(JSON.parse(safeGet(KEY.appearance)||'null'))}catch{return appearanceSafe()}}
 function saveAppearanceSettings(v,persist=true){const a=appearanceSafe(v);if(persist)storeSet(KEY.appearance,JSON.stringify(a));applyAppearanceSettings(a);return a}
 function getPricingSettings(){return pricingSafe(getAppearanceSettings().pricing)}
@@ -6334,6 +6370,43 @@ let pricingSaveChain=Promise.resolve(),pricingSavePending=0;
 function savePricingSettings(v,{patch=false}={}){const requested=clone(v);pricingSavePending++;const run=async()=>{while(inventoryBusy||finBusy||auditCleanupBusy)await new Promise(r=>setTimeout(r,25));return inventoryCommit(()=>{const a=getAppearanceSettings(),old=pricingSafe(a.pricing),next=pricingSafe(patch?{...old,...requested}:requested),changed=[];if(old.pharmacyMarkup!==next.pharmacyMarkup)changed.push('pharmacy');if(old.essentialsMarkup!==next.essentialsMarkup)changed.push('essentials');a.pricing=next;saveAppearanceSettings(a);repriceDefaultMarkupProducts(changed);renderPricingSettings();return next},'Stock','Markup rule update')};const result=pricingSaveChain.then(run,run);pricingSaveChain=result.catch(()=>{});return result.finally(()=>{pricingSavePending--})}
 function renderPricingSettings(){const p=getPricingSettings(),a=$('pharmacyDefaultMarkup'),b=$('essentialsDefaultMarkup');if(a&&document.activeElement!==a)a.value=p.pharmacyMarkup;if(b&&document.activeElement!==b)b.value=p.essentialsMarkup;if($('pharmacyMarkupPreview'))$('pharmacyMarkupPreview').textContent='Cost '+fmt(1000)+' → selling '+fmt(priceFromMarkup(1000,p.pharmacyMarkup));if($('essentialsMarkupPreview'))$('essentialsMarkupPreview').textContent='Cost '+fmt(1000)+' → selling '+fmt(priceFromMarkup(1000,p.essentialsMarkup));syncStockPricing('system');refreshSettingsPreview()}
 function fontStack(v){return{roseachy:"Georgia,'Times New Roman',serif",elegant:"'Palatino Linotype',Palatino,'Book Antiqua',serif",contemporary:"Cambria,Georgia,serif",grotesk:"Inter,-apple-system,'Segoe UI',Arial,sans-serif",humanist:"Candara,'Segoe UI',Arial,sans-serif"}[v]||"Georgia,'Times New Roman',serif"}
+/* Appearance geometry is independent of palette and persisted through the existing store.
+   Inset edges preserve layout; fractional shadows avoid browser border-width snapping. */
+function rsApplyGeometry(a,key){
+ const root=document.documentElement,s=root.style,set=(k,v)=>s.setProperty(k,v);
+ if(!key||key==='roundnessLevel'){
+  const q=a.roundnessLevel/100,R=radiusSet(a.roundnessLevel);
+  ['sm','md','lg'].forEach((n,i)=>set('--rs-radius-'+n,R[i]+'px'));
+  set('--r',R[2]+'px');set('--rs-roundness',q);set('--rs-radius-control',22*q+'px');
+ }
+ if(!key||key==='borderWeightLevel'){
+  set('--rs-border-width',a.borderWeightLevel*.03+'px');set('--rs-border-opacity','1');
+  root.classList.remove('rs-border-none','rs-hairline','rs-border-fine','rs-border-standard');
+ }
+ if(!key||key==='shadowLevel'){
+  const q=a.shadowLevel/100;set('--rs-shadow-level',q);
+  // Zero-valued layers compose with the independently controlled decorative edge.
+  const layer=(y,blur,spread,opacity)=>`0 ${y*q}px ${blur*q}px ${spread*q}px rgb(var(--rs-shadow-rgb,20 25 35) / ${opacity*q})`;
+  set('--shadow',layer(14,32,-6,.18)+','+layer(3,9,0,.07));
+  set('--shadow-sm',layer(5,14,-2,.12));
+  set('--shadow-lg',layer(24,56,-10,.24)+','+layer(5,16,0,.10));
+  set('--rs-shadow-y',14*q+'px');set('--rs-shadow-blur',32*q+'px');set('--rs-shadow-opacity',.18*q);
+  root.classList.toggle('rs-flat',q===0);root.classList.toggle('rs-soft-elevation',q>0);
+ }
+}
+let rsGeometryObserver;
+function rsObserveControlGeometry(){
+ if(rsGeometryObserver||!window.ResizeObserver)return;
+ // Measure only when component size changes, never during slider input. A control's
+ // actual half-height gives a true capsule at 100 even for large text or multiline labels.
+ const selector='button,.primaryBtn,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),select,.tabs,.seg,.segChoice,.marketCalcTabs,.previewTabs,.tabInd';
+ const seen=new WeakSet();
+ rsGeometryObserver=new ResizeObserver(entries=>{for(const {target} of entries){const h=target.offsetHeight;if(h>0)target.style.setProperty('--rs-control-half',h/2+'px')}});
+ const add=e=>{if(e.nodeType!==1)return;const els=[...(e.matches(selector)?[e]:[]),...e.querySelectorAll(selector)];for(const el of els)if(!seen.has(el)){seen.add(el);rsGeometryObserver.observe(el)}};
+ add(document.documentElement);
+ new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)add(node)}).observe(document.body,{childList:true,subtree:true});
+}
+
 function radiusSet(v){const q=Math.max(0,Math.min(100,Number(v)||0))/100;return[16*q,28*q,40*q]}
 
 /* ===== v2.7.0 Night Mode typography tokens (contrast-guaranteed) ===== */
@@ -6468,7 +6541,7 @@ function rsApplyReferenceTheme(a,dark){
 function rsApplyAuditContrast(a,dark){
  const style=document.documentElement.style,t=(dark?RS_DARK_THEMES:RS_THEMES)[a.theme],p=t.exact||{shell:t.background,card:t.surface,input:rsMixHex(t.surface,t.background,.18),buttons:t.accent,contrast:t.primary,onCard:t.text,onInput:t.text,onButton:rsOn(t.accent),muted:t.muted,border:t.border};
  const set=(k,v)=>style.setProperty(k,v),on=rsOn(p.card),isDark=rsLum(p.card)<.2;
- const secondary=rsMixHex(p.card,on,.055),elevated=rsMixHex(p.card,on,.035),soft=rsMixHex(p.card,p.buttons,.11);
+ const secondary=rsMixHex(p.card,p.buttons,isDark?.035:.045),elevated=rsMixHex(p.card,on,.025),soft=rsMixHex(p.card,p.buttons,.09);
  const surfaces=[p.card,secondary,elevated,soft];
  const ink=(c,backs=surfaces,target=5.2)=>backs.reduce((fg,bg)=>rsContrastGuard(fg,bg,target),c);
  const text=ink(p.onCard),muted=ink(rsMixHex(text,p.card,.26)),page=rsContrastGuard(t.exact?.onInput||t.text,p.shell,7);
@@ -6484,8 +6557,21 @@ function rsApplyAuditContrast(a,dark){
   '--focus-on-surface':rsContrastGuard(p.buttons,p.card,3.2),'--focus-on-page':rsContrastGuard(p.buttons,p.shell,3.2),
   '--disabled-bg':secondary,'--text-disabled':muted,'--hero-bg':p.contrast,'--hero-text':rsContrastGuard(p.onContrast||rsOn(p.contrast),p.contrast,7)};
  set('--field-chevron',"url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='"+roles['--field-text'].replace('#','%23')+"' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E\")");
+ // Gradient stops share the selected palette; each is contrast guarded before paint.
+ // Opaque stops keep contrast predictable and remove backdrop-dependent legibility.
+ const heroText='#ffffff',heroHi=rsContrastGuard(rsMixHex(p.contrast,p.buttons,.18),heroText,7),heroLo=rsMixHex(heroHi,'#000000',.32);
+ const btnHi=rsContrastGuard(rsMixHex(p.buttons,'#ffffff',.10),buttonText,5),btnLo=rsContrastGuard(rsMixHex(p.buttons,'#000000',.10),buttonText,5);
+ const cardHi=p.card,cardLo=rsMixHex(p.card,p.buttons,isDark?.035:.025),shellHi=rsMixHex(p.shell,p.buttons,isDark?.055:.035);
+ roles['--hero-bg']=heroHi;roles['--hero-text']=heroText;
+ roles['--hero-paint']=`radial-gradient(ellipse at 100% 0,${heroHi},transparent 72%),linear-gradient(125deg,${heroHi},${heroLo})`;
+ roles['--btn-paint']=`linear-gradient(155deg,${btnHi},${p.buttons} 48%,${btnLo})`;
+ roles['--surface-paint']=`linear-gradient(145deg,${cardHi},${cardLo})`;
+ roles['--page-paint']=`radial-gradient(ellipse at 90% 0,${shellHi},transparent 65%),linear-gradient(155deg,${p.shell},${shellHi})`;
+ roles['--rs-shadow-rgb']=rsHex(rsMixHex(p.buttons,'#000000',.66)).join(' ');
+ roles['--rs-highlight']=isDark?'255 255 255':'255 255 255';
  Object.entries(roles).forEach(([k,v])=>set(k,v));
- const tones={success:muted,warning:isDark?'#f1bc76':'#89500a',danger:isDark?'#ff9f9f':'#a52932',info:accent,pending:accent};
+
+ const tones={success:t.success,warning:isDark?'#f1bc76':'#89500a',danger:isDark?'#ff9f9f':'#a52932',info:accent,pending:accent};
  for(const [name,seed]of Object.entries(tones)){const bg=rsMixHex(p.card,seed,.11),fg=rsContrastGuard(seed,bg,4.8);set('--status-'+name,fg);set('--status-'+name+'-soft',bg);set('--status-'+name+'-text',ink(seed));}
  for(const [legacy,role]of [['green','success'],['amber','warning'],['red','danger']]){set('--'+legacy,style.getPropertyValue('--status-'+role));set('--'+legacy+'-soft',style.getPropertyValue('--status-'+role+'-soft'));}
  set('--division-pharmacy',muted);set('--division-essentials',muted);
@@ -6498,17 +6584,7 @@ function applyAppearanceSettings(a){a=appearanceSafe(a);const r=document.documen
   rs.setProperty('--navy',t.primary);rs.setProperty('--rs-title-color',dark?'color-mix(in srgb,'+t.primary+' 30%,'+t.text+')':t.primary);rs.setProperty('--navy2',dark?'color-mix(in srgb,'+t.primary+' 72%,'+t.text+')': 'color-mix(in srgb,'+t.primary+' 82%,black)');rs.setProperty('--accent',t.accent);rs.setProperty('--accent2',dark?'color-mix(in srgb,'+t.accent+' 58%,'+t.text+')':'color-mix(in srgb,'+t.accent+' 45%,white)');rs.setProperty('--accent-deep',dark?'color-mix(in srgb,'+t.accent+' 70%,'+t.text+')':t.accent);rs.setProperty('--bg',t.background);rs.setProperty('--bg2',dark?'color-mix(in srgb,'+t.surface+' 74%,'+t.background+')':'color-mix(in srgb,'+t.background+' 76%,white)');rs.setProperty('--card',t.surface);rs.setProperty('--surface',t.surface);rs.setProperty('--soft',dark?'color-mix(in srgb,'+t.surface+' 82%,'+t.background+')':'color-mix(in srgb,'+t.background+' 62%,white)');rs.setProperty('--text',t.text);rs.setProperty('--muted',t.muted);rs.setProperty('--line',t.border);rs.setProperty('--line2',t.border);rs.setProperty('--accent-soft',dark?'color-mix(in srgb,'+t.accent+' 14%,'+t.surface+')':'color-mix(in srgb,'+t.accent+' 9%,white)');rs.setProperty('--green',t.success);rs.setProperty('--green-soft',dark?'color-mix(in srgb,'+t.success+' 14%,'+t.surface+')':'color-mix(in srgb,'+t.success+' 10%,white)');rs.setProperty('--amber',t.warning);rs.setProperty('--amber-soft',dark?'color-mix(in srgb,'+t.warning+' 14%,'+t.surface+')':'color-mix(in srgb,'+t.warning+' 10%,white)');rs.setProperty('--red',t.error);rs.setProperty('--red-soft',dark?'color-mix(in srgb,'+t.error+' 14%,'+t.surface+')':'color-mix(in srgb,'+t.error+' 10%,white)');
   rs.setProperty('--rs-font-family',"-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif");rs.setProperty('--rs-title-font',fontStack('roseachy'));
   const fs={compact:12.5,small:13.25,default:14,comfortable:14.75,large:15.5}[a.fontScale]||14;rs.setProperty('--rs-font-size',fs+'px');rs.setProperty('--rs-heading-scale',{compact:.90,balanced:1,editorial:1.18}[a.textHierarchy]||1);
-  rs.setProperty('--rs-radius-sm',R[0]+'px');rs.setProperty('--rs-radius-md',R[1]+'px');rs.setProperty('--rs-radius-lg',R[2]+'px');rs.setProperty('--r',R[2]+'px');rs.setProperty('--rs-roundness',a.roundnessLevel/100);rs.setProperty('--rs-radius-control',(a.roundnessLevel*.22)+'px');const bw=a.borderWeightLevel*.03;rs.setProperty('--rs-border-width',bw+'px');rs.setProperty('--rs-border-opacity','1');r.classList.remove('rs-border-none','rs-hairline','rs-border-fine','rs-border-standard');const shLevel=Math.max(0,Math.min(100,n(a.shadowLevel))),sh=shLevel/100,
-    depth=Math.pow(sh,1.9),boost=Math.pow(Math.max(0,(sh-.50)/.50),1.25),
-    y=Math.round(2+42*depth+40*boost),blur=Math.round(6+80*depth+76*boost),
-    spread=Math.round(-3+4*depth+18*boost),
-    opacity=(.035+.34*depth+.30*boost).toFixed(3),
-    close=(.025+.13*depth+.20*boost).toFixed(3),
-    menu=(.09+.36*depth+.27*boost).toFixed(3);
-  rs.setProperty('--rs-shadow-level',sh.toFixed(3));
-  rs.setProperty('--shadow',shLevel<=0?'none':`0 ${Math.round(2+11*depth)}px ${Math.round(5+17*depth)}px rgba(0,0,0,${close}),0 ${y}px ${blur}px ${spread}px rgba(0,0,0,${opacity})`);
-  rs.setProperty('--shadow-sm',shLevel<=0?'none':`0 ${Math.round(2+15*depth+8*boost)}px ${Math.round(7+32*depth+22*boost)}px ${Math.round(-2+6*boost)}px rgba(0,0,0,${(.035+.31*depth+.15*boost).toFixed(3)})`);
-  rs.setProperty('--shadow-lg',shLevel<=0?'none':`0 ${Math.round(8+55*depth+48*boost)}px ${Math.round(18+95*depth+90*boost)}px ${Math.round(-6+17*boost)}px rgba(0,0,0,${menu}),0 ${Math.round(3+15*depth)}px ${Math.round(10+36*depth)}px rgba(0,0,0,${close})`);
+  rsApplyGeometry(a);rsObserveControlGeometry();const shLevel=a.shadowLevel;
   const dens={compact:{input:38,button:36},balanced:{input:46,button:44},comfortable:{input:56,button:54}}[a.density]||{input:46,button:44};
   const lerp=(lo,hi,v)=>lo+(hi-lo)*(Math.max(0,Math.min(100,n(v)))/100),spaceLv=a.spacingLevel,fieldLv=a.fieldSizeLevel,sectionLv=a.sectionSizeLevel,rhythmLv=a.verticalRhythmLevel;const sp={card:lerp(11,42,spaceLv),page:lerp(8,34,spaceLv),grid:lerp(7,28,spaceLv),control:lerp(6,22,spaceLv),block:lerp(11,46,spaceLv)},fieldMult=lerp(.72,1.38,fieldLv),sectionMult=lerp(.72,1.34,sectionLv);const fieldH=Math.round(dens.input*fieldMult),fieldPad=Math.round(lerp(7,22,fieldLv)),fieldText=lerp(.84,1.18,fieldLv),placeholderScale=lerp(.90,1.08,fieldLv);const sectionPad=Math.round(sp.card*sectionMult);rs.setProperty('--rs-card-pad',sectionPad+'px');rs.setProperty('--rs-input-h',fieldH+'px');rs.setProperty('--rs-h',fieldH+'px');rs.setProperty('--rs-field-pad-x',fieldPad+'px');rs.setProperty('--rs-field-text-scale',fieldText.toFixed(3));rs.setProperty('--rs-button-h',dens.button+'px');rs.setProperty('--rs-placeholder-scale',placeholderScale.toFixed(3));rs.setProperty('--rs-section-scale',sectionMult.toFixed(3));rs.setProperty('--rs-page-pad',Math.round(sp.page)+'px');rs.setProperty('--rs-grid-gap',Math.round(sp.grid*sectionMult)+'px');rs.setProperty('--rs-control-gap',Math.round(sp.control*sectionMult)+'px');rs.setProperty('--rs-block-gap',Math.round(sp.block*sectionMult)+'px');
   const vr={section:lerp(8,52,rhythmLv),stack:lerp(4,26,rhythmLv),card:lerp(5,26,rhythmLv),preview:lerp(4,20,rhythmLv)};rs.setProperty('--rs-rhythm-section',Math.round(vr.section)+'px');rs.setProperty('--rs-rhythm-stack',Math.round(vr.stack)+'px');rs.setProperty('--rs-rhythm-card',Math.round(vr.card)+'px');rs.setProperty('--rs-preview-rhythm',Math.round(vr.preview)+'px');
@@ -6525,7 +6601,8 @@ const rsColorScheme=matchMedia('(prefers-color-scheme: dark)');rsColorScheme.add
 function getUIState(){try{const x=JSON.parse(safeGet(KEY.ui)||'{}');return{stockInventoryCollapsed:!!x.stockInventoryCollapsed,openingBalancesUnlocked:!!x.openingBalancesUnlocked,openingUnlockDate:x.openingUnlockDate||'',recordsExpanded:!!x.recordsExpanded}}catch{return{stockInventoryCollapsed:false,openingBalancesUnlocked:false,openingUnlockDate:'',recordsExpanded:false}}}
 function saveUIState(v){const x={stockInventoryCollapsed:!!v.stockInventoryCollapsed,openingBalancesUnlocked:!!v.openingBalancesUnlocked,openingUnlockDate:v.openingUnlockDate||'',recordsExpanded:!!v.recordsExpanded};storeSet(KEY.ui,JSON.stringify(x));return x}
 function renderAppearanceControls(apply=true){const a=getAppearanceSettings();document.querySelectorAll('[data-setting]').forEach(el=>{const k=el.dataset.setting;if(!(k in a))return;if(el.type==='checkbox')el.checked=!!a[k];else el.value=a[k]});document.querySelectorAll('[data-range-value]').forEach(el=>{const k=el.dataset.rangeValue;if(k in a)el.textContent=String(Math.round(n(a[k]))) });document.querySelectorAll('[data-setting-buttons]').forEach(g=>{const k=g.dataset.settingButtons;g.querySelectorAll('[data-value]').forEach(b=>b.classList.toggle('active',b.dataset.value===String(a[k])))});document.querySelectorAll('[data-theme-choice]').forEach(b=>{const selected=b.dataset.themeChoice===a.theme;b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected))});if(apply)applyAppearanceSettings(a);refreshSettingsPreview();const tn=document.getElementById('previewThemeName');if(tn)tn.textContent=RS_THEME_SEEDS[a.theme].name;const badge=document.getElementById('previewBadge');if(badge)badge.textContent=({compact:'Compact',balanced:'Balanced',comfortable:'Comfortable'}[a.density]||'Balanced')+' · '+(n(a.verticalRhythmLevel)<25?'Tight rhythm':n(a.verticalRhythmLevel)<58?'Refined rhythm':n(a.verticalRhythmLevel)<84?'Relaxed rhythm':'Editorial rhythm')}
-function updateAppearanceValue(k,v){const a=getAppearanceSettings();if(k==='roundnessLevel'||k==='borderWeightLevel'){const raw=Number(v);if(!Number.isFinite(raw))return;v=Math.max(0,Math.min(100,Math.round(raw)));if(a[k]===v)return;a[k]=v;storeSet(KEY.appearance,JSON.stringify(appearanceSafe(a)));const rs=document.documentElement.style;if(k==='roundnessLevel'){const R=radiusSet(v);['sm','md','lg'].forEach((n,i)=>rs.setProperty('--rs-radius-'+n,R[i]+'px'));rs.setProperty('--r',R[2]+'px');rs.setProperty('--rs-roundness',v/100);rs.setProperty('--rs-radius-control',(v*.22)+'px')}else rs.setProperty('--rs-border-width',(v*.03)+'px');document.querySelectorAll('[data-setting="'+k+'"]').forEach(e=>e.value=v);document.querySelectorAll('[data-range-value="'+k+'"]').forEach(e=>e.textContent=String(v));return;}if(k==='theme')v=supportedTheme(v);if(Object.is(a[k],v))return;a[k]=v;saveAppearanceSettings(a);renderAppearanceControls(false)}
+function updateAppearanceValue(k,v){const a=getAppearanceSettings();if(['roundnessLevel','borderWeightLevel','shadowLevel'].includes(k)){const raw=Number(v);if(!Number.isFinite(raw))return;v=Math.max(0,Math.min(100,Math.round(raw)));if(a[k]===v)return;a[k]=v;storeSet(KEY.appearance,JSON.stringify(appearanceSafe(a)));rsApplyGeometry(a,k);document.querySelectorAll('[data-setting="'+k+'"]').forEach(e=>e.value=v);document.querySelectorAll('[data-range-value="'+k+'"]').forEach(e=>e.textContent=String(v));return;}if(k==='theme')v=supportedTheme(v);if(Object.is(a[k],v))return;a[k]=v;saveAppearanceSettings(a);renderAppearanceControls(false)}
+
 function updateAppearanceFromControl(el){const k=el.dataset.setting;if(!k)return;const v=el.type==='checkbox'?el.checked:el.type==='range'?Number(el.value):el.value;const out=document.querySelector('[data-range-value="'+CSS.escape(k)+'"]');if(out&&el.type==='range')out.textContent=String(Math.round(v));updateAppearanceValue(k,v)}
 function resetAppearanceSection(name){const a=getAppearanceSettings();(APPEARANCE_GROUPS[name]||[]).forEach(k=>a[k]=APPEARANCE_DEFAULTS[k]);saveAppearanceSettings(a);renderAppearanceControls(false);toast('Appearance section reset')}
 document.addEventListener('input',e=>{const el=e.target.closest&&e.target.closest('[data-setting]');if(el)updateAppearanceFromControl(el)});document.addEventListener('change',e=>{const el=e.target.closest&&e.target.closest('[data-setting]');if(el)updateAppearanceFromControl(el)});

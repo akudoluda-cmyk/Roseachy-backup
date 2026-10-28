@@ -1,0 +1,5 @@
+7852952e54d286b94fa5b2319cebe76efa11ebd22637f39308ae6634ead258d3  Roseachy-Desk-2.16.10-Cloudflare-Pages.zip
+2f31e7c42f81293b93a9dc026bd58d510698a7b12691a3c828d829bb51b1d39d  Roseachy-Desk-2.16.10-Source-and-Reports.zip
+5885f4a6a1b0007758ee03cd4bedb3500c18c56c909446fba81b7ab4fde74c0f  Roseachy-Desk-2.16.10-Visual-Report.html
+c438fbd3acc3d8ae9d20beaf711e25f0f396c2fc085b1c8172bdbcb5d8cc65a6  Roseachy-Desk-2.16.10-Preview.html
+119aee6b49df97b0e2b603e9d9ec1bf910ac1c5d84df1cf529ce4eba46260294  VERIFICATION.md

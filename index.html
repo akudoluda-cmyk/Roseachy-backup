@@ -2192,8 +2192,8 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
  :where(.marketActions button.primary){background:var(--surface-secondary);color:var(--text-primary);--edge-color:var(--border-strong)}
  :where(.finBalanceCard strong,.metric.hero strong){font-size:clamp(1.45rem,4.5vw,2.15rem);font-variant-numeric:tabular-nums}
 /* Shared geometry: fractional inset edges never change the layout box. */
-:where(.finReviewBar,.finReviewTotal,.finRecoveryValue,.inventoryAuditEntry,.adjComputedSummary,.overallStrip,.dayManageRow,.backupWarn,.creditLine,.noteItem,.card,.collapse,.marketSection,.settingsGroup,.finGroup,.finGate,.studioPreview,.previewBrand,.themeCard,.activeListCard,.supplierDebtGroup,.supplierDebtItem,.marketPanel,.dupModal,.creditPanel,.syncPanel,.deskMenu,.finMenu,.marketUtilityMenu,.productSuggestDrop,.supplierDrop,.marketSearchDrop,.metric,.packBox,.previewCard,.previewStock,.previewMiniRow,.marketCurrent,.marketChoice,.marketUpdateOnly,.supplierMini,.purchasePayBox,.activeSupplierBox,.purchaseDetailMetric,.marketSummaryMetric,.marketCalcStat,.creditSummary,.posEffect,.pricingDefaultCard,.supplierPaySummary,.marketListBadge,.settingsDanger,.tabs,.seg,.segChoice,.marketViewTabs,.marketCalcTabs,.rsHistoryToggle,.rsHistoryStatus,.rsAnaSwitch,.previewTabs,.finBalanceCard,.marketSummaryBar,.rsTrendCard,.rsAnaProductDetail,#holdPanel,.cartItemEditor,.editableNote,.marketPurchaseRow,#toast,button,.primaryBtn,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),select,textarea){
- box-sizing:border-box;border:1px solid transparent;border-radius:var(--rs-radius-md);background-clip:padding-box;
+:where(.finReviewBar,.finReviewTotal,.finRecoveryValue,.inventoryAuditEntry,.adjComputedSummary,.overallStrip,.rsEssentialMetrics>div,.rsAnaHighlights>div,.dayManageRow,.backupWarn,.creditLine,.noteItem,.card,.collapse,.marketSection,.settingsGroup,.finGroup,.finGate,.studioPreview,.previewBrand,.themeCard,.activeListCard,.supplierDebtGroup,.supplierDebtItem,.marketPanel,.dupModal,.creditPanel,.syncPanel,.deskMenu,.finMenu,.marketUtilityMenu,.productSuggestDrop,.supplierDrop,.marketSearchDrop,.metric,.packBox,.previewCard,.previewStock,.previewMiniRow,.marketCurrent,.marketChoice,.marketUpdateOnly,.supplierMini,.purchasePayBox,.activeSupplierBox,.purchaseDetailMetric,.marketSummaryMetric,.marketCalcStat,.creditSummary,.posEffect,.pricingDefaultCard,.supplierPaySummary,.marketListBadge,.settingsDanger,.tabs,.seg,.segChoice,.marketViewTabs,.marketCalcTabs,.rsHistoryToggle,.rsHistoryStatus,.rsAnaSwitch,.previewTabs,.finBalanceCard,.marketSummaryBar,.rsTrendCard,.rsAnaProductDetail,#holdPanel,.cartItemEditor,.editableNote,.marketPurchaseRow,#toast,button,.primaryBtn,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),select,textarea){
+ --surface-light:0 0 0 transparent;box-sizing:border-box;border:1px solid transparent;border-radius:var(--rs-radius-md);background-clip:padding-box;
  box-shadow:inset 0 0 0 var(--rs-border-width) var(--edge-color,var(--border-subtle)),var(--surface-depth,0 0 0 transparent),var(--surface-light,0 0 0 transparent);
  transition:background-color 140ms ease,color 140ms ease;
 }
@@ -2251,7 +2251,13 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
 
 @media screen {
 /* Premium surfaces: hierarchy through lighting, elevation and restrained colour. */
-:where(h2,h3,h4,.collapseHead,.settingsGroup>summary,.tabBtn,.seg button,.segChoice button){font-family:var(--rs-font-family)}
+:where(.rsEssentialMetrics,.rsAnaHighlights){gap:12px;margin:18px 0}
+:where(.rsEssentialMetrics>div,.rsAnaHighlights>div){padding:16px;gap:10px;--local-text:var(--text-primary);--local-muted:var(--text-secondary);background:var(--surface-secondary);--surface-depth:var(--shadow-sm)}
+:where(.rsEssentialMetrics>div:has(#roSales),.rsEssentialMetrics>div:has(#roProfit),.rsAnaHighlights>div:first-child){--local-text:var(--hero-text);--local-muted:var(--hero-text);background-color:var(--hero-bg);background-image:var(--hero-paint);--edge-color:color-mix(in srgb,var(--hero-text) 24%,var(--hero-bg));--surface-depth:var(--shadow)}
+:where(.rsEssentialMetrics span,.rsAnaHighlights span){color:var(--local-muted);line-height:1.45}
+:where(.rsEssentialMetrics b,.rsAnaHighlights b){color:var(--local-text);font-size:clamp(1.1rem,3vw,1.6rem);letter-spacing:-.025em;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+
+:where(.rs-swipe-labels,.summaryTop,.summaryTop strong,h2,h3,h4,.collapseHead,.settingsGroup>summary,.tabBtn,.seg button,.segChoice button){font-family:var(--rs-font-family)}
 :where(.collapseHead,.settingsGroup>summary){font-size:1rem;letter-spacing:-.015em;line-height:1.4}
 :where(.collapseHead){border-top-left-radius:max(0px,calc(var(--rs-radius-lg) - 2px));border-top-right-radius:max(0px,calc(var(--rs-radius-lg) - 2px))}
 :where(.collapse:has(>.collapseHead[aria-expanded="true"]),details[open],.rsRecordExpanded){--edge-color:var(--border-subtle)}
@@ -2262,6 +2268,7 @@ html[data-rs-exact-theme="true"] body[data-theme] .themeCard::after{display:none
 :where(.metric.hero,.finBalanceCard,.marketSummaryBar){--surface-depth:var(--shadow-lg);--surface-light:inset 0 1px 0 rgb(var(--rs-highlight) / calc(var(--rs-shadow-level) * .45));isolation:isolate}
 :where(.metric.hero,.finBalanceCard){min-height:132px;display:flex;flex-direction:column;justify-content:space-between;gap:12px}
 :where(.metric.hero strong,.metric.hero b,.finBalanceCard strong){font-weight:750;letter-spacing:-.04em}
+#finBalance{font-size:clamp(1.75rem,5.8vw,2.6rem);line-height:1.12;margin:12px 0;font-variant-numeric:tabular-nums}
 :where(button.primary,.primaryBtn){--surface-depth:var(--shadow-sm);--surface-light:inset 0 1px 0 rgb(var(--rs-highlight) / calc(var(--rs-shadow-level) * .55));font-weight:700}
 :where(button:not(:disabled):hover){translate:0 -1px}
 :where(button:not(:disabled):active){translate:0 0;--surface-light:inset 0 1px 2px rgb(var(--rs-shadow-rgb) / calc(var(--rs-shadow-level) * .18))}
@@ -6400,11 +6407,10 @@ function rsObserveControlGeometry(){
  // Measure only when component size changes, never during slider input. A control's
  // actual half-height gives a true capsule at 100 even for large text or multiline labels.
  const selector='button,.primaryBtn,input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]),select,.tabs,.seg,.segChoice,.marketCalcTabs,.previewTabs,.tabInd';
- const seen=new WeakSet();
- rsGeometryObserver=new ResizeObserver(entries=>{for(const {target} of entries){const h=target.offsetHeight;if(h>0)target.style.setProperty('--rs-control-half',h/2+'px')}});
- const add=e=>{if(e.nodeType!==1)return;const els=[...(e.matches(selector)?[e]:[]),...e.querySelectorAll(selector)];for(const el of els)if(!seen.has(el)){seen.add(el);rsGeometryObserver.observe(el)}};
- add(document.documentElement);
- new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)add(node)}).observe(document.body,{childList:true,subtree:true});
+ rsGeometryObserver=new ResizeObserver(entries=>{for(const entry of entries){const target=entry.target,h=entry.borderBoxSize?.[0]?.blockSize||target.offsetHeight;if(h>0)target.style.setProperty('--rs-control-half',h/2+'px')}});
+ const visit=(e,observe)=>{if(e.nodeType!==1)return;const els=[...(e.matches(selector)?[e]:[]),...e.querySelectorAll(selector)];for(const el of els)rsGeometryObserver[observe?'observe':'unobserve'](el)};
+ visit(document.documentElement,true);
+ new MutationObserver(records=>{for(const record of records)for(const node of record.removedNodes)visit(node,false);for(const record of records)for(const node of record.addedNodes)visit(node,true)}).observe(document.body,{childList:true,subtree:true});
 }
 
 function radiusSet(v){const q=Math.max(0,Math.min(100,Number(v)||0))/100;return[16*q,28*q,40*q]}

@@ -1,7 +1,7 @@
 /* Roseachy Cloudflare service worker — mobile-safe network-first navigation.
    Business records remain in IndexedDB. The network is preferred for page loads
    so a stale cached app shell cannot pin an older deployment when online. */
-const VERSION = '2.16.11-premium-redesign-20261028-r1';
+const VERSION = '2.16.11-premium-redesign-20261028-final3';
 const CACHE = 'roseachy-shell-inventory-v28-' + VERSION;
 const SHELL = [
   '/index.html',

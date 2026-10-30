@@ -1,0 +1,22 @@
+{
+  "passed": [
+    "create trimmed division",
+    "case-insensitive duplicate rejected",
+    "add subdivision inline",
+    "atomic multi-product move preserves every non-classification field",
+    "shared Market groups and unified active list",
+    "rename retains IDs; deleting occupied subdivision is blocked",
+    "same subdivision name allowed under different parents; unused removal succeeds",
+    "filtered Select All, cross-view selection and cancelled move preserve state",
+    "subdivision creation during move; injected failure rolls back entire batch and preserves selection",
+    "cross-division move clears stale subdivision",
+    "existing sale and profit work for a custom division",
+    "mixed-division purchasing uses one list; browsing preserves all purchase draft fields",
+    "reclassification preserves historical sales and the complete pending purchase",
+    "explicit Amount Paid validation, one mixed purchase, quantities, supplier balance and stale-draft protection",
+    "unclassified grouping, desktop/tablet/mobile overflow and keyboard dismissal",
+    "full backup round trip, idempotent migration, sync projection preserves classification IDs",
+    "backup, reload, independent view preferences, database verification"
+  ],
+  "errors": []
+}

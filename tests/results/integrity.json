@@ -1,0 +1,25 @@
+{
+  "legacyMigration": "Known, unknown and missing divisions; IDs, quantities and values preserved; repeat and reload passed",
+  "workingStock": "Export/restore preserves registry and product fields",
+  "legacyUtilities": "Custom divisions supported by low-stock PDF and bulk parser",
+  "nameEscaping": "Markup-like names render as text",
+  "syncProjection": {
+    "events": 2,
+    "conflicts": 0,
+    "classificationPreserved": true,
+    "noInventoryMovements": true
+  },
+  "safeDivisionRemoval": "Rename; parent removal blocked until unused child removed; unused division removed",
+  "orphanValidation": true,
+  "touch": "Create division, toggle view and expand/collapse via touch",
+  "largeInventory": {
+    "products": 2000,
+    "divisions": 22,
+    "subdivisions": 100,
+    "groupViewMs": 782,
+    "moveAllMs": 2103,
+    "allOtherFieldsPreserved": true,
+    "pagingAndSearch": true
+  },
+  "browserErrors": []
+}

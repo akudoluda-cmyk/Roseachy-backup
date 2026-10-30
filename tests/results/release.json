@@ -1,0 +1,9 @@
+{
+  "unmodifiedProduction": true,
+  "touchProductCreation": true,
+  "serviceWorkerControlled": true,
+  "offlineReload": true,
+  "classificationPersistence": true,
+  "databaseVerified": true,
+  "browserErrors": []
+}

@@ -1,10 +1,17 @@
 # Roseachy Desk downloads
 
-The completed UI upgrade is based on the uploaded Roseachy Desk 2.16.11 Cloudflare Pages build.
+## Current release: 2.16.12
 
-- [Download the deployment ZIP](Roseachy-Desk-2.16.11-UI-Completed-Cloudflare-Pages.zip)
-- [Read the implementation and verification report](Roseachy-UI-Completion-Report.md)
+Dynamic divisions and subdivisions, Stock bulk reclassification, and shared Market product browsing, built on the completed 2.16.11 UI refinement.
 
-ZIP SHA-256: `8ee475f5e4b4ef4c5469909e6f8962cfbd446af1a8c2b262afc9e98bee74d590`
+- [Download the Cloudflare Pages deployment ZIP](Roseachy-Desk-2.16.12-Divisions-Cloudflare-Pages.zip)
+- [Read the implementation and verification report](Roseachy-Divisions-Completion-Report.md)
 
-The ZIP has index.html at its root and contains the original 13-file deployment structure.
+ZIP SHA-256: `3713f85f5479bdc94fd7dd61e4aab3580ce33a41cfafc1027f77d899e45af377`
+
+The ZIP contains 13 deployment files with index.html at its root. Test scripts and results are in the repository's tests directory.
+
+## Previous release: 2.16.11 UI refinement
+
+- [Download the previous deployment ZIP](Roseachy-Desk-2.16.11-UI-Completed-Cloudflare-Pages.zip)
+- [Read its verification report](Roseachy-UI-Completion-Report.md)

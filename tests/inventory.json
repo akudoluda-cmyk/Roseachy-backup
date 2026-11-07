@@ -1,0 +1,3727 @@
+{
+  "source": "supplied Stage 3A, not independently verified original",
+  "coreBytes": 901242,
+  "coreFunctions": [
+    "txChangeOwed",
+    "electronicSaleReceipt",
+    "debounce",
+    "idleTask",
+    "markStockChanged",
+    "markSavedChanged",
+    "resetLedgerWindow",
+    "resetStockWindow",
+    "roseachyTableRowModels",
+    "resetSavedWindow",
+    "parsedJson",
+    "cacheJson",
+    "currentWeekBounds",
+    "currentMonthBounds",
+    "fingerprintCurrentDay",
+    "n",
+    "secureUuid",
+    "uid",
+    "esc",
+    "clone",
+    "businessDateAt",
+    "today",
+    "fmt",
+    "showToast",
+    "toast",
+    "roseachySection",
+    "roseachyDiag",
+    "dateOnlyMs",
+    "fmtDateTime",
+    "fmtDateISO",
+    "businessKey",
+    "clampMarkup",
+    "roundMoney",
+    "priceFromMarkup",
+    "impliedMarkup",
+    "pricingSafe",
+    "divisionDefaultMarkup",
+    "effectiveProductMarkup",
+    "productPricingLabel",
+    "safeGet",
+    "storeSet",
+    "storeRemove",
+    "hydrateFromIDB",
+    "finalizeMigration",
+    "migrateLegacy",
+    "normalizeBatch",
+    "nearestExpiry",
+    "normalizeProduct",
+    "normalizeStockArray",
+    "getStock",
+    "setStock",
+    "normalizeTxIds",
+    "getSaved",
+    "setSaved",
+    "getNotes",
+    "setNotes",
+    "getTrash",
+    "setTrash",
+    "currentCost",
+    "snapshotProduct",
+    "stockSnapshot",
+    "ensureOpeningStock",
+    "viewStock",
+    "divOf",
+    "stockDivMap",
+    "txDiv",
+    "divBadgeKey",
+    "divDotKey",
+    "styleDivisionSelect",
+    "refreshDivisionSelectStyles",
+    "divBadge",
+    "productNameIndex",
+    "prodLabel",
+    "findProductByName",
+    "ambiguousName",
+    "syncDivSelect",
+    "stampDivision",
+    "withHeads",
+    "validQuantityPricing",
+    "salePricing",
+    "txPricingRule",
+    "ruleFromSaleRecord",
+    "validSalesNumber",
+    "knownTxRows",
+    "linkedSaleRefunds",
+    "refundSaleTotals",
+    "originalRefundPricing",
+    "originalRefundBatches",
+    "refundMutationError",
+    "retailCashOutViolation",
+    "syncSalesCreditPurchases",
+    "electronicBasketMutationError",
+    "commitSalesLedger",
+    "ensureHistoryIndex",
+    "saleSourceCandidates",
+    "findSaleSource",
+    "refundedQtyForSale",
+    "refreshRefundSource",
+    "refundPricingRule",
+    "soldByDiv",
+    "divLines",
+    "divNetLine",
+    "packTotal",
+    "packBreakdown",
+    "reconcilePhysicalPackState",
+    "physicalPackText",
+    "packQtyLabel",
+    "reducePhysicalForTx",
+    "addPhysicalUnits",
+    "txPackQty",
+    "updateTxPackUI",
+    "stockEffectiveQty",
+    "updateStockPackUI",
+    "mediumStockLevel",
+    "isLow",
+    "addCalendarMonths",
+    "expiryInfo",
+    "expiryPriority",
+    "expiryLabel",
+    "addBatch",
+    "batchSort",
+    "reduceKnownBatchLooseFirst",
+    "consumeBatches",
+    "restoreAllocations",
+    "recalcProduct",
+    "saveDraft",
+    "loadDraft",
+    "saveHoldState",
+    "loadHoldState",
+    "ensureSupplierIndex",
+    "supplierOpeningFor",
+    "recordCalc",
+    "currentSupplierOpening",
+    "applyEffect",
+    "productMetaSnapshot",
+    "rebuildStockFromOpening",
+    "nowIso",
+    "fmtStamp",
+    "isPosCat",
+    "txLabel",
+    "posComponents",
+    "posBuild",
+    "posMovements",
+    "posCashDelta",
+    "posNeed",
+    "posOpeningNow",
+    "posElectronicOpeningNow",
+    "posRunning",
+    "posElectronicViolation",
+    "posCashViolation",
+    "posShortText",
+    "posUsed",
+    "posLine",
+    "syncFeeViaSeg",
+    "posDraft",
+    "posBaseList",
+    "refreshPosUI",
+    "refreshPosBal",
+    "setEntryMode",
+    "resetPosForm",
+    "hideShort",
+    "showShort",
+    "posValidate",
+    "posObj",
+    "startPosEdit",
+    "xferBase",
+    "xferRefresh",
+    "openXfer",
+    "todaySalesCashAvailable",
+    "startXferEdit",
+    "closeXfer",
+    "applySumView",
+    "txMatchesFilter",
+    "txEffectHtml",
+    "txDetailHtml",
+    "txRecordDetailsHtml",
+    "syncRecordsDensity",
+    "creditVisibleReceipts",
+    "salesDailyRows",
+    "renderLedger",
+    "allocateDebtCollection",
+    "creditDeferredProfit",
+    "creditProfitAllocations",
+    "calc",
+    "movementData",
+    "setTab",
+    "captureProductHistoryReturnState",
+    "restoreProductHistoryReturnState",
+    "updateChangeBoxVisibility",
+    "fundingEligibleType",
+    "normalizePaymentFunding",
+    "normalizePaymentFundingList",
+    "syncPaymentSourceUI",
+    "refreshTypeUI",
+    "smartProductScore",
+    "smartProductMatches",
+    "closeProductSuggestions",
+    "chooseProductSuggestion",
+    "renderProductSuggestions",
+    "refreshProductHint",
+    "updateSaleStockValidation",
+    "computeTotal",
+    "showSalePaymentWarning",
+    "refreshAutomaticSplitCredit",
+    "updateAutomaticDebtPreview",
+    "updateChangeOwed",
+    "resetTxForm",
+    "reviseCartItem",
+    "cartItemEditor",
+    "readCartItemEditor",
+    "updateCartItemSummary",
+    "heldQtyFor",
+    "validateAndBuildTx",
+    "currentItemHasInput",
+    "currentItemTotal",
+    "endHoldUI",
+    "applyBasketSplit",
+    "distributePartialBasket",
+    "finalizeHold",
+    "updateHoldChangeOwed",
+    "renderHoldPanel",
+    "openingCorrectionUnlocked",
+    "setOpeningCorrectionUnlocked",
+    "renderOpeningUnlockControl",
+    "updateLocks",
+    "validOpenCartEditors",
+    "addCurrentToCart",
+    "txQtyText",
+    "render",
+    "renderTxTrash",
+    "renderProductOptions",
+    "renderStock",
+    "renderAssignCard",
+    "buildLowStockPdf",
+    "captureLoosePurchaseForm",
+    "restoreLoosePurchase",
+    "workingMarketContext",
+    "stableBackupText",
+    "checkWorkingMarketContext",
+    "stockExportObject",
+    "duplicateScore",
+    "duplicateCandidates",
+    "sizeDifferentProducts",
+    "qpValues",
+    "pricingFormValues",
+    "syncStockCost",
+    "syncMarketCost",
+    "syncStockPricing",
+    "syncMarketPricing",
+    "updateQpUI",
+    "clearStockForm",
+    "commitNewStock",
+    "packLine",
+    "packConflictFor",
+    "packConflictText",
+    "entryFromV",
+    "buildExistingAddTx",
+    "addToExistingNow",
+    "dupCardHtml",
+    "showDuplicateWarning",
+    "dupSelected",
+    "dupConflict",
+    "refreshDupUI",
+    "closeDuplicateWarning",
+    "stockDeleteBlockReason",
+    "stockDeleteBlocked",
+    "detachMarketProductRef",
+    "syncMarketAfterStockDelete",
+    "syncMarketAfterStockRestore",
+    "validateSystemIntegrity",
+    "deleteStockIds",
+    "safeDeleteStockById",
+    "exitStockMultiMode",
+    "updateStockMultiBar",
+    "enterStockMultiMode",
+    "toggleStockSelection",
+    "finishExistingAdd",
+    "validateWorkingStockBackup",
+    "restoreWorkingStockBackup",
+    "prepareWorkingStockSafetyBackup",
+    "importStockProducts",
+    "groupRowCells",
+    "linesToStockRows",
+    "ensurePdfJs",
+    "parseStockPdf",
+    "workingRestoreFingerprint",
+    "closeWorkingStockRestore",
+    "openWorkingStockRestore",
+    "refreshNameHint",
+    "refreshBatchDup",
+    "isResolved",
+    "needsDecision",
+    "bulkBadge",
+    "bulkResolveHtml",
+    "parseBulkDivision",
+    "bulkNumber",
+    "parseBulkStock",
+    "renderBulkPreview",
+    "syncStockEntryLabel",
+    "showStockEntryForEdit",
+    "cancelStockPress",
+    "syncMarketAfterStockPurge",
+    "renderTrash",
+    "setupInventoryPicker",
+    "productHistoryRows",
+    "renderProductHistory",
+    "creditHistoryTimeline",
+    "buildCreditHistory",
+    "refreshSavedDebtCopies",
+    "ordinaryDebtMutationError",
+    "filterCreditHistory",
+    "renderCreditHistorySuggestions",
+    "creditHistoryObligations",
+    "creditHistorySearchText",
+    "renderCreditHistory",
+    "recordObject",
+    "savedFiltered",
+    "renderSaved",
+    "currentDayIsSaved",
+    "dayOperationState",
+    "dayDraftFields",
+    "normalizedDayRecord",
+    "persistBusinessDay",
+    "runManualDaySave",
+    "nextBusinessDate",
+    "prepareNewDayDraft",
+    "startNewBusinessDay",
+    "preservePassedBusinessDay",
+    "reportStock",
+    "reportText",
+    "movementText",
+    "renderDailyReportCard",
+    "renderMovementTable",
+    "renderReports",
+    "renderEssentialReport",
+    "copyText",
+    "printOnly",
+    "defaultWeekRange",
+    "ensureWeekDefaults",
+    "weeklyRows",
+    "renderWeekly",
+    "renderNotes",
+    "commitNotes",
+    "backupReadFields",
+    "backupWriteFields",
+    "backupWorkingContext",
+    "backupCaptureWorking",
+    "backupWaitForBusiness",
+    "backupPersistWorking",
+    "backupScheduleWorking",
+    "backupRestoreFinancialWorking",
+    "backupRestoreWorking",
+    "backupSetupWorking",
+    "backupValidateFields",
+    "backupValidateBox",
+    "backupValidateDomains",
+    "equalSmartBackup",
+    "backupCompareStored",
+    "restoreFullBackup",
+    "backupObject",
+    "stringifyOffThread",
+    "downloadObject",
+    "roseachySha256",
+    "roseachyVerifyBackupDigest",
+    "roseachySafeBackup",
+    "roseachyBackupRecorded",
+    "downloadBackup",
+    "normalizeBackupTxIds",
+    "applyBackupData",
+    "updatePreImportButton",
+    "validateBackupIdentities",
+    "validateBackupNumber",
+    "validateBackupTransactions",
+    "validateFullBackup",
+    "validateBackupPos",
+    "anaDay",
+    "anaISO",
+    "anaShift",
+    "anaPeriodBounds",
+    "anaRecords",
+    "anaUniqueRecords",
+    "anaDivMatches",
+    "anaEmpty",
+    "anaAggregate",
+    "anaProductCosts",
+    "anaPct",
+    "anaFmtPct",
+    "anaRowsProduct",
+    "anaRenderChart",
+    "anaStockFromRecords",
+    "anaStockVal",
+    "anaStockFiltered",
+    "anaInventory",
+    "anaRenderProductDetail",
+    "anaTrendEligible",
+    "anaProductKey",
+    "anaElapsed",
+    "anaTrendData",
+    "anaUnits",
+    "anaSpark",
+    "anaTrendTimeline",
+    "anaCompareBars",
+    "anaStockHint",
+    "anaRenderProductTrends",
+    "renderAnalytics",
+    "add",
+    "rsMakePalette",
+    "rsExactPalette",
+    "supportedTheme",
+    "migrateSavedTheme",
+    "appearanceSafe",
+    "getAppearanceSettings",
+    "saveAppearanceSettings",
+    "getPricingSettings",
+    "repriceDefaultMarkupProducts",
+    "savePricingSettings",
+    "renderPricingSettings",
+    "fontStack",
+    "rsApplyGeometry",
+    "rsObserveControlGeometry",
+    "radiusSet",
+    "rsHex",
+    "rsToHex",
+    "rsMixHex",
+    "rsLum",
+    "rsCR",
+    "rsEnsure",
+    "rsOn",
+    "rsApplyTextTokens",
+    "rsContrastGuard",
+    "rsApplyExactTokens",
+    "rsApplyReferenceTheme",
+    "rsApplyAuditContrast",
+    "rsApplyLayout",
+    "applyAppearanceSettings",
+    "getUIState",
+    "saveUIState",
+    "rsRefreshAppearanceLabel",
+    "renderAppearanceControls",
+    "updateAppearanceValue",
+    "updateAppearanceFromControl",
+    "resetAppearanceSection",
+    "refreshSettingsPreview",
+    "syncStudioPreviewCondense",
+    "previewPricingInput",
+    "commitPricingInput",
+    "syncStockInventoryCollapse",
+    "defaultMarketState",
+    "normalizeMarketState",
+    "getMarketState",
+    "setMarketState",
+    "marketActiveListById",
+    "selectedMarketActiveList",
+    "allMarketActiveItems",
+    "syncCompatToList",
+    "ensureSelectedMarketList",
+    "createMarketActiveList",
+    "marketListName",
+    "findSupplierActiveList",
+    "marketStateMut",
+    "marketProduct",
+    "marketReqMatch",
+    "marketStockMatch",
+    "marketPurchaseUnits",
+    "marketPurchaseTotal",
+    "marketPurchaseQuantityText",
+    "marketStatusText",
+    "syncMarketLowStock",
+    "setMarketView",
+    "marketSessionLabel",
+    "preserveMarketTxLink",
+    "marketHistoryForTx",
+    "syncSupplierPurchaseTxRelation",
+    "marketTxEdited",
+    "syncSupplierPaymentRecordForTx",
+    "marketTxDeleted",
+    "marketTxRestored",
+    "switchDesk",
+    "positionMarketUtilityMenu",
+    "closeMarketUtilityMenu",
+    "scheduleMarketUtilityPosition",
+    "renderMarketActiveLists",
+    "renderMarket",
+    "renderMarketSearch",
+    "marketPassFilter",
+    "renderMarketSuggestions",
+    "syncMarketQuantity",
+    "marketRecalcForm",
+    "explicitStockChoice",
+    "openMarketStock",
+    "closeMarketBudget",
+    "renderMarketListPickerSelection",
+    "marketListPickerSuggestions",
+    "openMarketListPicker",
+    "closeMarketListPicker",
+    "moveMarketItemsToSupplier",
+    "moveCustomerRequestToActiveList",
+    "confirmMarketListPicker",
+    "openMarketListActions",
+    "openSupplierActions",
+    "closeMarketListActions",
+    "deleteMarketActiveList",
+    "renderMarketRecycleBin",
+    "openMarketRecycleBin",
+    "restoreMarketActiveList",
+    "deleteMarketSupplier",
+    "restoreDeletedSupplier",
+    "purgeDeletedSupplier",
+    "supplierDebtModel",
+    "updateSupplierDebtHomePulse",
+    "refreshSupplierDebtAlert",
+    "scheduleSupplierDebtRefresh",
+    "supplierById",
+    "supplierPurchaseClaimed",
+    "supplierPurchasePaid",
+    "supplierPurchaseOutstanding",
+    "supplierStats",
+    "supplierMatches",
+    "renderActiveSupplierSelector",
+    "activeSupplierSuggestions",
+    "openSupplierEditor",
+    "renderSuppliers",
+    "supplierDisbursementHistory",
+    "openSupplierDetail",
+    "renderSupplierDebtBoard",
+    "supplierPaymentPreview",
+    "refreshSupplierPaymentForm",
+    "openSupplierPayment",
+    "closeSupplierPayment",
+    "renderPurchaseSupplierSelector",
+    "purchaseSupplierSuggestions",
+    "marketReviewPaymentState",
+    "selectedMarketReviewItems",
+    "syncMarketReviewPaymentDefaults",
+    "marketReviewMixedPayment",
+    "supplierReviewControls",
+    "updateReviewBalance",
+    "updateMarketReviewSelectionTotal",
+    "createSupplierPurchaseForApplied",
+    "marketReadyItems",
+    "openMarketReview",
+    "updateProductMetadataFromMarket",
+    "applyOneMarketItem",
+    "requireMarketPayment",
+    "marketCurrentTotals",
+    "showMarketSummary",
+    "marketLocalDateKey",
+    "renderMarketHistory",
+    "openMarketPurchaseDetail",
+    "calcMarket",
+    "syncMarketCalcCost",
+    "prefillMarketCalculator",
+    "setMarketCalcMode",
+    "renderDigital",
+    "pressDigital",
+    "marketCsvRows",
+    "marketCsvCell",
+    "marketDownloadCsv",
+    "closeMarketExport",
+    "hideMarketExportPreview",
+    "updateMarketExportCount",
+    "showMarketExportPreview",
+    "monitorStorageSize",
+    "roseachyActiveTab",
+    "roseachyNavSnapshot",
+    "roseachyNavSig",
+    "capture",
+    "clean",
+    "makeHome",
+    "isHomeState",
+    "sig",
+    "same",
+    "browserState",
+    "ensureHomeAnchor",
+    "ensureSentinel",
+    "replace",
+    "commit",
+    "restore",
+    "closeTemporary",
+    "backInternal",
+    "initNav",
+    "finValidPin",
+    "finIsPinAccount",
+    "finInitPinFields",
+    "finPinRefresh",
+    "finPinFocus",
+    "finPinClear",
+    "finStored",
+    "finPublic",
+    "finPublicWrite",
+    "finCurrentDate",
+    "finReviewSignature",
+    "finReviewValid",
+    "finIsPending",
+    "finReminder",
+    "finCollapseDaySetup",
+    "finClearReviewPulse",
+    "finBytes",
+    "finB64",
+    "finRandom",
+    "finKeyText",
+    "finNormalizeKey",
+    "finDerive",
+    "finSeal",
+    "finOpen",
+    "finWrap",
+    "finUnwrap",
+    "finVaultBase",
+    "finCommitMeta",
+    "finPersist",
+    "finLockForDeskExit",
+    "finClose",
+    "finEnter",
+    "finSetup",
+    "finError",
+    "finUnlock",
+    "finTxImpact",
+    "finTransactionRows",
+    "append",
+    "finSourceRows",
+    "finLedger",
+    "finDateSummary",
+    "finShow",
+    "finRender",
+    "finRowHtml",
+    "finRange",
+    "finHistory",
+    "finReviewExpected",
+    "finReviewOpen",
+    "finReviewDifference",
+    "finMarkReviewed",
+    "finMovementHint",
+    "finOpenForm",
+    "finVerifyPassword",
+    "finSaveMovement",
+    "finChangePassword",
+    "finRotateRecovery",
+    "finResetPasswordFromRecovery",
+    "finReportOpen",
+    "finReportToggle",
+    "finReportSelection",
+    "finCsvEscape",
+    "finDownloadBlob",
+    "finCsv",
+    "finPdf",
+    "finSecureBackup",
+    "finAskBackupKey",
+    "done",
+    "finDecryptBackup",
+    "finConfirmDay",
+    "auditVisibleRecords",
+    "expireInventoryAudit",
+    "cleanAdjustmentHistory",
+    "inventoryWhole",
+    "inventoryMoney",
+    "inventoryPayment",
+    "inventoryState",
+    "auditRecords",
+    "auditValidate",
+    "mergeInventoryAudit",
+    "auditAppend",
+    "auditObserve",
+    "initializeInventoryAudit",
+    "migrateInventoryPricing",
+    "inventoryCommit",
+    "stockPackSync",
+    "normalizeStockPackOnBlur",
+    "adjustmentUI",
+    "applyInventoryAdjustment",
+    "validateInventoryBackup",
+    "renderInventoryAudit",
+    "setupInventoryUpgrade",
+    "setupAdaptiveNavigation",
+    "duration",
+    "overlayOpen",
+    "blocked",
+    "indicator",
+    "draw",
+    "makeLabels",
+    "restoreIndicator",
+    "clean",
+    "beforeNavigation",
+    "afterNavigation",
+    "updateLayout",
+    "keyboardLayout",
+    "start",
+    "move",
+    "end",
+    "cents",
+    "records",
+    "KEY_DRAFT",
+    "validate",
+    "balance",
+    "assertWritable",
+    "endEdit",
+    "beginEdit",
+    "editSnapshot",
+    "editLine",
+    "editPurchaseLine",
+    "mutationError",
+    "create",
+    "updateLimit",
+    "assertCreditRoom",
+    "buildLine",
+    "prepare",
+    "prepareDesk",
+    "purchase",
+    "pay",
+    "voidGroup",
+    "summaries",
+    "obligations",
+    "reportHTML",
+    "reports",
+    "deskOptions",
+    "back",
+    "close",
+    "open",
+    "act",
+    "draw",
+    "lineUI",
+    "totals",
+    "validatePayload",
+    "keys",
+    "fingerprint",
+    "sign",
+    "verify",
+    "trust",
+    "requireTrusted",
+    "migrate",
+    "retainLocal",
+    "mergeAudit",
+    "signEvent",
+    "verifyEvent",
+    "track",
+    "localTransaction",
+    "requiresReview",
+    "transactions",
+    "queue",
+    "decide",
+    "render",
+    "restoreSettlementReceipts",
+    "settledTransaction",
+    "settledPayment",
+    "initializeExisting",
+    "bankRows",
+    "trackDeleted",
+    "settlementSnapshot",
+    "serializedState",
+    "persist",
+    "clean",
+    "limit",
+    "rowKey",
+    "transactionValue",
+    "flatten",
+    "currentSnapshot",
+    "meta",
+    "deltaRows",
+    "stockEffect",
+    "quantityProjection",
+    "openingProjection",
+    "stockChanges",
+    "dataFromShadows",
+    "changedRows",
+    "prepareCommit",
+    "start",
+    "authenticate",
+    "requireAuth",
+    "lock",
+    "prepareFinancial",
+    "wireEvent",
+    "localize",
+    "allWire",
+    "protect",
+    "unprotect",
+    "guard",
+    "write",
+    "snapshotFromBackup",
+    "verifyRecovery",
+    "offer",
+    "proof",
+    "validateSnapshot",
+    "remap",
+    "initialPlan",
+    "createCheckpoint",
+    "sealCheckpoint",
+    "openCheckpoint",
+    "checkpointPackage",
+    "validateCheckpoint",
+    "dayComparable",
+    "overlayRows",
+    "validateEvent",
+    "sortedEvents",
+    "fundingShortages",
+    "isDiscrepancy",
+    "projection",
+    "openingProjectionStock",
+    "dayHeaders",
+    "reconstruct",
+    "verifyRelations",
+    "applyProjection",
+    "acceptCheckpoint",
+    "known",
+    "updates",
+    "planUpdates",
+    "merge",
+    "acknowledgement",
+    "acceptAcknowledgement",
+    "join",
+    "acceptJoin",
+    "cashImpacts",
+    "accountBalances",
+    "applyBalances",
+    "financialRows",
+    "legacyBankRows",
+    "renderLegacyFinancialHistory",
+    "financialAnchor",
+    "cashPositions",
+    "assertCashAllocation",
+    "beforeBusiness",
+    "rebuildStock",
+    "endBusiness",
+    "allTransactions",
+    "advanceBalance",
+    "advance",
+    "returnAdvance",
+    "receive",
+    "backup",
+    "validateBackup",
+    "restoreBackup",
+    "status",
+    "errorMessage",
+    "action",
+    "saveFile",
+    "safeDetail",
+    "refreshSync",
+    "open",
+    "collectInitial",
+    "renderInitial",
+    "collectRoutine",
+    "renderRoutine",
+    "importFile",
+    "installUI",
+    "classificationData",
+    "classificationValidate",
+    "classificationValidateProducts",
+    "classificationWrite",
+    "classificationRestore",
+    "classificationMergeImport",
+    "classificationDestination",
+    "classificationPath",
+    "classificationDivisionOptions",
+    "classificationSubdivisionOptions",
+    "classificationRefreshControls",
+    "classificationGroups",
+    "classificationManageButtons",
+    "classificationStockGroups",
+    "classificationMarketBrowse",
+    "classificationMarketAssignment",
+    "classificationNameOpen",
+    "classificationNameSave",
+    "classificationDelete",
+    "classificationMoveOpen",
+    "classificationMoveConfirm",
+    "classificationSetup",
+    "init",
+    "correctionDialogKeys",
+    "validate",
+    "paymentDraft",
+    "comparable",
+    "open",
+    "editedRows",
+    "updateItemTotals",
+    "update",
+    "money",
+    "prepare",
+    "save",
+    "confirmed",
+    "protect",
+    "open",
+    "save"
+  ],
+  "controls": [
+    {
+      "tag": "button",
+      "id": "creditAccountsBtn",
+      "type": "button",
+      "ariaLabel": "Credit Accounts"
+    },
+    {
+      "tag": "button",
+      "id": "marketMoreBtn",
+      "type": "button",
+      "ariaLabel": "Market Desk tools"
+    },
+    {
+      "tag": "button",
+      "id": "marketNewSession",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketHistoryBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketRecycleBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketCalcBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketBudgetBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketExportBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "deskMenuBtn",
+      "type": "button",
+      "ariaLabel": "Switch workspace"
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketDeskEntry",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "financeMenuEntry",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "tabBtnTx",
+      "type": null,
+      "ariaLabel": "Sales"
+    },
+    {
+      "tag": "button",
+      "id": "tabBtnStock",
+      "type": null,
+      "ariaLabel": "Stock"
+    },
+    {
+      "tag": "button",
+      "id": "tabBtnReport",
+      "type": null,
+      "ariaLabel": "Reports"
+    },
+    {
+      "tag": "button",
+      "id": "tabBtnNotes",
+      "type": null,
+      "ariaLabel": "Notes"
+    },
+    {
+      "tag": "button",
+      "id": "tabBtnAnalytics",
+      "type": null,
+      "ariaLabel": "Analytics"
+    },
+    {
+      "tag": "button",
+      "id": "backCurrentBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "business",
+      "type": "hidden",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "date",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "openingCash",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "posOpeningCash",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "posOpeningElectronic",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "openingDebt",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finDayConfirm",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "moveCashBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "type",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "note",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "clearProductSelection",
+      "type": "button",
+      "ariaLabel": "Clear selected product"
+    },
+    {
+      "tag": "input",
+      "id": "party",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "amount",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "qty",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "totalAmount",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "refreshSalePrice",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "holdBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "addBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "cancelEditBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "txPackEnabled",
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "txPacks",
+      "type": "hidden",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "txUnitsPerPack",
+      "type": "hidden",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "txPackTotal",
+      "type": "hidden",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "paymentFunding",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "paymentFund",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "splitCash",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "splitBank",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "splitCredit",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "custPaid",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "custReturned",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "custOwed",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "recoverChangeCheck",
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "refundSource",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "refundReturn",
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "txDiv",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "posType",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "posA",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "posB",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "posFee",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "posRef",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "posParty",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "posChannel",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "posAddBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "posCancelEditBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "holdCustPaid",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "holdCustReturned",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "holdCustOwed",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "holdRecoverChangeCheck",
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "editOpenCartBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "cancelHoldBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "txKindFilter",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "txDivFilter",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "txSearch",
+      "type": "search",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "recordsDetailToggle",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "actualCash",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "actualBankMovement",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "actualPosCash",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "actualPosElectronic",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "printBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "csvBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "saveBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "clearBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "savedFrom",
+      "type": "date",
+      "ariaLabel": "Saved days from"
+    },
+    {
+      "tag": "input",
+      "id": "savedTo",
+      "type": "date",
+      "ariaLabel": "Saved days to"
+    },
+    {
+      "tag": "input",
+      "id": "showCreditOutstanding",
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "creditHistorySearch",
+      "type": "search",
+      "ariaLabel": "Search note or reference"
+    },
+    {
+      "tag": "input",
+      "id": "creditHistoryFrom",
+      "type": "date",
+      "ariaLabel": "From date"
+    },
+    {
+      "tag": "input",
+      "id": "creditHistoryTo",
+      "type": "date",
+      "ariaLabel": "To date"
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "backupBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "importBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "importFile",
+      "type": "file",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "copyBackupBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "restorePreImportBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "installBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockName",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "stockDivision",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "stockSubdivision",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockTotalCost",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockCost",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "stockMarkupMode",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockMarkup",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockPrice",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockUseMarkupBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockQpEnabled",
+      "type": "checkbox",
+      "ariaLabel": "Enable quantity pricing"
+    },
+    {
+      "tag": "input",
+      "id": "stockQpQty",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockQpPrice",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockQty",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockThreshold",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "stockExpiryBatch",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockExpiry",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockAddBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockCancelBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockPackEnabled",
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockPacks",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockUnitsPerPack",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockLooseUnits",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockPackTotal",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockCostAll",
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "dupUseBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "dupLooseBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "dupCorrectBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "dupNewBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "dupRemoveBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "dupCancelBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "dupDeleteBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "dupAddQtyBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "dupNameOnlyBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "dupStage2CancelBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "bulkDivision",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "textarea",
+      "id": "bulkStockText",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "bulkStockBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "bulkConfirmBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "bulkStockClearBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "bulkAddAllBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "bulkSizeNewBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockInventoryToggle",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "stockDiv",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockSearch",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "stockSort",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockLowOnly",
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockExpiringOnly",
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "lowStockPdfBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockDeleteCancelBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockSelectAllBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockMoveSelectedBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockDeleteSelectedBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockImportBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockExportJsonBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockImportFile",
+      "type": "file",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "adjProductSearch",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "adjProduct",
+      "type": "hidden",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "adjType",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "adjQty",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "adjUnitsPerPack",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "adjBatch",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "adjExpiry",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "adjCost",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "adjSell",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "adjReason",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "adjApplyBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "inventoryAuditSearch",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "inventoryAuditMore",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "historyProductSearch",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "historyProduct",
+      "type": "hidden",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "productHistoryBack",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "reportDetailToggle",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "copyReportBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "dailyPdfBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "weekFrom",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "weekTo",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "weekThisBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "weekRefreshBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "weeklyPdfBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "copyMovementBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "textarea",
+      "id": "noteText",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "noteSaveBtn",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "noteTrashEmptyBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "anaPeriod",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "anaDivision",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "anaFrom",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "anaTo",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "anaDemandMode",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "xferDir",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "xferAmt",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "xferNote",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "xferOk",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "xferCancel",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketDebtSummary",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketSearch",
+      "type": "search",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketAddManual",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketNewActiveList",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketAddRequest",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "supplierSearch",
+      "type": "search",
+      "ariaLabel": "Search supplier name"
+    },
+    {
+      "tag": "button",
+      "id": "supplierAddBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "supplierOtherPayment",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketReviewBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finAnchorInput",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "finAnchorMode",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finSetupPassword",
+      "type": "password",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finSetupPassword2",
+      "type": "password",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finSetupGo",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finUnlockPass",
+      "type": "password",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finUnlockGo",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finForgot",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finRecoverKey",
+      "type": "text",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finRecoveryNew",
+      "type": "password",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finRecoveryNew2",
+      "type": "password",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finRecoveryGo",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finRecoveryBack",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finSetupDone",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finMenuBtn",
+      "type": "button",
+      "ariaLabel": "Financial Desk options"
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finCorrect",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finLockDesk",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finMaskToggle",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finAdd",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finRemove",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finOpenHistory",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finReviewQuick",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finReviewActual",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "textarea",
+      "id": "finReviewReason",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finMarkReviewed",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "finRange",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finFrom",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finTo",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finMore",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finEditMode",
+      "type": "hidden",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finEditAmount",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "finTransferType",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "textarea",
+      "id": "finEditReason",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finEditPassword",
+      "type": "password",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finEditSave",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finEditCancel",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finCurrentPassword",
+      "type": "password",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finNewPass",
+      "type": "password",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finNewPass2",
+      "type": "password",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finChangePass",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finRotateRecovery",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finSecureBackup",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "finReportRange",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finReportFrom",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "finReportTo",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finExportPdf",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "finExportCsv",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "previewReplay",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "type": null,
+      "ariaLabel": "Preview field"
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "pharmacyDefaultMarkup",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "essentialsDefaultMarkup",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "resetPricingDefaults",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "appearanceRoundness",
+      "type": "range",
+      "ariaLabel": "Corner roundness"
+    },
+    {
+      "tag": "input",
+      "id": "appearanceBorder",
+      "type": "range",
+      "ariaLabel": "Border thickness"
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "type": "range",
+      "ariaLabel": "Global spacing"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "type": "range",
+      "ariaLabel": "Field size"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "type": "range",
+      "ariaLabel": "Section size"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "type": "range",
+      "ariaLabel": "Vertical rhythm"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "type": "range",
+      "ariaLabel": "Vertical compactness"
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "appearanceShadow",
+      "type": "range",
+      "ariaLabel": "Shadow effect"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "touchRippleEnabled",
+      "type": "checkbox",
+      "ariaLabel": "Enable touch ripple"
+    },
+    {
+      "tag": "input",
+      "id": "touchRippleIntensity",
+      "type": "range",
+      "ariaLabel": "Touch ripple intensity"
+    },
+    {
+      "tag": "button",
+      "id": "touchRipplePreview",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "safetyProtectBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "safetyVerifyBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "safetyExportBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "safetyBackupCheckBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "safetyBackupCheckFile",
+      "type": "file",
+      "ariaLabel": "Choose Roseachy full backup to verify"
+    },
+    {
+      "tag": "input",
+      "id": null,
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "openingUnlockBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "restoreAppearanceDefaults",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketUpdateOnly",
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketLoose",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketPacks",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketUpp",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketLooseRemainder",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketTotalCost",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketCost",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "marketMarkupMode",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketMarkup",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketSell",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketUseMarkupBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketQpEnabled",
+      "type": "checkbox",
+      "ariaLabel": "Enable quantity pricing"
+    },
+    {
+      "tag": "input",
+      "id": "marketQpQty",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketQpPrice",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketExpiry",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "marketPayment",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketSupplier",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketEditName",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "marketDivision",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "marketSubdivision",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketLowThreshold",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketTotalUnits",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketSavePurchase",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketCancelStock",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketReqName",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketReqNote",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketReqSave",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketReqCancel",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketApplyAll",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketReviewCancel",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketBudgetClose",
+      "type": "button",
+      "ariaLabel": "Close budget"
+    },
+    {
+      "tag": "input",
+      "id": "marketBudgetAmount",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketBudgetSave",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketBudgetClear",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketBudgetCancel",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketExportClose",
+      "type": "button",
+      "ariaLabel": "Close export"
+    },
+    {
+      "tag": "select",
+      "id": "marketExportScope",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketExportPreviewBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketExportDownload",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketExportCancel",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockRestoreClose",
+      "type": "button",
+      "ariaLabel": "Close restore"
+    },
+    {
+      "tag": "button",
+      "id": "stockRestoreSafety",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "stockRestoreSavedCheck",
+      "type": "checkbox",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockRestoreApply",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "stockRestoreCancel",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketHistoryClose",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketSummaryClose",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketCalcClose",
+      "type": "button",
+      "ariaLabel": "Close"
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketDigitalDisplay",
+      "type": null,
+      "ariaLabel": "Calculator display"
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": null,
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketCalcQty",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketCalcTotalCost",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketCalcPrice",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketCalcMarkup",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketCalcSell",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketCalcUpp",
+      "type": "hidden",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketCalcDiscount",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketCalcQpEnabled",
+      "type": "checkbox",
+      "ariaLabel": "Enable quantity pricing"
+    },
+    {
+      "tag": "input",
+      "id": "marketCalcQpQty",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketCalcQpPrice",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketListPickerClose",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "marketListSupplierSearch",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketListPickerNewSupplier",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketListPickerUnassigned",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketListPickerConfirm",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketListPickerCancel",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketListDeleteBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketListActionCancel",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketRecycleClose",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "marketPurchaseDetailClose",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "supplierName",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "supplierContact",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "supplierPhone",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "supplierEmail",
+      "type": "email",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "supplierAddress",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "textarea",
+      "id": "supplierNotes",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "supplierSaveBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "supplierEditCancel",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "supplierDetailClose",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "supplierPurchasesBtn",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "supplierEditExisting",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "supplierPaymentCancelTop",
+      "type": "button",
+      "ariaLabel": "Close supplier payment"
+    },
+    {
+      "tag": "input",
+      "id": "supplierPaymentName",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "supplierPaymentClassification",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "supplierPaymentAmount",
+      "type": "number",
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "supplierPaymentDate",
+      "type": "date",
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "supplierPaymentFunding",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "select",
+      "id": "supplierPaymentMethod",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "input",
+      "id": "supplierPaymentNote",
+      "type": null,
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "supplierPaymentSave",
+      "type": "button",
+      "ariaLabel": null
+    },
+    {
+      "tag": "button",
+      "id": "supplierPaymentCancel",
+      "type": "button",
+      "ariaLabel": null
+    }
+  ],
+  "storageSha256": "4f2a383a447cc12fda21203a9cfdec68b62e89d1cecdf58f15104526fba4f917"
+}

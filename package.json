@@ -12,7 +12,9 @@
     "verify:phase3": "node scripts/verify-phase3.mjs",
     "test:filter-contract": "node --test tests/filter-contract.test.mjs",
     "test:static": "npm run verify:legacy && npm run verify:phase2 && npm run verify:phase3 && npm run test:filter-contract",
-    "test:storage": "python tests/verify-indexeddb.py"
+    "test:storage": "python tests/verify-indexeddb.py",
+    "test:runtime": "python3 tests/verify-react-runtime.py --mode preview",
+    "test:runtime:dev": "python3 tests/verify-react-runtime.py --mode dev"
   },
   "dependencies": {
     "react": "^19.2.0",

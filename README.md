@@ -1,3 +1,11 @@
+# Current checkpoint — 2026-11-07
+
+Build, real IndexedDB and actual React runtime smoke now pass. Full migration remains incomplete; the original 2.17.2 baseline is missing. See MIGRATION_PLAN.md, FEATURE_PARITY_MATRIX.md and tests/CURRENT_TEST_REPORT.md. Use `npm ci` with the committed lockfile. Run `npm run build` before `npm run test:runtime`; `npm run test:runtime:dev` exercises the development server. Python Playwright and /usr/bin/chromium are required. Tests start isolated servers and write evidence under tests/evidence/.
+
+The handoff text below is historical and describes the earlier environment, not the current validation results.
+
+---
+
 # Roseachy Desk 2.17.2 — React migration Stage 3A
 
 **Status: guarded development/staging candidate. NOT validated for live retail use.**

@@ -1,0 +1,24 @@
+{
+  "name": "roseachy-desk-react-migration",
+  "private": true,
+  "version": "2.17.2-react-phase3a",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "verify:legacy": "node scripts/verify-parity.mjs",
+    "verify:phase2": "node scripts/verify-phase2.mjs",
+    "verify:phase3": "node scripts/verify-phase3.mjs",
+    "test:filter-contract": "node --test tests/filter-contract.test.mjs",
+    "test:static": "npm run verify:legacy && npm run verify:phase2 && npm run verify:phase3 && npm run test:filter-contract",
+    "test:storage": "python tests/verify-indexeddb.py"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "vite": "^7.1.0"
+  }
+}

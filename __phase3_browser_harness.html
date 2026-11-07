@@ -1,0 +1,667 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/src/legacy.css"><title>Test only - Roseachy Controller</title></head><body spellcheck="false"><script>window.RoseachyReactFilters=(()=>{const handlers=Object.create(null);return{register(next){Object.assign(handlers,next)},dispatch(id){if(!Object.hasOwn(handlers,id))return false;handlers[id]();return true},ready(id){return Object.hasOwn(handlers,id)},sync(desk){window.dispatchEvent(new CustomEvent('roseachy:filter-sync',{detail:{desk}}))}}})();</script>
+<div id="bootSplash" class="bootSplash" aria-hidden="true"><div class="bootLockup"><svg class="bootLogo" viewBox="0 0 960.98 954.66" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="M143.33 369.55l-40.7-45.22a8.56 8.56 0 0 1-1.72-7.9l14.63-56c17.84-68.33 57.75-109 113.81-121.65 115-26 159.84 88.29 175.42 137.42 2.41 7.6 13.28 8 17.78.65 27.19-44.55 113.61-150.08 228.35-162 86.14-9 136.32 14.89 157.25 28.64 6.92 4.54 8.28 13.17 3.18 20.46l-68.73 79.37c-5.39 7.7-16.46 10.85-24.8 7-42.48-19.6-110.66-26.74-173.61 18.84-63.46 46.43-122.75 133.38-148.47 174.21-4.71 7.48-16.18 5.35-17.49-3.19-10.75-70.15-47.19-254.69-130.24-245.86-105.6 11.22-105.58 123.94-98.52 172.08.49 3.3-3.3 5.5-5.42 3.15Z"></path><path d="M957.33 597.12l-67.84 88.61c-6.49 7.59-19.63 8.6-28.63 2.25l-109.48-64.14c-5.54-3.91-13.52-3.24-17.63 1.45L471.94 951.64c-3.82 4.61-11.75 3.82-16.11-1.56L100.34 472.58c-4-4.93-11.4-3.08-13.14 3.24l-31.12 89.94a11.29 11.29 0 0 1-13.81 6.55l-40.87-7.1a2 2 0 0 1 .68-3.86c12.07.68 28.71-3.79 36.82-3.21a5.61 5.61 0 0 0 5.89-4.4l31.76-142.8c1.6-6.13 8.48-8.45 12.55-4.22l362.81 397c4.73 4.92 12.67 4.62 16-.63l248.73-353.43c3.72-5.16 11.56-6.72 17.24-3.4L952 573.53c9.44 5.47 11.81 16.01 5.33 23.59Z"></path><circle cx="437.82" cy="54.74" r="54.74"></circle></g></svg><span class="bootName">Roseachy</span></div></div>
+<div class="app">
+<div class="noPrint appBrand"><button id="creditAccountsBtn" class="deskMenuBtn" type="button" aria-label="Credit Accounts" title="Credit Accounts" style="left:auto;right:0;padding:0;display:grid;place-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"></rect><circle cx="9" cy="10" r="2"></circle><path d="M5.5 16c0-4 7-4 7 0M15 10h3M15 14h3"></path></svg></button><div class="marketUtilityWrap hidden" id="marketHeaderUtility"><button class="marketMoreBtn" id="marketMoreBtn" type="button" aria-label="Market Desk tools">•••</button><div class="marketUtilityMenu hidden" id="marketUtilityMenu"><button id="marketNewSession" type="button">New session</button><button id="marketHistoryBtn" type="button">History</button><button id="marketRecycleBtn" type="button">Recycle Bin</button><button id="marketCalcBtn" type="button">Calculator</button><button id="marketBudgetBtn" type="button">Budget</button><button id="marketExportBtn" type="button">Export</button></div></div><button type="button" class="deskMenuBtn" id="deskMenuBtn" aria-label="Switch workspace">⋮</button><div class="deskMenu hidden" id="deskMenu"><button type="button" data-desk="sales" class="active">Sales Desk</button><button type="button" data-desk="market" id="marketDeskEntry">Market Desk<span id="marketDebtDot" class="marketDebtDot hidden" aria-hidden="true"></span></button><button type="button" data-desk="financial" id="financeMenuEntry">Financial Desk <span class="finDot hidden" aria-label="Review pending">•</span></button><button type="button" data-desk="settings">Settings</button></div><div class="brandLockup" aria-label="Roseachy Sales Desk"><svg class="brandLogo" viewBox="0 0 960.98 954.66" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="M143.33 369.55l-40.7-45.22a8.56 8.56 0 0 1-1.72-7.9l14.63-56c17.84-68.33 57.75-109 113.81-121.65 115-26 159.84 88.29 175.42 137.42 2.41 7.6 13.28 8 17.78.65 27.19-44.55 113.61-150.08 228.35-162 86.14-9 136.32 14.89 157.25 28.64 6.92 4.54 8.28 13.17 3.18 20.46l-68.73 79.37c-5.39 7.7-16.46 10.85-24.8 7-42.48-19.6-110.66-26.74-173.61 18.84-63.46 46.43-122.75 133.38-148.47 174.21-4.71 7.48-16.18 5.35-17.49-3.19-10.75-70.15-47.19-254.69-130.24-245.86-105.6 11.22-105.58 123.94-98.52 172.08.49 3.3-3.3 5.5-5.42 3.15Z"></path><path d="M957.33 597.12l-67.84 88.61c-6.49 7.59-19.63 8.6-28.63 2.25l-109.48-64.14c-5.54-3.91-13.52-3.24-17.63 1.45L471.94 951.64c-3.82 4.61-11.75 3.82-16.11-1.56L100.34 472.58c-4-4.93-11.4-3.08-13.14 3.24l-31.12 89.94a11.29 11.29 0 0 1-13.81 6.55l-40.87-7.1a2 2 0 0 1 .68-3.86c12.07.68 28.71-3.79 36.82-3.21a5.61 5.61 0 0 0 5.89-4.4l31.76-142.8c1.6-6.13 8.48-8.45 12.55-4.22l362.81 397c4.73 4.92 12.67 4.62 16-.63l248.73-353.43c3.72-5.16 11.56-6.72 17.24-3.4L952 573.53c9.44 5.47 11.81 16.01 5.33 23.59Z"></path><circle cx="437.82" cy="54.74" r="54.74"></circle></g></svg><div class="brandText"><h1>Roseachy</h1><div class="deskName" id="deskTitle">Sales Desk</div><p class="sub" id="deskSub">Daily sales, stock and records — all in one place.</p></div></div></div><div id="salesDesk">
+<div class="tabs noPrint">
+<button class="tabBtn active" id="tabBtnTx" aria-label="Sales"><svg class="navIcon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16v16H4zM8 8h8M8 12h8M8 16h4"></path></svg><span class="navLabel">Sales</span></button>
+<button class="tabBtn" id="tabBtnStock" aria-label="Stock"><svg class="navIcon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="m3 7 9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10"></path></svg><span class="navLabel">Stock</span></button>
+<button class="tabBtn" id="tabBtnReport" aria-label="Reports"><svg class="navIcon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M5 3h14v18H5zM8 8h8M8 12h8M8 16h5"></path></svg><span class="navLabel">Reports</span></button>
+<button class="tabBtn" id="tabBtnNotes" aria-label="Notes"><svg class="navIcon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M13 4H4v16h16v-9M10 14l1-4 8-8 3 3-8 8z"></path></svg><span class="navLabel">Notes</span></button>
+<button class="tabBtn" id="tabBtnAnalytics" aria-label="Analytics"><svg class="navIcon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 3v17h17M8 16v-5M13 16V7M18 16V4"></path></svg><span class="navLabel">Analytics</span></button>
+</div>
+<div id="historyBar" class="card readonly hidden noPrint"><strong>Saved day — read only.</strong> Historical transactions will not change current inventory. <button class="ghost" id="backCurrentBtn">Back to current day</button></div>
+<div id="tabTx">
+<div class="collapse">
+<button type="button" class="collapseHead noPrint" data-target="daySetupBody" aria-expanded="true"><span>Day setup — business, date &amp; opening balances</span><span class="chev">⌄</span></button>
+<div class="collapseBody open" id="daySetupBody"><div class="collapseInner">
+<div class="row daySetupGrid">
+<input spellcheck="false" id="business" type="hidden" defaultValue="Roseachy"><div><label>Date</label><input spellcheck="false" id="date" type="date"></div>
+<div><label>Retail opening cash</label><input spellcheck="false" id="openingCash" type="number" min="0" step="0.01" placeholder="Enter opening retail cash"><div id="openingCashHint" class="small openingCashHint" aria-live="polite"></div></div><div><label>POS opening cash</label><input spellcheck="false" id="posOpeningCash" type="number" min="0" step="0.01" placeholder="Enter opening POS cash"><div id="posOpeningCashHint" class="small openingCashHint" aria-live="polite"></div></div><div><label>Opening POS electronic balance</label><input spellcheck="false" id="posOpeningElectronic" type="number" min="0" step="0.01" placeholder="Enter opening POS balance"><div id="posOpeningElectronicHint" class="small openingCashHint" aria-live="polite"></div></div><div><label>Opening customer debt</label><input spellcheck="false" id="openingDebt" type="number" min="0" step="0.01" placeholder="0.00"></div>
+</div>
+<div class="finConfirmRow"><button class="primary finDayConfirmBtn" type="button" id="finDayConfirm">✓ Confirm Day Setup</button><span id="finDayConfirmStatus" class="small">Bank review reminder starts after confirmation</span></div>
+</div></div>
+</div>
+<section class="card noPrint" id="txEntryCard"><div class="modeRow"><div class="seg" id="entryMode"><button type="button" data-mode="retail" class="active">Sales</button><button type="button" data-mode="pos">POS</button></div><button type="button" class="linkbtn" id="moveCashBtn">Move cash</button></div>
+<div id="retailEntry"><div class="addrow">
+<div><label>Type</label><select id="type">
+<option value="sale_cash">Cash sale</option><option value="sale_transfer">Transfer / card sale</option><option value="sale_cashout">Sale + Cash Out</option><option value="sale_credit">Credit Sale</option><option value="sale_split">Split payment sale</option>
+<option value="purchase_cash">Stock purchase — cash</option><option value="purchase_transfer">Stock purchase — transfer</option><option value="purchase_credit">Stock Purchase on Credit</option>
+<option value="debt_cash">Old customer debt paid — cash</option><option value="debt_transfer">Old customer debt paid — transfer</option><option value="expense_cash">Expense — cash</option><option value="expense_bank">Expense — bank</option><option value="refund_cash">Refund — cash</option><option value="refund_bank">Refund — bank</option>
+</select></div>
+<div class="productSearchWrap"><label>Reference / product</label><input spellcheck="false" id="note" placeholder="Start typing a product name…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="productSuggestions"><button type="button" id="clearProductSelection" class="iconbtn hidden" aria-label="Clear selected product" title="Clear selected product">×</button><datalist id="stockNames"></datalist><div id="productSuggestions" class="productSuggestDrop hidden" role="listbox"></div></div>
+<div><label>Note / Person</label><input spellcheck="false" id="party" placeholder="Name or note (optional)"></div>
+<div class="amt"><label>Unit amount</label><input spellcheck="false" id="amount" type="number" min="0" step="0.01" placeholder="0.00"></div><div class="amt"><label>Qty / loose units</label><input spellcheck="false" id="qty" type="number" min="0" step="1" placeholder="0"><div id="saleAvailable" class="rsAvailability hidden"></div><div id="saleStockWarn" class="rsWorkflowWarn" role="alert"></div></div><div class="amt saleTotalField"><label for="totalAmount">Total</label><input spellcheck="false" id="totalAmount" type="number" step="0.01" placeholder="0.00" readonly></div><button type="button" class="ghost" id="refreshSalePrice">Refresh current price</button><button class="ghost" id="holdBtn" data-action-role="cart-add">Add to Cart</button><button class="primary" id="addBtn">Add</button><button class="ghost hidden" id="cancelEditBtn">Cancel</button>
+</div>
+<div id="txPackBox" class="legacyPackCompat hidden" aria-hidden="true"><input spellcheck="false" type="checkbox" id="txPackEnabled"><div id="txPackFields" class="hidden"></div><input spellcheck="false" id="txPacks" type="hidden" defaultValue="0"><input spellcheck="false" id="txUnitsPerPack" type="hidden" defaultValue="0"><input spellcheck="false" id="txPackTotal" type="hidden" defaultValue="0"><span id="txPackSummary"></span></div>
+<div id="paymentSourceBox" class="split hidden" style="margin-top:10px"><div><label>Payment Source</label><select id="paymentFunding"><option value="business">Business Balance</option><option value="external">External Payment Source</option></select></div><div id="paymentFundWrap"><label>Business fund</label><select id="paymentFund"><option value="cash">Cash</option><option value="bank">Account / Bank</option></select></div></div><div id="paymentSourceHelp" class="help hidden">External payments are recorded for accounting/debt settlement but do not reduce Roseachy-tracked cash or account balances.</div><div id="splitBox" class="split hidden"><div><label>Cash part</label><input spellcheck="false" id="splitCash" type="number" min="0" step="0.01" placeholder="0.00"></div><div><label>Transfer/POS part</label><input spellcheck="false" id="splitBank" type="number" min="0" step="0.01" placeholder="0.00"></div><div><label>Automatically owed</label><input spellcheck="false" id="splitCredit" type="number" min="0" step="0.01" placeholder="0.00" readonly><small>Unpaid amount enters Credit History</small></div></div>
+<div id="changeBox" class="hidden" style="background:var(--surface-secondary);border-radius:var(--rs-radius-md);padding:16px;margin-top:10px"><div class="small" style="font-weight:700;color:var(--text-primary);text-transform:uppercase;letter-spacing:.3px;margin-bottom:8px">Payment &amp; change</div><div class="split" style="margin-top:0"><div><label>Amount received from customer</label><input spellcheck="false" id="custPaid" type="number" min="0" step="0.01" placeholder="Leave blank if exact"></div><div><label>Returned to customer now</label><input spellcheck="false" id="custReturned" type="number" min="0" step="0.01" placeholder="0.00"></div><div><label>Still owed to customer</label><input spellcheck="false" id="custOwed" type="number" readonly placeholder="0.00"></div></div><div class="rsAutoDebtPreview" id="autoDebtPreview" aria-live="polite"></div><label class="checkline hidden" id="recoverChangeWrap"><input spellcheck="false" type="checkbox" id="recoverChangeCheck"> Excess change is recoverable from the customer</label><div class="small hidden" id="changeBoxNote" style="margin-top:8px;font-weight:600"></div></div>
+<div id="refundSourceWrap" class="hidden refundSource"><label>Original sale (recommended)</label><select id="refundSource"><option value="">Use current product pricing</option></select><div class="help" id="refundSourceHint"></div></div><label id="refundReturnLine" class="checkline hidden"><input spellcheck="false" type="checkbox" id="refundReturn"> Returned item is sellable and should go back into stock</label>
+<div class="help" id="typeHelp"></div><div class="help" id="productHint"></div><div class="qpApplied hidden" id="saleQpHint">Quantity price applied</div><div id="txDivWrap" class="hidden" style="max-width:240px;margin-top:8px"><label>Division (no stock product matched)</label><select id="txDiv"><option value="">Unassigned</option><option value="pharmacy">Pharmacy</option><option value="essentials">Essentials</option></select></div><div class="warnText" id="stockWarn"></div>
+<div class="help">Stock adjustments (add, remove, damaged/spoiled) are done in the Stock tab.</div>
+</div>
+<div id="posEntry" class="hidden">
+<div class="posBal" id="posBal"></div>
+<div class="posGrid">
+<div style="grid-column:1/-1"><label>Transaction</label><select id="posType"><option value="pos_withdrawal">Cash withdrawal</option><option value="pos_transfer">Transfer</option><option value="pos_deposit">Deposit / Cash-In</option></select><div class="help" id="posTypeHelp">Customer receives cash; payment comes in electronically.</div></div>
+<div><label id="posLblA">Cash paid out</label><input spellcheck="false" id="posA" type="number" min="0" step="0.01" placeholder="0.00"></div>
+<div id="posBWrap" class="hidden"><label id="posLblB">Amount sent</label><input spellcheck="false" id="posB" type="number" min="0" step="0.01" placeholder="0.00"></div>
+<div><label>Service charge</label><input spellcheck="false" id="posFee" type="number" min="0" step="0.01" placeholder="0.00"></div>
+<div><label>Reference (optional)</label><input spellcheck="false" id="posRef" placeholder="Txn / RRN no." autocomplete="off"></div>
+</div>
+<div class="feeVia hidden" id="posFeeVia"><span>Charge paid by</span><div class="seg small" id="posFeeViaSeg"><button type="button" data-via="elec" class="active">Card / transfer</button><button type="button" data-via="cash">Cash</button></div></div>
+<div class="posEffect" id="posEffect"></div>
+<details class="posMore"><summary>Customer &amp; channel</summary><div class="posMoreGrid"><div><label>Customer / note</label><input spellcheck="false" id="posParty" placeholder="Optional"></div><div><label>Channel</label><select id="posChannel"><option value="">—</option><option value="POS terminal">POS terminal</option><option value="Bank transfer">Bank transfer</option><option value="Mobile wallet">Mobile wallet</option><option value="Other">Other</option></select></div></div></details>
+<div class="posShort hidden" id="posShort"></div>
+<div class="footerActions" style="margin-top:16px"><button class="primary" id="posAddBtn">Add</button><button class="ghost hidden" id="posCancelEditBtn">Cancel</button></div>
+<div class="warnText" id="posWarn"></div>
+</div>
+</section>
+<div id="holdPanel" class="card hidden noPrint">
+<div class="summaryTop"><strong>Cart</strong><span class="small">Running total: <b id="holdTotal">0</b></span></div>
+<div id="holdList" style="margin-top:4px"></div>
+<div id="holdPaymentBox" class="hidden" style="background:var(--surface-secondary);border-radius:var(--rs-radius-md);padding:16px;margin-top:14px"><div class="small" style="font-weight:700;color:var(--text-primary);text-transform:uppercase;letter-spacing:.3px;margin-bottom:8px">Payment &amp; change for this basket</div><div class="split" style="margin-top:0"><div><label>Amount received from customer</label><input spellcheck="false" id="holdCustPaid" type="number" min="0" step="0.01" placeholder="Leave blank if exact"></div><div><label>Returned to customer now</label><input spellcheck="false" id="holdCustReturned" type="number" min="0" step="0.01" placeholder="0.00"></div><div><label>Still owed to customer</label><input spellcheck="false" id="holdCustOwed" type="number" readonly placeholder="0.00"></div></div><div class="rsAutoDebtPreview" id="holdAutoDebtPreview" aria-live="polite"></div><label class="checkline hidden" id="holdRecoverChangeWrap"><input spellcheck="false" type="checkbox" id="holdRecoverChangeCheck"> Excess change is recoverable from the customer</label><div class="small" style="margin-top:8px">Applies once, to the whole basket total above — not per item.</div></div>
+<div class="help">Add to Cart adds the selected product immediately. Change the sales type above to update the entire cart. Complete Sale records the cart and its payment together.</div><div class="footerActions" style="margin-top:16px"><button class="ghost" id="editOpenCartBtn" type="button">Edit Cart</button><button class="ghost danger" id="cancelHoldBtn">Cancel Cart</button></div>
+</div>
+<div class="collapse">
+<button type="button" class="collapseHead noPrint" data-target="txListBody" aria-expanded="true"><span>Transactions <span class="small" style="font-weight:500;margin-left:6px">— edit/delete affects current day only</span></span><span class="chev">⌄</span></button>
+<div class="collapseBody open" id="txListBody"><div class="collapseInner"><div class="txTools noPrint"><select id="txKindFilter"><option value="all">All records</option><option value="retail">Retail only</option><option value="pos">POS only</option><option value="cash">Cash moves</option></select><select id="txDivFilter"><option value="all">All divisions</option><option value="pharmacy">Pharmacy</option><option value="essentials">Essentials</option></select><input spellcheck="false" id="txSearch" type="search" placeholder="Search reference, name, amount…" autocomplete="off"><button class="ghost recordsDensityBtn" id="recordsDetailToggle" type="button" aria-pressed="false">Show record details</button></div>
+<div class="tablewrap recordsTableWrap"><table id="recordsTable" class="recordsCompact"><thead><tr><th class="recType">Type</th><th>Reference</th><th class="recDiv">Div</th><th class="recParty">Note/Person</th><th class="num">Qty</th><th class="num">Amount</th><th></th></tr></thead><tbody id="ledger"></tbody></table></div><div class="help hidden" id="txFilterNote"></div>
+</div></div>
+</div>
+<section class="card"><div class="summaryTop"><div><strong id="sumBusiness">Roseachy Sales Desk</strong><div class="sub" id="sumDate" style="margin:2px 0 0">No date selected</div></div><div class="status warn" id="balanceStatus">Awaiting actual counts</div></div>
+<div class="sumSeg noPrint"><div class="seg small" id="sumView"><button type="button" data-v="retail" class="active">Retail</button><button type="button" data-v="pos">POS</button></div></div>
+<div class="metrics" id="metricsRetail">
+<div class="metric hero"><span>Net sales</span><strong id="mNetSales">0</strong></div>
+<div class="metric hero"><span>Recognized gross profit</span><strong id="mProfit">0</strong></div>
+<div class="metric"><span>Gross margin</span><strong id="mMargin">0%</strong></div>
+<div class="metric"><span>Received today</span><strong id="mReceived">0</strong></div>
+<div class="metric"><span>Retail cash</span><strong id="mCash">0</strong></div>
+<div class="metric"><span>Expected bank movement</span><strong id="mBank">0</strong></div>
+</div>
+<div class="metrics viewOff" id="metricsPos">
+<div class="metric hero"><span>POS cash</span><strong id="pCash">0</strong></div>
+<div class="metric hero"><span>Service income</span><strong id="pIncome">0</strong></div>
+<div class="metric"><span>Cash paid out</span><strong id="pCashOut">0</strong></div>
+<div class="metric"><span>Cash received</span><strong id="pCashIn">0</strong></div>
+<div class="metric"><span>Electronic movement</span><strong id="pElecNet">0</strong></div>
+<div class="metric"><span>Electronic balance</span><strong id="pElecBalance">0</strong></div>
+<div class="metric"><span>Transactions</span><strong id="pCount">0</strong></div>
+</div>
+<div class="recon" id="reconRetail"><div><label>Retail cash counted</label><input spellcheck="false" id="actualCash" type="number" step="0.01" placeholder="Optional"><div class="small" id="cashDiff"></div></div><div><label>Actual bank movement</label><input spellcheck="false" id="actualBankMovement" type="number" step="0.01" placeholder="Optional"><div class="small" id="bankDiff"></div></div></div>
+<div class="recon viewOff" id="reconPos"><div><label>POS cash counted</label><input spellcheck="false" id="actualPosCash" type="number" step="0.01" placeholder="Optional"><div class="small" id="posCashDiff"></div></div><div><label>POS electronic balance</label><input spellcheck="false" id="actualPosElectronic" type="number" step="0.01" placeholder="Optional"><div class="small" id="posElectronicDiff"></div><div class="warnText" id="posNegWarn" style="margin-top:8px;text-align:left"></div></div></div><div class="overallStrip" id="overallStrip"><div>Overall physical cash<b id="overallCash">0</b></div><div>Retail profit + POS service income<b id="overallIncome">0</b></div></div>
+<div class="collapse" style="margin:12px 0 0">
+<button type="button" class="collapseHead noPrint" data-target="moreDetailBody" aria-expanded="false"><span>More detail</span><span class="chev">⌄</span></button>
+<div class="collapseBody" id="moreDetailBody"><div class="collapseInner">
+<div class="line"><span>Gross sales</span><b id="mSales">0</b></div><div class="line"><span>· Pharmacy sales</span><b id="mPharm">0</b></div><div class="line"><span>· Essentials sales</span><b id="mEss">0</b></div><div class="line hidden" id="mUnLine"><span>· Unassigned sales</span><b id="mUn">0</b></div>
+<div class="line"><span>Refunds</span><b id="mRefunds">0</b></div>
+<div class="line"><span>New customer credit</span><b id="mCredit">0</b></div>
+<div class="line"><span>Owed to customers (unreturned change)</span><b id="mCustOwed">0</b></div>
+<div class="line"><span>Closing customer debt</span><b id="mDebt">0</b></div>
+<div class="warnText" id="mDebtWarn" style="margin:-4px 0 4px;text-align:right"></div>
+<div class="line"><span>Closing supplier payable</span><b id="mPayable">0</b></div>
+<div class="warnText" id="mPayableWarn" style="margin:-4px 0 4px;text-align:right"></div>
+<div class="line"><span>Net COGS</span><b id="mCogs">0</b></div>
+<div class="line"><span>Expenses</span><b id="mExpenses">0</b></div>
+<div class="line"><span>Customer debt collected</span><b id="dPaid">0</b></div>
+<div class="line"><span>Supplier debt paid</span><b id="pPaid">0</b></div>
+<div class="line"><span>Units sold</span><b id="uSold">0</b></div>
+<div class="line"><span>Units purchased</span><b id="uPurchased">0</b></div>
+<div class="line"><span>Units damaged/adjusted</span><b id="uAdjusted">0</b></div>
+</div></div>
+</div>
+<div class="footerActions noPrint dayExportTools"><button class="ghost" id="printBtn">Print / PDF</button><button class="ghost" id="csvBtn">Export CSV</button></div>
+</section>
+<div class="dayManageRow noPrint" id="dayManageRow" role="group" aria-label="Business day actions">
+<button class="ghost daySaveBtn" id="saveBtn" type="button"><span>Save Day</span></button>
+<button class="primary dayStartBtn" id="clearBtn" type="button"><span>Start New Day</span> </button>
+</div>
+<div class="collapse">
+<button type="button" class="collapseHead noPrint" data-target="dataHistoryBody" aria-expanded="false"><span>Saved Days &amp; Credit History · Recycle Bin &amp; Backup</span><span class="chev">⌄</span></button>
+<div class="collapseBody" id="dataHistoryBody"><div class="collapseInner">
+<section class="rsHistorySection"><div class="rsHistoryHead"><strong>Saved Days &amp; Credit History</strong><div class="rsHistoryToggle" id="historyViewToggle" role="group" aria-label="History view"><button type="button" class="active" data-history-view="saved">Saved Days</button><button type="button" data-history-view="credit">Credit History</button></div></div>
+<div id="savedHistoryPane"><div class="savedTools noPrint" id="savedTools">
+<div class="segChoice" id="savedRangeFilter"><button type="button" data-saved-range="recent" class="active">Recent</button><button type="button" data-saved-range="week">This Week</button><button type="button" data-saved-range="month">This Month</button><button type="button" data-saved-range="custom">Custom</button><button type="button" data-saved-range="archived">Archived</button></div>
+<div class="savedCustom hidden" id="savedCustomRange"><input spellcheck="false" id="savedFrom" type="date" aria-label="Saved days from"><input spellcheck="false" id="savedTo" type="date" aria-label="Saved days to"></div>
+<span class="savedCount" id="savedCount"></span>
+</div>
+<div id="savedList"></div></div>
+<div id="creditHistoryPane" class="hidden">
+<div class="rsHistoryTotal">Total Outstanding <strong id="regularCreditOutstanding">••••</strong><label class="checkline small"><input spellcheck="false" type="checkbox" id="showCreditOutstanding"> Show Total Outstanding</label></div>
+<div class="rsCreditLookup"><div class="rsSuggestWrap"><input spellcheck="false" id="creditHistorySearch" type="search" placeholder="Search note or reference" autocomplete="off" aria-label="Search note or reference" aria-controls="creditHistorySuggestions" aria-expanded="false"><div id="creditHistorySuggestions" class="rsCreditSuggest hidden" role="listbox"></div></div><div class="rsCreditDates"><input spellcheck="false" id="creditHistoryFrom" type="date" aria-label="From date" title="From"><span>—</span><input spellcheck="false" id="creditHistoryTo" type="date" aria-label="To date" title="To"></div></div>
+<div class="rsHistoryStatus" id="creditHistoryStatus"><button type="button" class="active" data-credit-status="all">All</button><button type="button" data-credit-status="outstanding">Outstanding</button><button type="button" data-credit-status="settled">Settled</button></div>
+<div id="creditHistoryResults" aria-live="polite"></div>
+</div></section>
+<section class="rsHistorySection rsSafetySection"><h3>Recycle Bin &amp; Backup</h3>
+<div class="small" style="margin:16px 0 10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:10.5px">Recycle bin — deleted transactions</div>
+<div id="txTrashList"></div>
+<div class="small" style="margin:28px 0 10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:10.5px">Data safety / backup</div>
+<div class="footerActions"><button class="ghost" id="backupBtn">Export Full Backup</button><button class="ghost" id="importBtn">Import Backup</button><input spellcheck="false" class="hidden" type="file" id="importFile" accept="application/json,.json"><button class="ghost" id="copyBackupBtn">Copy Backup JSON</button><button class="ghost hidden" id="restorePreImportBtn">Restore pre-import backup</button></div>
+<div class="help">Full Backup includes stock, saved days, Market Desk, notes (including deleted notes), current draft, recycle bins and settings. The Stock tab’s Working-State Backup is for current inventory + current-day work and is not a replacement for a Full Backup.</div>
+<div class="help" id="lastBackupInfo"></div>
+<div class="help" id="storageStatus"></div>
+<div class="storagePerfWarn hidden" id="storagePerfWarn"></div>
+<div class="backupWarn">⚠ Roseachy keeps your records in this phone’s private app storage (IndexedDB). Closing, restarting or updating the app never erases them, but clearing Chrome/site/app data, or uninstalling/removing the app’s data, can. Export a Full Backup regularly and copy it off the phone (Drive, email or a computer).</div>
+<div class="footerActions"><button class="ghost hidden" id="installBtn" type="button">Install Roseachy</button></div>
+<div class="help hidden" id="installNote">Installed — running as an app.</div>
+</section>
+</div></div>
+</div>
+</div>
+<div id="tabStock" class="hidden">
+<section class="collapse noPrint stockEntryCard" id="stockEntryCard">
+<button type="button" class="collapseHead stockEntryHead" data-target="stockEntryBody" aria-controls="stockEntryBody" aria-expanded="false">
+<span class="stockEntryHeaderText"><span id="stockEntryTitle">Stock addition</span><span class="small">Add or edit products</span></span>
+<span class="chev" aria-hidden="true">⌄</span>
+</button>
+<div class="collapseBody" id="stockEntryBody"><div class="collapseInner stockEntryInner"><div class="stockRow"><div><label>Product name</label><input spellcheck="false" id="stockName" placeholder="e.g. Coke 50cl" autocomplete="off"><div class="nameHint" id="stockNameHint"></div></div><div class="qp"><label>Inventory division *</label><select id="stockDivision"><option value="">Select…</option><option value="pharmacy">Pharmacy</option><option value="essentials">Essentials</option></select></div><div><label for="stockSubdivision">Subdivision (optional)</label><select id="stockSubdivision"><option value="">No Subdivision</option></select><button type="button" class="ghost" data-class-add-sub-form="stock">+ Add Subdivision</button></div><div class="qp"><label>Total Cost Price (optional)</label><input spellcheck="false" id="stockTotalCost" type="number" min="0" step="0.01" placeholder="Total paid"><div class="pricingCalcNote" id="stockTotalCostHint"></div></div><div class="qp"><label>Single / Unit Cost Price</label><input spellcheck="false" id="stockCost" type="number" min="0" step="any"><div class="pricingCalcNote" id="stockUnitCostHint"></div></div>
+<div class="qp"><label>Markup source</label><select id="stockMarkupMode"><option value="default">Division default</option><option value="custom">Custom markup</option></select></div>
+<div class="qp pricingField"><label>Markup %</label><input spellcheck="false" id="stockMarkup" type="number" min="0" max="500" step="0.5" placeholder="e.g. 30"><div class="pricingAssist"><span class="pricingHint" id="stockMarkupHint"></span></div></div>
+<div class="qp pricingField"><label>Selling price</label><input spellcheck="false" id="stockPrice" type="number" min="0" step="0.01"><div class="pricingAssist"><span class="pricingHint" id="stockPriceHint"></span><button class="miniAction hidden" id="stockUseMarkupBtn" type="button">Use markup price</button></div></div><div class="wide"><div class="qpToggleRow"><label for="stockQpEnabled">Quantity Pricing</label><label class="qpSwitch"><input spellcheck="false" id="stockQpEnabled" type="checkbox" aria-label="Enable quantity pricing"><span class="qpSlider"></span></label></div><div id="stockQpFields" class="qpFields hidden"><div><label>Quantity</label><input spellcheck="false" id="stockQpQty" type="number" min="2" step="1" placeholder="e.g. 3"></div><div><label>Bundle Price</label><input spellcheck="false" id="stockQpPrice" type="number" min="0.01" step="0.01" placeholder="0.00"></div></div><div class="qpInlineError" id="stockQpError"></div></div><div class="qp"><label id="stockQtyLabel">Total units</label><input spellcheck="false" id="stockQty" type="number" min="0" step="1"></div><div class="qp"><label>Medium Stock</label><input spellcheck="false" id="stockThreshold" type="number" min="0" step="1" placeholder="e.g. 10"></div><div id="stockExpiryBatchField" class="qp hidden"><label>Expiry batch to correct</label><select id="stockExpiryBatch"></select></div><div class="qp"><label>Expiry date (optional)</label><input spellcheck="false" id="stockExpiry" type="date"></div><button class="primary" id="stockAddBtn">Add</button><button class="ghost hidden" id="stockCancelBtn">Cancel</button></div><div class="packBox"><label class="checkline" style="margin-top:0"><input spellcheck="false" type="checkbox" id="stockPackEnabled"> Pack</label><div id="stockPackFields" class="packGrid hidden"><div><label id="stockPacksLabel">Calculated packs</label><input spellcheck="false" id="stockPacks" type="number" min="0" step="1" placeholder="0"></div><div><label>Units per pack</label><input spellcheck="false" id="stockUnitsPerPack" type="number" min="1" step="1" placeholder="e.g. 12"></div><div><label>Loose units</label><input spellcheck="false" id="stockLooseUnits" type="number" min="0" step="1" placeholder="0"></div><div><label>Total units</label><input spellcheck="false" id="stockPackTotal" type="number" readonly></div></div><div class="packSummary" id="stockPackSummary"></div><div class="help hidden" id="stockPackEditHint"></div></div><label id="stockCostAllLine" class="hidden"><input spellcheck="false" type="checkbox" id="stockCostAll"></label></div></div></section>
+<div id="dupOverlay" class="dupOverlay hidden noPrint" role="dialog" aria-modal="true" aria-labelledby="dupTitle">
+<div class="dupModal">
+<h3 id="dupTitle">Possible Existing Stock</h3>
+<div class="small">Roseachy found something similar already in inventory. Nothing has been changed. Choose what to do.</div>
+<div id="dupEntered" class="dupEntered"></div>
+<div id="dupCandidates" class="dupCandidates"></div>
+<div id="dupNote" class="dupNote"></div>
+<div id="dupStage1">
+<div class="dupActions"><button class="primary" id="dupUseBtn">Add to Existing Stock</button><button class="primary hidden" id="dupLooseBtn">Add Total as Loose Units</button><button class="ghost" id="dupCorrectBtn">Correct to Existing Name</button><button class="ghost" id="dupNewBtn">Add as New Anyway</button><button class="ghost" id="dupRemoveBtn">Remove Entry</button><button class="ghost" id="dupCancelBtn">Cancel</button></div>
+<details class="dupMore"><summary>More options</summary><button class="dupDelete" id="dupDeleteBtn" type="button">Delete Existing Stock…</button><div class="small" style="margin-top:6px">Only for removing the OLD product. It uses the normal delete: you confirm first and the product goes to the recycle bin.</div></details>
+</div>
+<div id="dupStage2" class="hidden">
+<div class="dupStage2Text" id="dupStage2Text"></div>
+<div class="dupActions"><button class="primary" id="dupAddQtyBtn">Add to Existing Stock</button><button class="ghost" id="dupNameOnlyBtn">Only Correct the Name</button><button class="ghost" id="dupStage2CancelBtn">Cancel</button></div>
+</div>
+</div>
+</div>
+<div class="collapse">
+<button type="button" class="collapseHead noPrint" data-target="bulkStockBody" aria-expanded="false"><span>Bulk stock input</span><span class="chev">⌄</span></button>
+<div class="collapseBody" id="bulkStockBody"><div class="collapseInner">
+<label>Default division (optional)</label><select id="bulkDivision" style="margin-bottom:10px"><option value="">Use division written on each row</option><option value="pharmacy">Pharmacy</option><option value="essentials">Essentials</option></select>
+<label>Bulk format: Name | Division | Cost | Sell | Quantity | Expiry | Bundle Qty / OFF | Bundle Price | Markup % (optional)</label>
+<textarea spellcheck="false" id="bulkStockText" rows="7" placeholder="Paracetamol 500mg | Pharmacy | 500 | 700 | 2p + 7u | 12 | 2027-04-30
+Colgate 140g | Essentials | 1200 | 1500 | 1p + 2u | 6 |
+Dettol 250ml | Essentials | 1800 | 2200 | 24u | |"></textarea>
+<div class="help">Quantity is entered as units. Legacy pack-formatted imports remain readable for compatibility, but new stock uses the unit-only workflow. One item per line is recommended; semicolons also work. Optional columns 8–9 control Quantity Pricing: use bundle quantity + bundle price to enable it, or put OFF in column 8 to disable it for an existing product. Leave both blank to preserve an existing product’s current rule. The old comma format is still accepted.</div>
+<div class="footerActions" style="margin-top:16px"><button class="primary" id="bulkStockBtn">Preview</button><button class="primary hidden" id="bulkConfirmBtn">Confirm bulk addition</button><button class="ghost" id="bulkStockClearBtn">Clear</button></div>
+<div id="bulkPreview" class="hidden" style="margin-top:12px"><div class="tablewrap"><table><thead><tr><th>Product</th><th>Division</th><th class="num">Qty</th><th class="num">Cost</th><th class="num">Sell</th><th>Expiry</th><th>Status</th></tr></thead><tbody id="bulkPreviewBody"></tbody></table></div><div class="bulkAll"><button class="ghost hidden" id="bulkAddAllBtn" type="button"></button><button class="ghost hidden" id="bulkSizeNewBtn" type="button"></button></div></div>
+<div class="warnText" id="bulkStockWarn"></div>
+</div></div>
+</div>
+<section class="card noPrint hidden" id="divAssignCard"></section><section class="card"><div class="metrics" style="grid-template-columns:repeat(2,1fr)"><div class="metric"><span>Total products</span><strong id="vProducts">0</strong></div><div class="metric"><span>Total units</span><strong id="vUnits">0</strong></div><div class="metric"><span>Inventory value (cost)</span><strong id="vCostValue">0</strong></div><div class="metric hero"><span>Potential gross profit</span><strong id="vPotProfit">0</strong></div></div></section>
+<section class="card noPrint stockInventoryCard"><button class="stockInventoryHead" id="stockInventoryToggle" type="button" aria-expanded="true" aria-controls="stockInventoryBody"><span>Stock Inventory</span><span class="chev">⌄</span></button><div class="stockInventoryBody" id="stockInventoryBody"><div class="classificationToolbar" id="stockClassificationToolbar"></div><div class="controlsRow"><select id="stockDiv"><option value="all">All divisions</option><option value="pharmacy">Pharmacy</option><option value="essentials">Essentials</option></select><input spellcheck="false" id="stockSearch" placeholder="Search product"><select id="stockSort"><option value="lowest">Sort: lowest stock</option><option value="highest">Sort: highest stock</option><option value="name">Sort: name</option><option value="value">Sort: highest value</option></select><label class="checkline"><input spellcheck="false" type="checkbox" id="stockLowOnly"> Low stock only</label><label class="checkline" id="stockExpiringLine"><input spellcheck="false" type="checkbox" id="stockExpiringOnly"> Expiring stock only</label></div><div class="footerActions hidden" id="lowStockPdfRow" style="margin-top:10px"><button class="primary" id="lowStockPdfBtn" type="button">⬇ Download low stock PDF</button></div><div class="stockMultiBar hidden noPrint" id="stockMultiBar"><div class="stockMultiInfo"><strong id="stockMultiCount">1 selected</strong><span class="stockMultiHint">Tap rows to select more</span></div><div class="stockMultiActions"><button class="ghost" id="stockDeleteCancelBtn" type="button">Cancel</button><button class="ghost" id="stockSelectAllBtn" type="button">Select all</button><button class="primary" id="stockMoveSelectedBtn" type="button">Move Selected</button><button class="del" id="stockDeleteSelectedBtn" type="button">Delete selected</button></div></div><div class="tablewrap"><table><thead><tr><th>Product</th><th class="num">Qty</th><th class="num">Current cost</th><th class="num">Sell</th><th class="num">Value</th><th class="num">Profit/u</th><th>Expiry</th><th>Status</th><th></th></tr></thead><tbody id="stockTable"></tbody></table></div></div></section>
+<section class="card printTarget screenHidden" id="lowStockPdfSection">
+<div class="summaryTop"><strong>Low stock report</strong><span class="small" id="lowStockPdfDate"></span></div>
+<div class="tablewrap" style="margin-top:10px"><table><thead><tr><th>Product name</th><th class="num">Remaining stock</th></tr></thead><tbody id="lowStockPdfTable"></tbody></table></div>
+</section>
+<div class="collapse">
+<button type="button" class="collapseHead noPrint" data-target="stockTransferBody" aria-expanded="false"><span>Stock backup</span><span class="chev">⌄</span></button>
+<div class="collapseBody" id="stockTransferBody"><div class="collapseInner">
+<div class="workingStockBlock">
+<div class="summaryTop workingStockHead"><div><strong>Working Stock</strong><div class="small">Download or restore current inventory together with current-day working state and unfinished purchase information.</div></div></div>
+<div class="footerActions workingStockActions"><button class="ghost" id="stockImportBtn" type="button">⬆ Restore Working Stock</button><button class="primary" id="stockExportJsonBtn" type="button">⬇ Download Working Stock</button><input spellcheck="false" class="hidden" type="file" id="stockImportFile" accept=".json,.pdf,application/json,application/pdf"></div>
+</div>
+<div class="warnText" id="stockImportWarn"></div>
+</div></div>
+</div>
+<div class="collapse">
+<button type="button" class="collapseHead noPrint" data-target="stockAdjBody" aria-expanded="false"><span>Stock adjustments</span><span class="chev">⌄</span></button>
+<div class="collapseBody" id="stockAdjBody"><div class="collapseInner">
+<div class="summaryTop"><strong>Stock adjustment</strong><span class="small">Traceable quantity corrections without changing product pricing</span></div>
+<div class="row stockAdjustmentGrid" style="margin-top:12px">
+<div class="productSearchWrap"><label>Product</label><input spellcheck="false" id="adjProductSearch" placeholder="Search product…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false"><input spellcheck="false" id="adjProduct" type="hidden"><div id="adjProductSuggestions" class="productSuggestDrop hidden" role="listbox"></div></div>
+<div><label>Adjustment mode</label><select id="adjType"><option value="adjust_plus">Increase (+)</option><option value="adjust_minus">Decrease (−)</option><option value="damaged">Damaged / spoiled</option><option value="set_exact">Quantity correction</option><option value="packaging">Correct packaging</option><option value="pricing">Update pricing</option></select></div>
+<div id="adjUnitField"><label id="adjQtyLabel">Units to add</label><input spellcheck="false" id="adjQty" type="number" min="0" step="1" inputMode="numeric" placeholder="Total units"></div>
+<div id="adjPackSizeField" class="hidden"><label>Units per pack (optional)</label><input spellcheck="false" id="adjUnitsPerPack" type="number" min="1" step="1" inputMode="numeric" placeholder="e.g. 12"></div>
+<div id="adjBatchField"><label>Affected expiry batch</label><select id="adjBatch"><option value="">Select batch / new stock</option></select></div>
+<div id="adjExpiryField"><label>Expiry for added units (optional)</label><input spellcheck="false" id="adjExpiry" type="date"></div>
+<div id="adjPriceFields" class="hidden"><div><label>Current unit cost (optional)</label><input spellcheck="false" id="adjCost" type="number" min="0" step="any"></div><div><label>Selling price (optional)</label><input spellcheck="false" id="adjSell" type="number" min="0" step="0.01"></div></div>
+<div><label>Reason / note</label><input spellcheck="false" id="adjReason" placeholder="Optional"></div>
+<div style="align-self:end"><button class="primary" id="adjApplyBtn">Apply adjustment</button></div>
+</div><div class="help adjComputedSummary" id="adjPackSummary" role="status" aria-live="polite"></div>
+</div></div>
+</div>
+<div class="collapse"><button type="button" class="collapseHead noPrint" data-target="inventoryAuditBody" aria-expanded="false"><span>Adjustment History</span><span class="chev">⌄</span></button><div class="collapseBody" id="inventoryAuditBody"><div class="collapseInner"><label for="inventoryAuditSearch">Find product or reason</label><input spellcheck="false" id="inventoryAuditSearch" placeholder="Product name, ID or reason"><div class="help" id="inventoryAuditCount"></div><div id="inventoryAuditList"></div><button type="button" class="ghost hidden" id="inventoryAuditMore">Load more</button><div class="help">Entries automatically expire seven days after their recorded time. Expired entries are deleted when Roseachy is opened or running; sales, stock balances and Product History are unaffected. Correct mistakes with a new adjustment.</div></div></div></div>
+<div class="collapse">
+<button type="button" class="collapseHead noPrint" data-target="productHistoryBody" aria-expanded="false"><span>Product history</span><span class="chev">⌄</span></button>
+<div class="collapseBody" id="productHistoryBody"><div class="collapseInner">
+<div class="productHistoryToolbar"><div class="productSearchWrap"><label for="historyProductSearch">Product</label><input spellcheck="false" id="historyProductSearch" placeholder="Start typing a product name…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false"><input spellcheck="false" id="historyProduct" type="hidden"><div id="historyProductSuggestions" class="productSuggestDrop hidden" role="listbox"></div></div><div class="productHistoryBackWrap"><button class="ghost" id="productHistoryBack" type="button">Back to inventory</button></div></div>
+<div class="tablewrap productHistoryTableWrap"><table><thead><tr><th>Date</th><th>Movement</th><th class="num">Qty</th><th class="num">Amount</th><th>Reference</th></tr></thead><tbody id="productHistory"></tbody></table></div>
+</div></div>
+</div>
+<div class="collapse">
+<button type="button" class="collapseHead noPrint" data-target="stockTrashBody" aria-expanded="false"><span>Recycle bin — deleted stock</span><span class="chev">⌄</span></button>
+<div class="collapseBody" id="stockTrashBody"><div class="collapseInner"><div id="stockTrashList"></div></div></div>
+</div>
+</div>
+<div id="tabReport" class="hidden">
+<section class="card noPrint" id="reportEssentialOverview">
+<div class="summaryTop"><strong>Daily essentials</strong><span class="small" id="reportEssentialDate"></span></div>
+<div class="rsEssentialMetrics" aria-label="Essential business figures">
+<div><span>Retail sales</span><b id="roSales">—</b></div>
+<div><span>Cash sales</span><b id="roCash">—</b></div>
+<div><span>Non-cash sales</span><b id="roNonCash">—</b></div>
+<div><span>Recognized gross profit</span><b id="roProfit">—</b></div>
+<div><span>Expenses</span><b id="roExpenses">—</b></div>
+<div><span>Customer credit</span><b id="roCredits">—</b></div>
+<div><span>Retail cash at hand</span><b id="roCashHand">—</b></div>
+<div><span>POS cash balance</span><b id="roPosCash">—</b></div>
+</div>
+<button type="button" id="reportDetailToggle" class="ghost rsDetailToggle" aria-controls="reportFullContent" aria-expanded="false">View full report ⌄</button>
+</section>
+<div id="reportFullContent" class="hidden">
+<section class="card printTarget" id="dailyReportSection">
+<div class="summaryTop"><div><strong id="rBusiness">Roseachy Sales Desk</strong><div class="sub" id="rDate" style="margin:2px 0 0">No date selected</div></div></div>
+<div class="metrics" style="margin-top:4px">
+<div class="metric hero"><span>Net sales</span><strong id="rNetSales">0</strong></div>
+<div class="metric hero"><span>Recognized gross profit</span><strong id="rProfit">0</strong></div>
+<div class="metric"><span>Gross margin</span><strong id="rMargin">0%</strong></div>
+<div class="metric"><span>Retail cash</span><strong id="rCash">0</strong></div>
+<div class="metric"><span>Expected bank movement</span><strong id="rBank">0</strong></div>
+<div class="metric"><span>Expenses</span><strong id="rExpenses">0</strong></div>
+</div>
+<div class="recon">
+<div><div class="line"><span>Retail Sales</span><b id="rSales">0</b></div><div class="line"><span>· Cash Sales</span><b id="rCashSales">0</b></div><div class="line"><span>· Non-Cash Sales</span><b id="rNonCashSales">0</b></div><div class="line"><span>· Pharmacy sales</span><b id="rPharm">0</b></div><div class="line"><span>· Essentials sales</span><b id="rEss">0</b></div><div class="line hidden" id="rUnLine"><span>· Unassigned sales</span><b id="rUn">0</b></div><div class="line"><span>Refunds</span><b id="rRefunds">0</b></div><div class="line"><span>Received today</span><b id="rReceived">0</b></div><div class="line"><span>New customer credit</span><b id="rCredit">0</b></div><div class="line"><span>Owed to customers</span><b id="rCustOwed">0</b></div><div class="line"><span>Net COGS</span><b id="rCogs">0</b></div></div>
+<div><div class="line"><span>Opening customer debt</span><b id="rOpenDebt">0</b></div><div class="line"><span>Debt collected</span><b id="rDebtPaid">0</b></div><div class="line"><span>Closing customer debt</span><b id="rClosingDebt">0</b></div><div class="warnText" id="rDebtWarn" style="margin:-4px 0 4px"></div><div class="line"><span>Supplier paid</span><b id="rSupplierPaid">0</b></div><div class="line"><span>Closing supplier payable</span><b id="rClosingPayable">0</b></div><div class="warnText" id="rPayableWarn" style="margin:-4px 0 0"></div></div>
+</div>
+<div class="hidden" id="rPosBlock" style="margin-top:18px"><div class="summaryTop"><strong>POS / Agent banking</strong><span class="small">Separate from retail sales</span></div>
+<div class="recon" style="margin-top:6px">
+<div><div class="line"><span>POS opening cash</span><b id="rPosOpen">0</b></div><div class="line"><span>Cash received</span><b id="rPosCashIn">0</b></div><div class="line"><span>Cash paid out</span><b id="rPosCashOut">0</b></div><div class="line"><span>Moved in from Retail</span><b id="rPosXin">0</b></div><div class="line"><span>Moved out to Retail</span><b id="rPosXout">0</b></div><div class="line"><span>Adjustments (net)</span><b id="rPosAdj">0</b></div><div class="line"><span><b>Expected POS cash</b></span><b id="rPosCash">0</b></div></div>
+<div><div class="line"><span>Opening POS electronic balance</span><b id="rPosElecOpen">0</b></div><div class="line"><span>Electronic received</span><b id="rPosElecIn">0</b></div><div class="line"><span>Electronic sent</span><b id="rPosElecOut">0</b></div><div class="line"><span><b>Expected electronic balance</b></span><b id="rPosElecBalance">0</b></div><div class="line"><span>POS service income</span><b id="rPosIncome">0</b></div><div class="line"><span>Transactions</span><b id="rPosCount">0</b></div><div class="line"><span><b>Store cash (Retail + POS)</b></span><b id="rStoreCash">0</b></div><div class="line"><span>Retail profit + POS income</span><b id="rEarnings">0</b></div></div>
+</div></div>
+<div class="split" style="margin-top:14px">
+<div class="metric"><span>Units sold</span><strong id="rUnitsSold">0</strong></div>
+<div class="metric"><span>Units purchased</span><strong id="rUnitsPurchased">0</strong></div>
+<div class="metric"><span>Units adjusted</span><strong id="rUnitsAdjusted">0</strong></div>
+</div>
+<div class="help" style="margin-top:8px">Low-stock products: <b id="rLowStock">0</b></div>
+<div class="footerActions noPrint" style="margin-top:24px"><button class="primary" id="copyReportBtn">Copy report</button><button class="ghost" id="dailyPdfBtn">Download PDF</button></div>
+</section>
+<section class="card printTarget" id="weeklySection">
+<div class="summaryTop"><strong>Weekly summary</strong><span class="small">Based on saved days</span></div>
+<div class="weeklyFilterToolbar noPrint" role="group" aria-label="Weekly summary date filters">
+<div class="weeklyDateField"><label for="weekFrom">From</label><input spellcheck="false" id="weekFrom" type="date"></div>
+<div class="weeklyDateField"><label for="weekTo">To</label><input spellcheck="false" id="weekTo" type="date"></div>
+<div class="weeklyActionGroup"><button class="ghost" id="weekThisBtn" type="button">This week</button><button class="primary" id="weekRefreshBtn" type="button">Refresh</button></div>
+</div>
+<div class="metrics" style="margin-top:14px">
+<div class="metric hero"><span>Retail Sales</span><strong id="wSales">0</strong></div><div class="metric"><span>Cash Sales</span><strong id="wCashSales">0</strong></div><div class="metric"><span>Non-Cash Sales</span><strong id="wNonCashSales">0</strong></div>
+<div class="metric hero"><span>Recognized gross profit</span><strong id="wProfit">0</strong></div>
+<div class="metric"><span>Margin</span><strong id="wMargin">0%</strong></div>
+<div class="metric"><span>Expenses</span><strong id="wExpenses">0</strong></div>
+<div class="metric"><span>Refunds</span><strong id="wRefunds">0</strong></div>
+<div class="metric"><span>Units sold</span><strong id="wUnits">0</strong></div>
+</div>
+<div class="help" id="wDivLine"></div><div class="help" id="wPosLine"></div><div class="tablewrap" style="margin-top:12px"><table><thead><tr><th>Date</th><th>Business</th><th class="num">Net sales</th><th class="num">Profit</th><th class="num">Expenses</th></tr></thead><tbody id="weeklyBreakdown"></tbody></table></div>
+<div class="footerActions noPrint" style="margin-top:24px"><button class="ghost" id="weeklyPdfBtn">Download PDF</button></div>
+</section>
+<div class="collapse printTarget" id="movementSection">
+<button type="button" class="collapseHead noPrint" data-target="movementBody" aria-expanded="false"><span>Per-product stock movement</span><span class="chev">⌄</span></button>
+<div class="collapseBody" id="movementBody"><div class="collapseInner">
+<div class="footerActions noPrint" style="margin-bottom:10px"><button class="ghost" id="copyMovementBtn">Copy as text</button></div>
+<div class="tablewrap"><table><thead><tr><th>Product</th><th class="num">Opening</th><th class="num">Bought</th><th class="num">Sold</th><th class="num">Returned</th><th class="num">Damaged</th><th class="num">Adjusted</th><th class="num">Closing</th></tr></thead><tbody id="movementTable"></tbody></table></div>
+</div></div>
+</div>
+</div>
+</div>
+<div id="tabNotes" class="hidden">
+<section class="card noPrint">
+<div class="summaryTop"><strong>Add a general note</strong></div>
+<div><label>Note</label><textarea spellcheck="false" id="noteText" rows="4" placeholder="Write a general note..."></textarea></div>
+<div class="footerActions" style="margin-top:16px"><button class="primary" id="noteSaveBtn">Save note</button></div>
+<div class="help">Saved automatically with today's date and time.</div>
+</section>
+<section class="card">
+<div class="summaryTop"><strong>General notes</strong></div>
+<div id="notesList" style="margin-top:10px"></div>
+</section>
+<div class="collapse noPrint" id="notesRecycleSection">
+<button type="button" class="collapseHead" data-target="notesRecycleBody" aria-controls="notesRecycleBody" aria-expanded="false"><span>Recycle bin — deleted notes <span id="noteTrashCount" class="small">(0)</span></span><span class="chev" aria-hidden="true">⌄</span></button>
+<div class="collapseBody" id="notesRecycleBody"><div class="collapseInner">
+<div class="help" style="margin:0 0 12px">Deleted notes stay here until permanently removed. Restore any note to your General notes.</div>
+<div id="noteTrashList" aria-live="polite"></div>
+<div class="notesBinTools"><button type="button" class="danger" id="noteTrashEmptyBtn">Empty recycle bin</button></div>
+</div></div>
+</div> </div>
+<div id="tabAnalytics" class="hidden rsAnalytics">
+<section class="card noPrint">
+<div class="summaryTop"><strong>Business analytics</strong><span class="small">Offline · meaningful trends only</span></div>
+<div class="rsAnalyticsFilters">
+<div><label for="anaPeriod">Period</label><select id="anaPeriod"><option value="today">Today</option><option value="30">Last 30 Days</option><option value="7">Last 7 Days</option><option value="month">This Month</option><option value="previous">Last month</option><option value="custom">Custom range</option></select></div>
+<div><label for="anaDivision">Division</label><select id="anaDivision"><option value="all">All divisions</option><option value="pharmacy">Pharmacy</option><option value="essentials">Essentials</option></select></div>
+<div id="anaCustomDates" class="rsAnaDates hidden"><div><label for="anaFrom">From</label><input spellcheck="false" id="anaFrom" type="date"></div><div><label for="anaTo">To</label><input spellcheck="false" id="anaTo" type="date"></div></div>
+</div>
+<div class="small" id="anaScopeNote" aria-live="polite"></div>
+</section>
+<section class="card rsAnaPanel">
+<div class="summaryTop"><strong>Business performance</strong><span class="small">Against previous equivalent period</span></div>
+<div class="rsAnaHighlights">
+<div><span>Sales change</span><b id="anaSalesChange">—</b></div>
+<div><span>Profit change</span><b id="anaProfitChange">—</b></div>
+<div><span>Profit margin</span><b id="anaMargin">—</b></div>
+</div>
+<div class="rsAnaChartHead"><span id="anaChartTitle">Net sales trend</span><div class="seg small" id="anaChartMode"><button type="button" data-ana-series="sales" class="active">Sales</button><button type="button" data-ana-series="profit">Profit</button></div></div>
+<div id="anaChart" class="rsAnaChart" role="img" aria-label="Daily sales trend"></div>
+<details class="rsAnaDetail"><summary>Performance details</summary><div id="anaPerformanceDetails" class="rsAnaDetailBody"></div></details>
+</section>
+<section class="card rsAnaPanel">
+<div class="summaryTop"><strong>Product performance</strong><span class="small">From recorded transactions</span></div>
+<p class="rsTrendIntro">Compare net units, revenue and repeated demand over the same reporting period.</p>
+<details class="rsTrendCard" id="anaFastCard">
+<summary><span class="rsTrendCardHeader"><strong>Top Selling Products</strong><span class="rsTrendTag">Cumulative demand</span></span><span class="rsTrendSummary" id="anaFastSummary">No sales recorded yet</span></summary>
+<div class="rsTrendContent"><label for="anaDemandMode">Rank products by</label><select id="anaDemandMode"><option value="consistent">Most consistently demanded</option><option value="units">Best sellers by net units</option><option value="revenue">Top products by net revenue</option><option value="velocity">Fastest-moving with repeated demand</option></select><div id="anaFastList" class="rsTrendList" aria-live="polite"></div><small>Consistency ranks selling days, then distinct sales, then net units. Velocity ranks net units per calendar day among products sold at least twice on two days (one day for Today). One-off bulk purchases remain visible under Units and Revenue. Returns reduce units and revenue; stockout evidence is shown separately.</small>
+<details class="rsAnaDetail rsTrendLegacy"><summary>Other product figures</summary>
+<div class="seg small rsAnaSwitch" id="anaProductMode"><button type="button" data-ana-products="profit" class="active">Top profit</button><button type="button" data-ana-products="volume">Top volume</button></div>
+<div id="anaTopProducts" class="rsAnaRows"></div>
+<details class="rsAnaDetail"><summary>Slow movers &amp; price changes</summary><div id="anaProductWatch" class="rsAnaDetailBody"></div></details>
+<div id="anaProductDetail" class="rsAnaProductDetail hidden" aria-live="polite"></div>
+</details>
+</div>
+</details>
+<details class="rsTrendCard" id="anaRiseCard">
+<summary><span class="rsTrendCardHeader"><strong>Rising Products</strong><span class="rsTrendTag">Selling more</span></span><span class="rsTrendSummary" id="anaRiseSummary">Insufficient Data</span></summary>
+<div class="rsTrendContent"><div id="anaRiseList" class="rsTrendList" aria-live="polite"></div><small>Compared with an equally long previous period. New products and too little history are never labelled Rising.</small></div>
+</details>
+<details class="rsTrendCard" id="anaDeclineCard">
+<summary><span class="rsTrendCardHeader"><strong>Declining Products</strong><span class="rsTrendTag">Selling less</span></span><span class="rsTrendSummary" id="anaDeclineSummary">Insufficient Data</span></summary>
+<div class="rsTrendContent"><div id="anaDeclineList" class="rsTrendList" aria-live="polite"></div><small>Stockouts and missing stock history are not treated as falling demand. Check availability before drawing conclusions.</small></div>
+</details>
+</section>
+<section class="card rsAnaPanel">
+<div class="summaryTop"><strong>Inventory efficiency</strong><span class="small">Estimates, not guarantees</span></div>
+<div class="rsAnaHighlights">
+<div><span>Stock coverage</span><b id="anaCoverage">—</b></div>
+<div><span>Inventory turnover</span><b id="anaTurnover">—</b></div>
+<div><span>Stagnant stock value</span><b id="anaStagnant">—</b></div>
+</div>
+<details class="rsAnaDetail"><summary>Inventory requiring attention</summary><div id="anaInventoryDetail" class="rsAnaDetailBody"></div></details>
+</section>
+<section class="card rsAnaPanel">
+<div class="summaryTop"><strong>Important insights</strong><span class="small">Up to 5 · only when supported</span></div>
+<div id="anaInsights" class="rsAnaRows" aria-live="polite"></div>
+</section>
+</div>
+<div id="xferOverlay" class="dupOverlay hidden noPrint" role="dialog" aria-modal="true" aria-labelledby="xferTitle">
+<div class="dupModal">
+<h3 id="xferTitle">Move cash</h3>
+<div class="small" id="xferBal"></div>
+<label class="xferLabel">Direction</label><select id="xferDir"><option value="r2p">Retail cash → POS cash</option><option value="ts2p">Today’s sales cash → POS cash</option><option value="p2r">POS cash → Retail cash</option><option value="padd">Add cash to POS (from outside)</option><option value="prem">Take cash out of POS</option></select>
+<label class="xferLabel">Amount</label><input spellcheck="false" id="xferAmt" type="number" min="0" step="0.01" placeholder="0.00">
+<label class="xferLabel" id="xferNoteLbl">Note (optional)</label><input spellcheck="false" id="xferNote" placeholder="e.g. float top-up">
+<div class="dupConflict hidden" id="xferErr"></div>
+<div class="dupActions" style="margin-top:20px"><button class="primary" id="xferOk" type="button">Move cash</button><button class="ghost" id="xferCancel" type="button">Cancel</button></div>
+</div>
+</div>
+</div>
+<div id="marketDesk" class="hidden marketShell noPrint">
+<div class="marketHeaderRow">
+<div class="marketHero"><p>Focused purchasing and repricing, linked to Sales Desk.</p></div>
+</div>
+<div class="marketSessionLine"><span class="marketSessionTag" id="marketSessionTag"></span></div>
+<button type="button" id="marketDebtSummary" class="ghost hidden"></button>
+<div class="marketViewTabs" id="marketViewTabs"><button type="button" data-mview="active" class="active">Active</button><button type="button" data-mview="requests">Customer Request</button><button type="button" data-mview="suppliers">Suppliers</button></div>
+<div id="marketActivePane">
+<div class="classificationToolbar" id="marketClassificationToolbar"></div><div class="marketTop"><input spellcheck="false" id="marketSearch" type="search" placeholder="Search existing stock..." autocomplete="off"><button class="primary marketAddBtn" id="marketAddManual" type="button">+ Add Item</button></div>
+<div id="marketSearchResults" class="classificationBrowse"></div>
+<div id="marketSuggestions" class="marketSuggest"></div>
+<div class="activeListWorkspace"><div class="activeListWorkspaceHead"><strong>Active Lists</strong><button class="ghost" id="marketNewActiveList" type="button">+ New List</button></div><div id="marketActiveLists" class="activeListStrip"></div></div>
+<div class="marketFilters" id="marketFilters"><button type="button" data-mf="all" class="active">All</button><button type="button" data-mf="pharmacy">Pharmacy</button><button type="button" data-mf="essentials">Essentials</button><button type="button" data-mf="ready">Ready</button></div>
+<section class="marketSection marketSectionFlat"><div class="marketHead marketSelectedListHead"><div><strong id="marketSelectedListTitle">Active List</strong><div class="small" id="marketSelectedListSub">Select or create an Active List.</div></div></div><div id="marketActiveList" class="marketList"></div></section>
+</div>
+<div id="marketHistoryPane" class="hidden"><section class="marketSection marketSectionFlat"><div class="marketHead"><div><strong>Purchase History</strong><div class="small">Completed Market Desk purchases grouped by day</div></div></div><div id="marketHistoryPaneList"></div></section></div>
+<div id="marketRequestsPane" class="hidden">
+<section class="marketSection marketSectionFlat"><div class="marketHead"><div><strong>Customer Requests</strong><div class="small">Items customers asked you to source</div></div><button class="primary marketAddBtn" id="marketAddRequest" type="button">+ Add Request</button></div><div id="marketRequestList" class="marketList"></div></section>
+</div>
+<div id="marketSuppliersPane" class="hidden supplierPane">
+<div class="supplierTop"><input spellcheck="false" id="supplierSearch" type="search" placeholder="Search supplier name…" aria-label="Search supplier name" autocomplete="off"><button class="primary" id="supplierAddBtn" type="button">+ Add Supplier</button></div>
+<section class="marketSection supplierDebtSection" aria-labelledby="supplierDebtsTitle">
+<div class="marketHead supplierDebtHead"><div><strong id="supplierDebtsTitle">Supplier Debt Payment</strong><div class="small">Select an outstanding purchase to pay it, partially or in full.</div></div><div id="supplierDebtTotal" class="supplierDebtTotal" aria-live="polite"></div></div>
+<div id="supplierDebtList" class="supplierDebtList" aria-live="polite"></div>
+<div class="supplierOtherActions"><button id="supplierOtherPayment" class="ghost" type="button">Other supplier payment</button><span class="small">For advances or obligations not recorded as purchases.</span></div>
+</section>
+<section class="marketSection marketSectionFlat"><div class="marketHead"><div><strong>Saved Suppliers</strong><div class="small">View suppliers, their purchases and account details</div></div></div><div id="supplierList" class="supplierList"></div></section>
+</div>
+<div class="marketSummaryBar" id="marketSummaryOpen"><div><span id="marketSummaryText">0 active · 0 ready</span><b id="marketSummaryTotal">₦0.00</b></div><button class="primary" id="marketReviewBtn" type="button">Review Purchase</button></div>
+</div>
+<div id="financialDesk" class="hidden finShell noPrint" aria-label="Protected Financial Desk">
+<div id="finGate" class="finGate card">
+<div class="finGateTop"><h2>Financial Desk</h2><p class="small">Private business bank · available offline</p></div>
+<div id="finSetup" class="hidden finGroup">
+<h3>Secure first-time setup</h3><p class="small">Choose a separate 4-digit financial PIN and enter the real bank balance once. It will update from Roseachy's recorded transactions.</p>
+<label>Starting bank balance (₦)</label><input spellcheck="false" id="finAnchorInput" type="number" min="0" step="0.01" inputMode="decimal" placeholder="0.00">
+<label>Starting balance represents</label><select id="finAnchorMode"><option value="now">The balance right now (recommended)</option><option value="day">The balance at the start of this business day</option></select>
+<label>4-digit financial PIN</label><input spellcheck="false" id="finSetupPassword" type="password" autocomplete="new-password">
+<label>Confirm financial PIN</label><input spellcheck="false" id="finSetupPassword2" type="password" autocomplete="new-password">
+<button class="primary" type="button" id="finSetupGo">Create Financial Desk</button>
+</div>
+<div id="finUnlock" class="finGroup">
+<label>Financial PIN</label><input spellcheck="false" id="finUnlockPass" type="password" autocomplete="off" placeholder="Enter your PIN">
+<button class="primary" type="button" id="finUnlockGo">Unlock Financial Desk</button>
+<button class="linkbtn" type="button" id="finForgot">Forgot password? Use recovery key</button>
+</div>
+<div id="finRecovery" class="finGroup hidden">
+<h3>Offline password recovery</h3><label>Your saved recovery key</label><input spellcheck="false" id="finRecoverKey" type="text" autocomplete="off">
+<label>New 4-digit PIN</label><input spellcheck="false" id="finRecoveryNew" type="password" autocomplete="new-password">
+<label>Confirm new PIN</label><input spellcheck="false" id="finRecoveryNew2" type="password" autocomplete="new-password">
+<button class="primary" type="button" id="finRecoveryGo">Reset financial password</button><button class="ghost" type="button" id="finRecoveryBack">Back</button>
+</div>
+<div id="finRecoveryOnce" class="finGroup hidden" role="status">
+<h3>Save this recovery key now</h3><p class="small">Write it down or store it securely OFF this device. It is only shown once. Anyone with it can reset your password.</p>
+<div id="finRecoveryValue" class="finRecoveryValue"></div><button class="primary" type="button" id="finSetupDone">I saved the recovery key</button>
+</div>
+<div id="finGateError" class="warnText" role="alert"></div>
+</div>
+<div id="finMain" class="hidden">
+<div class="finTitle"><div><h2>Financial Desk</h2><span class="small">Business Bank</span></div>
+<div class="finMenuWrap"><button id="finMenuBtn" class="iconbtn" type="button" aria-label="Financial Desk options">⋮</button><div id="finMenu" class="finMenu hidden">
+<button data-fin-action="report" type="button">Download Report</button><button data-fin-action="report" type="button">Export Transactions</button>
+<button id="finCorrect" type="button">Correct Balance</button><button id="finLockDesk" type="button">Lock Financial Desk</button><button data-fin-action="admin" type="button">Security &amp; Settings</button>
+</div></div>
+</div>
+<section id="finOverview" class="finGroup">
+<div class="finBalanceCard"><div class="finBetween"><span class="small">Available bank balance · calculated locally</span><button type="button" id="finMaskToggle" class="linkbtn">Hide balance</button></div>
+<strong id="finBalance">—</strong><div class="finSummary"><span>Money in today <b class="finPlus" id="finIn">₦0</b></span><span>Money out today <b class="finMinus" id="finOut">₦0</b></span></div></div>
+<div class="finActions"><button class="primary" id="finAdd" type="button">+ Add Money</button><button class="ghost" id="finRemove" type="button">− Remove Money</button></div>
+<div class="finBetween finSubhead"><h3>Recent Activity</h3><button type="button" id="finOpenHistory" class="linkbtn">View all</button></div><div id="finRecent" class="finRecent"></div>
+<div class="finReviewBar"><div><span class="small">Daily Bank Review</span><strong id="finReviewStatus">Pending</strong></div><button class="ghost" type="button" id="finReviewQuick">Review bank balance</button></div>
+</section>
+<section id="finReviewPanel" class="finGroup card hidden"><div class="finBetween"><h3>Review Bank Balance</h3><button class="ghost" data-fin-back="" type="button">Back</button></div>
+<p class="small" id="finReviewDay"></p><div class="finReviewTotal"><span>Roseachy calculated balance</span><b id="finReviewCalculated"></b></div>
+<label>Actual balance shown by your bank (₦)</label><input spellcheck="false" id="finReviewActual" inputMode="decimal" type="number" min="0" step="0.01" placeholder="Enter actual bank balance"><div class="small" id="finDifference" aria-live="polite"></div>
+<label>Reason if balances differ (required)</label><textarea spellcheck="false" rows="2" id="finReviewReason" placeholder="Missing transfer, pending bank charge, etc."></textarea>
+<div class="small" id="finReviewAlready"></div><button class="primary" type="button" id="finMarkReviewed">✓ Mark as Reviewed</button>
+<p class="small">Review does not change the balance. Use Correct Balance if an audited adjustment is needed.</p>
+</section>
+<section id="finHistoryPanel" class="finGroup card hidden"><div class="finBetween"><h3>Bank History</h3><button class="ghost" data-fin-back="" type="button">Back</button></div>
+<label>Period</label><select id="finRange"><option value="today">Today</option><option value="7">Last 7 Days</option><option value="month">This Month</option><option value="custom">Custom period</option></select>
+<div id="finCustomDates" class="finDateRow hidden"><label>From<input spellcheck="false" id="finFrom" type="date"></label><label>To<input spellcheck="false" id="finTo" type="date"></label></div>
+<p id="finHistorySummary" class="small"></p><div id="finHistoryRows"></div><button class="ghost hidden" id="finMore" type="button">Load more</button>
+</section>
+<section id="finEditPanel" class="finGroup card hidden"><div class="finBetween"><h3 id="finEditTitle">Add Money</h3><button data-fin-back="" class="ghost" type="button">Back</button></div>
+<input spellcheck="false" type="hidden" id="finEditMode" defaultValue="plus"><label>Amount (₦)</label><input spellcheck="false" id="finEditAmount" type="number" step="0.01" min="0" inputMode="decimal">
+<div id="finTransferWrap"><label>Type</label><select id="finTransferType"><option value="outside">Outside money (not recorded elsewhere)</option><option value="move">Move between retail cash and bank</option><option value="bank_pos">Between Bank &amp; POS</option></select></div>
+<label>Reason / reference</label><textarea spellcheck="false" rows="2" id="finEditReason"></textarea>
+<div id="finEditPassWrap" class="hidden"><label>Confirm financial PIN</label><input spellcheck="false" type="password" id="finEditPassword" autocomplete="off"></div>
+<p class="small" id="finEditHint"></p><button id="finEditSave" class="primary" type="button">Save</button>
+<button id="finEditCancel" class="ghost" type="button">Cancel</button>
+</section>
+<section id="finAdminPanel" class="finGroup card hidden"><div class="finBetween"><h3>Security &amp; Settings</h3><button data-fin-back="" class="ghost" type="button">Back</button></div>
+<p class="small" id="finAdminNotice"></p><label>Current password / PIN</label><input spellcheck="false" id="finCurrentPassword" type="password" autocomplete="off">
+<label>New 4-digit PIN</label><input spellcheck="false" id="finNewPass" type="password" autocomplete="new-password">
+<label>Confirm new PIN</label><input spellcheck="false" id="finNewPass2" type="password" autocomplete="new-password">
+<button class="ghost" id="finChangePass" type="button">Change password</button><hr><button class="ghost" id="finRotateRecovery" type="button">Generate replacement recovery key</button>
+<div id="finRotateOutputWrap" class="hidden"><p class="small">Save this key now. The previous key no longer works.</p><div class="finRecoveryValue" id="finRotateOutput"></div></div>
+<button type="button" id="finSecureBackup" class="ghost">Download encrypted full backup</button><p class="small">A standard full backup includes encrypted bank details but ordinary transactions are readable. Use the encrypted full backup for private storage.</p>
+</section>
+<section id="finReportPanel" class="finGroup card hidden"><div class="finBetween"><h3>Download Report</h3><button data-fin-back="" class="ghost" type="button">Back</button></div>
+<label>Period</label><select id="finReportRange"><option value="today">Today</option><option value="7">Last 7 Days</option><option value="month">This Month</option><option value="custom">Custom period</option></select>
+<div id="finReportDates" class="finDateRow hidden"><label>From<input spellcheck="false" id="finReportFrom" type="date"></label><label>To<input spellcheck="false" id="finReportTo" type="date"></label></div>
+<button type="button" class="primary" id="finExportPdf">Download PDF</button><button type="button" class="ghost" id="finExportCsv">Download CSV</button>
+<p class="small">Sensitive file: downloaded PDFs and CSVs are not password-protected. Store and share them carefully.</p>
+</section>
+</div>
+</div>
+<div id="settingsDesk" class="hidden settingsShell settingsStudio noPrint">
+<div class="settingsIntro studioIntro"><div><h2>Appearance &amp; Experience</h2><p>A calm, curated design system for Roseachy. Changes preview instantly and never alter business data.</p></div></div>
+<section class="studioPreview" id="settingsStickyPreview" aria-label="Live preview">
+<div class="previewTopline"><div class="previewToplineMeta"><strong>Live Preview</strong><span>App-aware</span><em class="previewThemeName" id="previewThemeName">Roseachy Signature</em></div><button class="ghost previewReplay" id="previewReplay" type="button">Replay</button></div>
+<div class="previewCanvas" id="previewCanvas">
+<div class="previewBrand"><svg class="previewLogo" viewBox="0 0 960.98 954.66" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="M143.33 369.55l-40.7-45.22a8.56 8.56 0 0 1-1.72-7.9l14.63-56c17.84-68.33 57.75-109 113.81-121.65 115-26 159.84 88.29 175.42 137.42 2.41 7.6 13.28 8 17.78.65 27.19-44.55 113.61-150.08 228.35-162 86.14-9 136.32 14.89 157.25 28.64 6.92 4.54 8.28 13.17 3.18 20.46l-68.73 79.37c-5.39 7.7-16.46 10.85-24.8 7-42.48-19.6-110.66-26.74-173.61 18.84-63.46 46.43-122.75 133.38-148.47 174.21-4.71 7.48-16.18 5.35-17.49-3.19-10.75-70.15-47.19-254.69-130.24-245.86-105.6 11.22-105.58 123.94-98.52 172.08.49 3.3-3.3 5.5-5.42 3.15Z"></path><path d="M957.33 597.12l-67.84 88.61c-6.49 7.59-19.63 8.6-28.63 2.25l-109.48-64.14c-5.54-3.91-13.52-3.24-17.63 1.45L471.94 951.64c-3.82 4.61-11.75 3.82-16.11-1.56L100.34 472.58c-4-4.93-11.4-3.08-13.14 3.24l-31.12 89.94a11.29 11.29 0 0 1-13.81 6.55l-40.87-7.1a2 2 0 0 1 .68-3.86c12.07.68 28.71-3.79 36.82-3.21a5.61 5.61 0 0 0 5.89-4.4l31.76-142.8c1.6-6.13 8.48-8.45 12.55-4.22l362.81 397c4.73 4.92 12.67 4.62 16-.63l248.73-353.43c3.72-5.16 11.56-6.72 17.24-3.4L952 573.53c9.44 5.47 11.81 16.01 5.33 23.59Z"></path><circle cx="437.82" cy="54.74" r="54.74"></circle></g></svg><div><div class="previewTitle">Roseachy</div><div class="previewDesk">Sales Desk</div><div class="previewSub">Premium retail workspace</div></div></div>
+<div class="previewTabs" id="previewTabs"><button class="active" type="button" data-preview-tab="overview">Overview</button><button type="button" data-preview-tab="stock">Stock</button><button type="button" data-preview-tab="records">Records</button></div>
+<div class="previewCard"><div class="previewCardTop"><div><span class="previewEyebrow" id="previewEyebrow">Today</span><strong id="previewCardTitle">Sales snapshot</strong></div><span class="previewBadge" id="previewBadge">Balanced</span></div><div class="previewValue" id="previewValue">₦12,450.00</div><div class="previewMiniStack" id="previewMiniStack"><div class="previewMiniRow"><span>Paracetamol 500 mg</span><b>24 units</b></div><div class="previewMiniRow"><span>Low stock</span><b>3 items</b></div></div><input spellcheck="false" class="previewInput" defaultValue="Preview field" aria-label="Preview field"><div class="previewActions"><button class="primary" type="button">Primary</button><button class="ghost" type="button">Secondary</button></div><small>Muted supporting information</small></div>
+</div>
+</section>
+<div class="studioGroups">
+<details class="settingsGroup" open><summary><span>Appearance</span><small>Theme &amp; density</small></summary><div class="settingsBody">
+<div class="settingRow"><div><label>Dark Mode</label><div class="settingSub">Choose Off, On, or follow your device. Roseachy keeps the selected palette tuned for comfortable dark-mode reading.</div></div><div class="segChoice" data-setting-buttons="colorMode"><button data-value="light">Off</button><button data-value="dark">On</button><button data-value="system">System</button></div></div>
+<div class="settingBlock"><div class="settingBlockHead"><div><label>Theme</label><div class="settingSub">Six established themes. Each theme includes coordinated surfaces, controls and readable light/dark variants.</div></div></div>
+<div class="themeGrid" id="themeGrid">
+<button type="button" class="themeCard" data-theme-choice="cobalt" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#111B32"></i><i style="--sw:#366FB9"></i><i style="--sw:#F3F6FC"></i></span><b>Cobalt Studio</b><small>Original midnight blue · rich cobalt · ice</small></button>
+<button type="button" class="themeCard" data-theme-choice="pearl" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#F1F2F7"></i><i style="--sw:#FFFFFF"></i><i style="--sw:#001351"></i></span><b>Pearl &amp; Royal Blue</b><small>Pearl · deep blue</small></button>
+<button type="button" class="themeCard" data-theme-choice="ember" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#FFECCF"></i><i style="--sw:#1E223D"></i><i style="--sw:#F74E1C"></i></span><b>Midnight &amp; Ember</b><small>Navy · vivid ember</small></button>
+<button type="button" class="themeCard" data-theme-choice="cyanflux" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#1c2330"></i><i style="--sw:#252e3f"></i><i style="--sw:#59a7ed"></i></span><b>Cyan Flux</b><small>Graphite · clear blue</small></button>
+<button type="button" class="themeCard" data-theme-choice="coralbank" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#182227"></i><i style="--sw:#253037"></i><i style="--sw:#ff8987"></i></span><b>Coral Carbon</b><small>Carbon · soft coral</small></button>
+<button type="button" class="themeCard" data-theme-choice="monomint" aria-pressed="false"><span class="themeSwatches" aria-hidden="true"><i style="--sw:#e9eae7"></i><i style="--sw:#ffffff"></i><i style="--sw:#222627"></i></span><b>Mono Mint</b><small>Porcelain · charcoal · mint</small></button>
+</div>
+</div>
+<div class="settingRow"><div><label>Interface density</label><div class="settingSub">Controls vertical rhythm without scaling the whole app.</div></div><div class="segChoice" data-setting-buttons="density"><button data-value="compact">Compact</button><button data-value="balanced">Balanced</button><button data-value="comfortable">Comfortable</button></div></div>
+<div class="settingsResetRow"><button class="ghost" data-reset-section="appearance">Reset Appearance</button></div>
+</div></details>
+<details class="settingsGroup"><summary><span>Pricing</span><small>Division markups</small></summary><div class="settingsBody">
+<div class="settingBlock"><div class="settingBlockHead"><div><label>Default markup</label><div class="settingSub">Products using a division default follow it automatically. Custom markup and manual selling-price overrides remain unchanged.</div></div></div>
+<div class="pricingDefaultsGrid">
+<div class="pricingDefaultCard"><label for="pharmacyDefaultMarkup">Pharmacy Default Markup</label><input spellcheck="false" id="pharmacyDefaultMarkup" data-pricing-setting="pharmacyMarkup" type="number" min="0" max="500" step="0.5" placeholder="e.g. 30"><div class="settingSub" id="pharmacyMarkupPreview">Cost ₦1,000 → selling ₦1,300</div></div>
+<div class="pricingDefaultCard"><label for="essentialsDefaultMarkup">Essentials Default Markup</label><input spellcheck="false" id="essentialsDefaultMarkup" data-pricing-setting="essentialsMarkup" type="number" min="0" max="500" step="0.5" placeholder="e.g. 20"><div class="settingSub" id="essentialsMarkupPreview">Cost ₦1,000 → selling ₦1,200</div></div>
+</div>
+</div>
+<div class="settingsResetRow"><button class="ghost" id="resetPricingDefaults" type="button">Reset Pricing Defaults</button></div>
+</div></details>
+<details class="settingsGroup"><summary><span>Typography</span><small>Scale &amp; hierarchy</small></summary><div class="settingsBody">
+<div class="advancedNote">Roseachy uses one consistent professional serif-led typography system. Settings adjust scale and hierarchy without changing the font family.</div>
+<div class="settingRow"><div><label>Interface font scale</label><div class="settingSub">Selected steps preserve hierarchy and mobile fit.</div></div><select data-setting="fontScale"><option value="compact">Compact</option><option value="small">Small</option><option value="default">Default</option><option value="comfortable">Comfortable</option><option value="large">Large</option></select></div>
+<div class="settingRow"><div><label>Text hierarchy</label><div class="settingSub">Controls contrast between captions, body and headings.</div></div><div class="segChoice" data-setting-buttons="textHierarchy"><button data-value="compact">Quiet</button><button data-value="balanced">Balanced</button><button data-value="editorial">Editorial</button></div></div>
+<div class="settingsResetRow"><button class="ghost" data-reset-section="typography">Reset Typography</button></div>
+</div></details>
+<details class="settingsGroup"><summary><span>Shape &amp; Borders</span><small>Geometry &amp; edge weight</small></summary><div class="settingsBody">
+<div class="settingRow"><div><label for="appearanceRoundness">Corner roundness</label><div class="settingSub">Square at 0, softly rounded at 50, generous cards and pill-shaped controls at 100.</div></div><div class="settingRange"><input spellcheck="false" id="appearanceRoundness" data-setting="roundnessLevel" type="range" min="0" max="100" step="1" aria-label="Corner roundness"><output for="appearanceRoundness" data-range-value="roundnessLevel">55</output></div></div>
+<div class="settingRow"><div><label for="appearanceBorder">Border thickness</label><div class="settingSub">From no decorative edge at 0 to a defined 3px inset edge at 100. Focus indicators stay visible.</div></div><div class="settingRange"><input spellcheck="false" id="appearanceBorder" data-setting="borderWeightLevel" type="range" min="0" max="100" step="1" aria-label="Border thickness"><output for="appearanceBorder" data-range-value="borderWeightLevel">30</output></div></div>
+<div class="settingsResetRow"><button class="ghost" data-reset-section="shape">Reset Shape</button></div>
+</div></details>
+<details class="settingsGroup"><summary><span>Spacing &amp; Rhythm</span><small>Cadence &amp; preview</small></summary><div class="settingsBody">
+<div class="settingRow"><div><label>Global spacing</label><div class="settingSub">0 is very tight; 100 is very airy. Mobile limits prevent overflow.</div></div><div class="settingRange"><input spellcheck="false" data-setting="spacingLevel" type="range" min="0" max="100" step="1" aria-label="Global spacing"><output data-range-value="spacingLevel">50</output></div></div>
+<div class="settingRow"><div><label>Field size</label><div class="settingSub">Adjust field height and horizontal padding from 0–100; text stays readable.</div></div><div class="settingRange"><input spellcheck="false" data-setting="fieldSizeLevel" type="range" min="0" max="100" step="1" aria-label="Field size"><output data-range-value="fieldSizeLevel">50</output></div></div>
+<div class="settingRow"><div><label>Section size</label><div class="settingSub">Precisely controls card, collapsible-section and panel padding while preserving mobile fit.</div></div><div class="settingRange"><input spellcheck="false" data-setting="sectionSizeLevel" type="range" min="0" max="100" step="1" aria-label="Section size"><output data-range-value="sectionSizeLevel">50</output></div></div>
+<div class="settingRow"><div><label>Vertical rhythm</label><div class="settingSub">Adjust spacing within text groups, from tight to relaxed.</div></div><div class="settingRange"><input spellcheck="false" data-setting="verticalRhythmLevel" type="range" min="0" max="100" step="1" aria-label="Vertical rhythm"><output data-range-value="verticalRhythmLevel">32</output></div></div>
+<div class="settingRow"><div><label>Vertical compactness</label><div class="settingSub">Reduce internal vertical whitespace. 0 is relaxed; 100 is compact.</div></div><div class="settingRange"><input spellcheck="false" data-setting="verticalCompactnessLevel" type="range" min="0" max="100" step="1" aria-label="Vertical compactness"><output data-range-value="verticalCompactnessLevel">0</output></div></div>
+<div class="settingRow"><div><label>Live preview behavior</label><div class="settingSub">Controls preview density. On phones, the preview remains in normal page flow so it can never cover Settings controls.</div></div><div class="segChoice" data-setting-buttons="previewBehavior"><button data-value="compact">Auto compact</button><button data-value="full">Always full</button><button data-value="minimal">Minimal</button></div></div>
+<div class="settingsResetRow"><button class="ghost" data-reset-section="spacing">Reset Spacing</button></div>
+</div></details>
+<details class="settingsGroup"><summary><span>Header &amp; Branding</span><small>Title composition</small></summary><div class="settingsBody">
+<div class="settingRow"><div><label>Header vertical space</label><div class="settingSub">Adds breathing room around branding and pushes content down deliberately.</div></div><select data-setting="headerSpace"><option value="tight">Tight</option><option value="balanced">Balanced</option><option value="spacious">Spacious</option><option value="editorial">Editorial</option></select></div>
+<div class="settingRow"><div><label>Brand scale</label><div class="settingSub">Scales the logo and Roseachy name together so the lockup stays optically balanced.</div></div><div class="segChoice" data-setting-buttons="titleSize"><button data-value="small">Small</button><button data-value="medium">Medium</button><button data-value="large">Large</button><button data-value="display">Display</button></div></div>
+<div class="settingRow"><div><label>Composition</label><div class="settingSub">Keeps the logo, Roseachy title and desk label aligned as one system.</div></div><select data-setting="headerComposition"><option value="compact">Compact</option><option value="balanced">Balanced</option><option value="spacious">Spacious</option><option value="editorial">Editorial</option></select></div>
+<div class="settingsResetRow"><button class="ghost" data-reset-section="header">Reset Header</button></div>
+</div></details>
+<details class="settingsGroup"><summary><span>Motion</span><small>Level &amp; speed</small></summary><div class="settingsBody">
+<div class="settingRow"><div><label>Animation level</label><div class="settingSub">Controls motion amplitude and character. Minimal is restrained, Refined is the default, and Expressive adds clearly stronger spring and travel.</div></div><div class="segChoice" data-setting-buttons="animation"><button data-value="off">Off</button><button data-value="minimal">Minimal</button><button data-value="refined">Refined</button><button data-value="expressive">Expressive</button></div></div>
+<div class="settingRow"><div><label>Speed</label><div class="settingSub">No raw milliseconds.</div></div><div class="segChoice" data-setting-buttons="speed"><button data-value="fast">Fast</button><button data-value="balanced">Balanced</button><button data-value="relaxed">Relaxed</button></div></div>
+<div class="settingsResetRow"><button class="ghost" data-reset-section="motion">Reset Motion</button></div>
+</div></details>
+<details class="settingsGroup"><summary><span>Effects</span><small>Restrained interaction polish</small></summary><div class="settingsBody">
+<div class="settingRow"><div><label for="appearanceShadow">Shadow effect</label><div class="settingSub">From flat at 0 to soft, dimensional depth at 100. Adjusts elevation and light continuously without changing borders.</div></div><div class="settingRange"><input spellcheck="false" id="appearanceShadow" data-setting="shadowLevel" type="range" min="0" max="100" step="1" aria-label="Shadow effect"><output for="appearanceShadow" data-range-value="shadowLevel">28</output></div></div>
+<div class="settingRow"><div><label>Glint</label><div class="settingSub">Subtle light sweep on buttons and tab indicators.</div></div><label class="studioSwitch"><input spellcheck="false" data-setting="glint" type="checkbox"><span></span></label></div>
+<div class="settingRow"><div><label>Press response</label><div class="settingSub">Small physical compression on touch.</div></div><label class="studioSwitch"><input spellcheck="false" data-setting="pressResponse" type="checkbox"><span></span></label></div>
+<div class="rsRippleSettings" role="group" aria-label="Touch ripple settings">
+<div class="settingRow"><div><label for="touchRippleEnabled">Touch Ripple</label><div class="settingSub">Light touch feedback for buttons, lists and tabs.</div></div><label class="studioSwitch"><input spellcheck="false" id="touchRippleEnabled" data-setting="rippleEnabled" type="checkbox" aria-label="Enable touch ripple"><span></span></label></div>
+<div class="settingRow"><div><label for="touchRippleIntensity">Intensity</label><div class="settingSub">0% invisible · 100% pronounced</div></div><div class="settingRange"><input spellcheck="false" id="touchRippleIntensity" data-setting="rippleIntensity" type="range" min="0" max="100" step="1" aria-label="Touch ripple intensity"><output for="touchRippleIntensity" data-range-value="rippleIntensity">40</output></div></div>
+<div class="rsRipplePreviewWrap"><button id="touchRipplePreview" type="button">Tap to preview</button><span id="touchRippleStatus" aria-live="off">Subtle · 40%</span></div>
+</div>
+<div class="settingsResetRow"><button class="ghost" data-reset-section="effects">Reset Effects</button></div>
+</div></details>
+<details class="settingsGroup" id="roseachyDataSafety"><summary><span>Data safety</span><small>Offline records &amp; recovery</small></summary><div class="settingsBody">
+<div class="settingBlock"><div class="settingBlockHead"><strong>Storage health</strong></div>
+<div class="settingSub" id="safetyDbStatus" role="status">Checking local database…</div>
+<div class="settingSub" id="safetyPersistStatus">Checking browser storage protection…</div>
+<div class="settingSub" id="safetyUsageStatus">Checking available browser storage…</div>
+<div class="footerActions" style="margin-top:10px"><button class="ghost" id="safetyProtectBtn" type="button">Protect storage</button><button class="ghost" id="safetyVerifyBtn" type="button">Check saved records</button></div>
+<div class="settingSub" id="safetyVerificationStatus" aria-live="polite">Database integrity has not been checked in this session.</div>
+</div>
+<div class="settingBlock"><div class="settingBlockHead"><strong>External backup</strong></div>
+<div class="settingSub" id="safetyBackupStatus" role="status">Checking backup history…</div>
+<div class="footerActions" style="margin-top:10px"><button class="primary" id="safetyExportBtn" type="button">Export full backup</button><button class="ghost" id="safetyBackupCheckBtn" type="button">Check backup file</button><input spellcheck="false" type="file" id="safetyBackupCheckFile" class="hidden" accept="application/json,.json" aria-label="Choose Roseachy full backup to verify"></div>
+<div class="settingSub" id="safetyFileStatus" aria-live="polite">A backup is only safe after you confirm that the file exists outside Chrome and keep another copy.</div>
+</div>
+<div class="advancedNote">Full backups include current-day work, inventory, Market Desk, reports history and encrypted Financial Desk records. Browser storage protection cannot prevent intentional site-data clearing or phone loss. Save a copy to another device or cloud storage.</div>
+</div></details>
+<details class="settingsGroup"><summary><span>Advanced</span><small>Safety &amp; reset</small></summary><div class="settingsBody">
+<div class="settingRow"><div><label>Reduce motion</label><div class="settingSub">Disables decorative motion while preserving essential state feedback.</div></div><label class="studioSwitch"><input spellcheck="false" data-setting="reduceMotion" type="checkbox"><span></span></label></div>
+<div class="settingRow"><div><label>Opening balance correction</label><div class="settingSub" id="openingUnlockStatus">Opening balances lock after the first transaction to protect reconciliation.</div></div><button class="ghost" id="openingUnlockBtn" type="button">Unlock today’s opening balances</button></div>
+<div class="advancedNote">Roseachy automatically respects your device’s reduced-motion preference. Appearance settings are stored separately from inventory, sales, Market Desk and transaction data.</div>
+<div class="settingsDanger"><h3>Reset Appearance</h3><p>Restores Roseachy’s visual defaults only. Stock, transactions, POS records, active purchases, backups and all business data remain untouched.</p><button class="danger" id="restoreAppearanceDefaults" type="button">Reset Appearance</button></div>
+</div></details>
+</div>
+</div>
+<div id="marketStockOverlay" class="marketOverlay hidden noPrint" role="dialog" aria-modal="true"><div class="marketPanel"><h3 id="marketStockTitle">Stock Up</h3><div class="subline" id="marketStockSub"></div><div class="marketCurrent" id="marketCurrent"></div><div class="marketUpdateOnly"><input spellcheck="false" id="marketUpdateOnly" type="checkbox"><label for="marketUpdateOnly" style="margin:0">Update product details only — no stock purchase</label></div><div class="marketForm" style="margin-top:12px">
+<div><label>Total Units Purchased</label><input spellcheck="false" id="marketLoose" type="number" min="0" step="1" placeholder="0"></div><div><label>Number of Packs</label><input spellcheck="false" id="marketPacks" type="number" min="0" step="1" placeholder="0"></div><div><label>Units per Pack (optional)</label><input spellcheck="false" id="marketUpp" type="number" min="1" step="1" placeholder="e.g. 12"></div><div><label>Loose Units</label><input spellcheck="false" id="marketLooseRemainder" type="number" min="0" step="1" readonly placeholder="0"></div><div class="wide marketHint">Units and Packs synchronize automatically. Example: 57 units at 10 per pack = 5 packs + 7 loose units; 5 packs at 10 per pack = 50 total units. Inventory remains unit-based.</div><div><label>Total Cost Price (optional)</label><input spellcheck="false" id="marketTotalCost" type="number" min="0" step="0.01" placeholder="Total paid"></div><div><label>Single / Unit Cost Price</label><input spellcheck="false" id="marketCost" type="number" min="0" step="0.01"></div>
+<div><label>Markup source</label><select id="marketMarkupMode"><option value="default">Division default</option><option value="custom">Custom markup</option></select></div>
+<div class="pricingField"><label>Markup %</label><input spellcheck="false" id="marketMarkup" type="number" min="0" max="500" step="0.5" placeholder="e.g. 25"><div class="pricingAssist"><span class="pricingHint" id="marketMarkupHint"></span></div></div>
+<div class="pricingField"><label>Selling price</label><input spellcheck="false" id="marketSell" type="number" min="0" step="0.01"><div class="pricingAssist"><span class="pricingHint" id="marketPriceHint"></span><button class="miniAction hidden" id="marketUseMarkupBtn" type="button">Use markup price</button></div></div><div class="wide"><div class="qpToggleRow"><label for="marketQpEnabled">Quantity Pricing</label><label class="qpSwitch"><input spellcheck="false" id="marketQpEnabled" type="checkbox" aria-label="Enable quantity pricing"><span class="qpSlider"></span></label></div><div id="marketQpFields" class="qpFields hidden"><div><label>Quantity</label><input spellcheck="false" id="marketQpQty" type="number" min="2" step="1" placeholder="e.g. 3"></div><div><label>Bundle Price</label><input spellcheck="false" id="marketQpPrice" type="number" min="0.01" step="0.01" placeholder="0.00"></div></div><div class="qpInlineError" id="marketQpError"></div></div><div><label>Expiry (optional)</label><input spellcheck="false" id="marketExpiry" type="date"></div><div><label>Payment</label><select id="marketPayment"><option value="purchase_cash">Cash</option><option value="purchase_transfer">Transfer / card</option><option value="purchase_credit">Supplier credit</option></select></div><div><label>Purchase note (optional)</label><input spellcheck="false" id="marketSupplier" placeholder="Optional item note"></div><div class="wide"><label>Product name</label><input spellcheck="false" id="marketEditName"></div><div><label>Division</label><select id="marketDivision"><option value="pharmacy">Pharmacy</option><option value="essentials">Essentials</option></select></div><div><label for="marketSubdivision">Subdivision (optional)</label><select id="marketSubdivision"><option value="">No Subdivision</option></select><button type="button" class="ghost" data-class-add-sub-form="market">+ Add Subdivision</button></div><div><label>Medium Stock</label><input spellcheck="false" id="marketLowThreshold" type="number" min="0" step="1" placeholder="e.g. 10"></div><div><label>Total purchased units</label><input spellcheck="false" id="marketTotalUnits" readonly></div></div><div class="marketHint" id="marketMarginHint"></div><div class="marketWarn" id="marketStockWarn"></div><div class="footerActions" style="margin-top:18px"><button class="primary" id="marketSavePurchase" type="button">Save Purchase</button><button class="ghost" id="marketCancelStock" type="button">Cancel</button></div></div></div>
+<div id="marketReqOverlay" class="marketOverlay hidden noPrint" role="dialog" aria-modal="true"><div class="marketPanel"><h3 id="marketReqTitle">Add Customer Request</h3><div class="marketForm"><div class="wide"><label>Item name</label><input spellcheck="false" id="marketReqName" autocomplete="off"></div><div class="wide"><label>Note (optional)</label><input spellcheck="false" id="marketReqNote"></div></div><div class="marketWarn" id="marketReqWarn"></div><div class="footerActions" style="margin-top:18px"><button class="primary" id="marketReqSave" type="button">Save Request</button><button class="ghost" id="marketReqCancel" type="button">Cancel</button></div></div></div>
+<div id="marketReviewOverlay" class="marketOverlay hidden noPrint" role="dialog" aria-modal="true"><div class="marketPanel"><h3>Complete Active List Purchase</h3><div class="subline">Only the selected Active List is applied. Other supplier lists stay untouched.</div><div id="marketReviewList"></div><div class="footerActions" style="margin-top:18px"><button class="primary" id="marketApplyAll" type="button">Apply Selected</button><button class="ghost" id="marketReviewCancel" type="button">Close</button></div></div></div>
+
+<div id="marketBudgetOverlay" class="marketOverlay hidden noPrint" role="dialog" aria-modal="true" aria-labelledby="marketBudgetTitle">
+<div class="marketPanel rsToolPanel"><div class="marketPanelTop"><div><h3 id="marketBudgetTitle">Market Budget</h3><div class="subline">Set a spending guide for the current Market session.</div></div><button class="iconClose" id="marketBudgetClose" type="button" aria-label="Close budget">×</button></div>
+<label for="marketBudgetAmount">Budget amount (₦)</label><input spellcheck="false" id="marketBudgetAmount" type="number" inputMode="decimal" min="0" step="0.01" placeholder="e.g. 50000"><div class="small" id="marketBudgetCurrent"></div><div class="warnText" id="marketBudgetError" role="alert"></div>
+<div class="footerActions rsToolActions"><button class="primary" id="marketBudgetSave" type="button">Save Budget</button><button class="ghost" id="marketBudgetClear" type="button">Clear Budget</button><button class="ghost" id="marketBudgetCancel" type="button">Cancel</button></div></div>
+</div>
+<div id="marketExportOverlay" class="marketOverlay hidden noPrint" role="dialog" aria-modal="true" aria-labelledby="marketExportTitle">
+<div class="marketPanel rsToolPanel"><div class="marketPanelTop"><div><h3 id="marketExportTitle">Export Market Desk</h3><div class="subline">Download a CSV file that opens in Excel or Google Sheets.</div></div><button class="iconClose" id="marketExportClose" type="button" aria-label="Close export">×</button></div>
+<label for="marketExportScope">What would you like to export?</label><select id="marketExportScope"><option value="list">Active Lists</option><option value="purchases">Purchase History</option><option value="requests">Customer Requests</option></select>
+<div class="small" id="marketExportCount"></div><div class="rsExportPreview hidden" id="marketExportPreview" role="region" aria-label="Market Desk export preview" tabindex="0"></div><div class="rsExportPreviewMeta hidden" id="marketExportPreviewMeta" role="status"></div><div class="warnText" id="marketExportError" role="alert"></div><div class="footerActions rsToolActions rsExportActions"><button id="marketExportPreviewBtn" class="ghost" type="button">Review records</button><button id="marketExportDownload" class="primary" type="button">Download CSV</button><button id="marketExportCancel" class="ghost" type="button">Close</button></div></div>
+</div>
+<div id="stockRestoreOverlay" class="marketOverlay hidden noPrint" role="dialog" aria-modal="true" aria-labelledby="stockRestoreTitle">
+<div class="marketPanel rsToolPanel"><div class="marketPanelTop"><div><h3 id="stockRestoreTitle">Restore Working Stock</h3><div class="subline">Review the selected backup before replacing working stock and current-day state.</div></div><button class="iconClose" id="stockRestoreClose" type="button" aria-label="Close restore">×</button></div>
+<div id="stockRestoreSummary" class="marketCurrent rsRestoreSummary"></div>
+<p class="small">A full safety backup must be saved first. Working Stock restore does not overwrite your Market Desk supplier ledgers. If the Market purchase records no longer match, use a matching Full Backup instead.</p>
+<div class="footerActions rsToolActions"><button id="stockRestoreSafety" class="ghost" type="button">1. Download Safety Backup</button></div>
+<label class="rsRestoreCheck"><input spellcheck="false" id="stockRestoreSavedCheck" type="checkbox" disabled><span>I verified the safety backup is saved in Downloads or Files</span></label>
+<div class="warnText" id="stockRestoreError" role="alert"></div>
+<div class="footerActions rsToolActions"><button id="stockRestoreApply" class="primary" type="button" disabled>2. Restore Working Stock</button><button id="stockRestoreCancel" class="ghost" type="button">Cancel</button></div></div>
+</div>
+<div id="marketHistoryOverlay" class="marketOverlay hidden noPrint" role="dialog" aria-modal="true"><div class="marketPanel"><h3>History</h3><div class="subline">Completed Market Desk purchases grouped by day.</div><div id="marketHistoryList"></div><div class="footerActions" style="margin-top:18px"><button class="ghost" id="marketHistoryClose" type="button">Close</button></div></div></div>
+<div id="marketSummaryOverlay" class="marketOverlay hidden noPrint" role="dialog" aria-modal="true"><div class="marketPanel"><h3>Market Summary</h3><div class="subline" id="marketSummarySession"></div><div class="marketSummaryGrid" id="marketSummaryGrid"></div><div class="footerActions" style="margin-top:18px"><button class="ghost" id="marketSummaryClose" type="button">Close</button></div></div></div>
+<div id="marketCalcOverlay" class="marketOverlay hidden noPrint" role="dialog" aria-modal="true"><div class="marketPanel marketCalcPanel"><div class="marketPanelTop"><div><h3>Calculator</h3><div class="subline">Quick maths or purchase planning.</div></div><button class="iconClose" id="marketCalcClose" type="button" aria-label="Close">×</button></div><div class="marketCalcTabs" id="marketCalcTabs"><button type="button" data-mcalc="digital" class="active">Digital Calculator</button><button type="button" data-mcalc="purchase">Purchase Calculator</button></div><div id="marketDigitalCalc"><input spellcheck="false" class="digitalDisplay" id="marketDigitalDisplay" defaultValue="0" readonly aria-label="Calculator display"><div class="digitalKeys" id="marketDigitalKeys"><button data-k="C">C</button><button data-k="⌫">⌫</button><button data-k="%">%</button><button data-k="/">÷</button><button data-k="7">7</button><button data-k="8">8</button><button data-k="9">9</button><button data-k="*">×</button><button data-k="4">4</button><button data-k="5">5</button><button data-k="6">6</button><button data-k="-">−</button><button data-k="1">1</button><button data-k="2">2</button><button data-k="3">3</button><button data-k="+">+</button><button data-k="0" class="wideKey">0</button><button data-k=".">.</button><button data-k="=" class="primary">=</button></div></div><div id="marketPurchaseCalc" class="hidden"><div class="marketForm"><div><label>Quantity</label><input spellcheck="false" id="marketCalcQty" type="number" min="0" step="1" defaultValue="1"></div><div><label>Total Cost Price</label><input spellcheck="false" id="marketCalcTotalCost" type="number" min="0" step="0.01"></div><div><label>Cost / unit</label><input spellcheck="false" id="marketCalcPrice" type="number" min="0" step="0.01"></div><div><label>Markup %</label><input spellcheck="false" id="marketCalcMarkup" type="number" min="0" max="500" step="0.5" placeholder="e.g. 30"></div><div><label>Selling / unit</label><input spellcheck="false" id="marketCalcSell" type="number" min="0" step="0.01"></div><div class="legacyMarketPackCompat"><input spellcheck="false" id="marketCalcUpp" type="hidden" defaultValue="0"></div><div class="wide"><label>Discount</label><input spellcheck="false" id="marketCalcDiscount" type="number" min="0" step="0.01" placeholder="0.00"></div><div class="wide"><div class="qpToggleRow"><label for="marketCalcQpEnabled">Quantity Pricing</label><label class="qpSwitch"><input spellcheck="false" id="marketCalcQpEnabled" type="checkbox" aria-label="Enable quantity pricing"><span class="qpSlider"></span></label></div><div id="marketCalcQpFields" class="qpFields hidden"><div><label>Bundle quantity</label><input spellcheck="false" id="marketCalcQpQty" type="number" min="2" step="1" placeholder="e.g. 3"></div><div><label>Bundle price</label><input spellcheck="false" id="marketCalcQpPrice" type="number" min="0.01" step="0.01" placeholder="0.00"></div></div></div></div><div class="marketCalcResult" id="marketCalcResult">₦0.00</div><div class="marketCalcStats" id="marketCalcStats"></div><div class="small" id="marketCalcSub"></div></div></div></div>
+<div id="marketListPickerOverlay" class="marketOverlay hidden noPrint"><div class="marketPanel"><div class="marketPanelTop"><div><h3 id="marketListPickerTitle">Create Active List</h3><div class="subline" id="marketListPickerSub">Choose a supplier, create one, or keep the list Unassigned.</div></div><button class="iconClose" id="marketListPickerClose" type="button">×</button></div><div class="supplierSuggest"><label>Search or select supplier</label><input spellcheck="false" id="marketListSupplierSearch" autocomplete="off" placeholder="Search supplier"><div id="marketListSupplierDrop" class="supplierDrop hidden"></div></div><div class="footerActions" style="margin-top:10px;justify-content:flex-start"><button class="ghost" id="marketListPickerNewSupplier" type="button">+ New Supplier</button><button class="ghost" id="marketListPickerUnassigned" type="button">Unassigned</button></div><div class="marketPickerStatus" id="marketListSupplierSelected">Unassigned selected</div><div class="footerActions" style="margin-top:16px"><button class="primary" id="marketListPickerConfirm" type="button">OK</button><button class="ghost" id="marketListPickerCancel" type="button">Cancel</button></div></div></div>
+<div id="marketListActionOverlay" class="marketOverlay hidden noPrint"><div class="marketPanel"><h3 id="marketListActionTitle">Market Desk Item</h3><div class="subline" id="marketListActionSub">Choose an action.</div><div class="footerActions" style="margin-top:18px"><button class="danger" id="marketListDeleteBtn" type="button">Delete</button><button class="ghost" id="marketListActionCancel" type="button">Cancel</button></div></div></div>
+<div id="marketRecycleOverlay" class="marketOverlay hidden noPrint"><div class="marketPanel"><div class="marketPanelTop"><div><h3>Market Desk Recycle Bin</h3><div class="subline">Deleted Active Lists and Suppliers can be restored or permanently removed.</div></div><button class="iconClose" id="marketRecycleClose" type="button">×</button></div><div id="marketRecycleList" class="marketList"></div></div></div>
+<div id="marketPurchaseDetailOverlay" class="marketOverlay hidden noPrint"><div class="marketPanel"><div class="marketPanelTop"><div><h3 id="marketPurchaseDetailTitle">Purchase</h3><div class="subline" id="marketPurchaseDetailSub"></div></div><button class="iconClose" id="marketPurchaseDetailClose" type="button">×</button></div><div id="marketPurchaseDetailSummary" class="purchaseDetailGrid"></div><div id="marketPurchaseDetailSupplierAction"></div><div id="marketPurchaseDetailItems" class="purchaseDetailItems"></div></div></div>
+<div id="supplierEditOverlay" class="marketOverlay hidden noPrint"><div class="marketPanel"><h3 id="supplierEditTitle">Add Supplier</h3><div class="subline">Only supplier name is required.</div><div class="marketForm"><div class="wide"><label>Supplier / Business Name</label><input spellcheck="false" id="supplierName"></div><div><label>Contact Person</label><input spellcheck="false" id="supplierContact"></div><div><label>Phone Number</label><input spellcheck="false" id="supplierPhone" inputMode="tel"></div><div><label>Email</label><input spellcheck="false" id="supplierEmail" type="email"></div><div class="wide"><label>Address</label><input spellcheck="false" id="supplierAddress"></div><div class="wide"><label>Notes</label><textarea spellcheck="false" id="supplierNotes" rows="3"></textarea></div></div><div class="marketWarn" id="supplierEditWarn"></div><div class="footerActions" style="margin-top:16px"><button class="primary" id="supplierSaveBtn" type="button">Save Supplier</button><button class="ghost" id="supplierEditCancel" type="button">Cancel</button></div></div></div>
+<div id="supplierDetailOverlay" class="marketOverlay hidden noPrint"><div class="marketPanel"><div class="marketPanelTop"><div><h3 id="supplierDetailName">Supplier</h3><div class="subline">Supplier summary and linked records</div></div><button class="iconClose" id="supplierDetailClose" type="button">×</button></div><div id="supplierDetailSummary" class="supplierDetailSummary"></div><div class="supplierDetailActions"><button class="primary" id="supplierPurchasesBtn" type="button">Purchases</button><button class="ghost" id="supplierEditExisting" type="button">Edit Supplier</button></div><div id="supplierPurchaseSection" class="supplierPurchaseSection hidden"><div class="summaryTop"><strong>Purchases</strong><span class="supplierPurchaseCount" id="supplierPurchaseCount"></span></div><div id="supplierPurchaseList"></div></div></div></div>
+<div id="supplierPaymentOverlay" class="marketOverlay hidden noPrint" role="dialog" aria-modal="true" aria-labelledby="supplierPaymentTitle"><div class="marketPanel supplierPayPanel">
+<div class="marketPanelTop"><div><h3 id="supplierPaymentTitle">Pay Supplier Debt</h3><div class="subline">Payment is linked to the selected supplier purchase.</div></div><button id="supplierPaymentCancelTop" type="button" class="iconClose" aria-label="Close supplier payment">×</button></div>
+<div id="supplierPaymentOwed" class="supplierPaySummary" aria-live="polite"></div>
+<div id="supplierPaymentManualWrap" class="hidden"><label for="supplierPaymentName">Supplier name (optional)</label><input spellcheck="false" id="supplierPaymentName" maxLength="160" placeholder="Supplier or business name"><label for="supplierPaymentClassification">Payment for</label><select id="supplierPaymentClassification"><option value="advance">Supplier advance</option><option value="prior">Prior obligation not recorded in Roseachy</option></select></div>
+<div class="marketForm supplierPayFields">
+<div><label for="supplierPaymentAmount">Amount to pay (₦)</label><input spellcheck="false" id="supplierPaymentAmount" type="number" min="0.01" step="0.01" inputMode="decimal" required></div>
+<div><label for="supplierPaymentDate">Payment date</label><input spellcheck="false" id="supplierPaymentDate" type="date"></div>
+<div><label for="supplierPaymentFunding">Payment source</label><select id="supplierPaymentFunding"><option value="business">Business Balance</option><option value="external">External Payment Source</option></select></div>
+<div id="supplierPaymentMethodWrap"><label for="supplierPaymentMethod">Pay from</label><select id="supplierPaymentMethod"><option value="cash">Cash</option><option value="bank">Transfer / bank</option></select></div>
+<div class="wide"><label for="supplierPaymentNote">Note / reference (optional)</label><input spellcheck="false" id="supplierPaymentNote" maxLength="500"></div>
+</div>
+<div class="marketWarn" id="supplierPaymentWarn" role="status" aria-live="polite"></div>
+<div class="footerActions supplierPayFooter"><button class="primary" id="supplierPaymentSave" type="button">Record Payment</button><button class="ghost" id="supplierPaymentCancel" type="button">Cancel</button></div>
+</div></div>
+<div role="status" aria-live="polite" id="toast"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+</div><script src="/legacy/01-storage.js"></script><script src="/legacy/02-product-match.js"></script><script src="/legacy/03-core.js"></script><script src="/legacy/04-tabs-indicator.js"></script><script src="/legacy/05-title-fit.js"></script><script src="/legacy/06-button-glint.js"></script><script src="/legacy/07-boot-splash.js"></script><script src="/legacy/08-ripple.js"></script></body></html>

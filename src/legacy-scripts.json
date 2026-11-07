@@ -1,0 +1,12 @@
+[
+  "/legacy/01-storage.js",
+  "/legacy/02-product-match.js",
+  "/legacy/03-core.js",
+  "/legacy/04-tabs-indicator.js",
+  "/legacy/05-title-fit.js",
+  "/legacy/06-button-glint.js",
+  "/legacy/07-boot-splash.js",
+  "/js/pwa.js",
+  "/legacy/08-ripple.js",
+  "/js/android-sync-files.js"
+]

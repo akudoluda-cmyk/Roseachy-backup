@@ -8,7 +8,7 @@ import json, zipfile, hashlib, sys
 from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'tests/evidence' / ('baseline-mobile' if '--mobile' in sys.argv else 'baseline-desktop')
+OUT = ROOT / 'tests/evidence' / (('baseline-mobile' if '--mobile' in sys.argv else 'baseline-desktop')+('-cart' if '--cart' in sys.argv else ''))
 VIEWPORT = {'width':390,'height':844} if '--mobile' in sys.argv else {'width':1280,'height':900}
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self, *args): pass
@@ -31,6 +31,10 @@ def fixture(browser, root, label):
         page.locator('#stockAddBtn').click()
         expect(page.locator('#stockTable')).to_contain_text('Parity Product')
         page.evaluate('RoseachyStore.whenSaved()')
+        if '--cart' in sys.argv:
+            page.locator('#stockDivision').select_option('essentials')
+            for field,value in [('stockName','Cart Second Product'),('stockQty','6'),('stockCost','80'),('stockPrice','125')]:page.locator('#'+field).fill(value)
+            page.locator('#stockAddBtn').click();expect(page.locator('#stockTable')).to_contain_text('Cart Second Product');page.evaluate('RoseachyStore.whenSaved()')
         page.locator('#tabBtnTx').click()
         page.locator('#note').fill('Parity Product')
         page.locator('[data-product-suggest]').click()
@@ -40,8 +44,9 @@ def fixture(browser, root, label):
         expect(page.locator('#ledger')).to_contain_text('₦600.00')
         page.evaluate('RoseachyStore.whenSaved()')
         if '--financial' in sys.argv: financial_scenario(page)
+        if '--cart' in sys.argv: cart_scenario(page,label)
         state=page.evaluate('({stock:RoseachyStore.getObject("dsb_stock_v2"), draft:RoseachyStore.getObject("dsb_draft_v2"),creditCustomers:RoseachyStore.getObject("roseachy_credit_customers_v1")})')
-        assert state['stock'][0]['qty']==(6 if '--credit' in sys.argv else 8 if '--financial' in sys.argv else 10)
+        assert next(p for p in state['stock'] if p['name']=='Parity Product')['qty']==(7 if '--cart' in sys.argv else 6 if '--credit' in sys.argv else 8 if '--financial' in sys.argv else 10)
         # A real export through the existing download UI, never private test hooks.
         page.locator('#tabBtnStock').click()
         toggle=page.locator('[data-target="stockTransferBody"]')
@@ -53,10 +58,10 @@ def fixture(browser, root, label):
         if '--backup' in sys.argv:
             export_full(page,label)
             if label=='react': restore_original_backup(browser,f'http://127.0.0.1:{server.server_port}')
-        assert export['stock'][0]['qty']==state['stock'][0]['qty']
+        assert sorted(export['stock'],key=lambda p:p['name'])==sorted(state['stock'],key=lambda p:p['name'])
         page.reload(wait_until='networkidle')
         page.wait_for_function('window.__roseachyFirstUsableMs !== undefined')
-        assert page.evaluate('RoseachyStore.getObject("dsb_stock_v2")[0].qty')==state['stock'][0]['qty']
+        assert sorted(page.evaluate('RoseachyStore.getObject("dsb_stock_v2")'),key=lambda p:p['name'])==sorted(state['stock'],key=lambda p:p['name'])
         assert page.evaluate('RoseachyStore.verify()')['ok']
         assert not errors, errors
         # Compare all persisted stock + working transaction fields, ignoring only
@@ -73,6 +78,7 @@ def fixture(browser, root, label):
                 return ids.get(value,value)
             return value
         state['totals']=page.evaluate('Object.fromEntries(["mSales","mNetSales","mReceived","mCash","mBank","mProfit","mCogs","mRefunds","mExpenses","mDebt","mPayable"].map(id=>[id,document.getElementById(id).textContent]))')
+        state['stock'].sort(key=lambda p:p['name'])
         result=normalize(state)
         (OUT/f'{label}-normalized.json').write_text(json.dumps(result,indent=2))
         print('PASS',label,'create, sale, export and reload',flush=True)
@@ -120,6 +126,57 @@ def restore_original_backup(browser,url):
     except Exception:
         page.screenshot(path=str(OUT/'restore-failure.png'),full_page=True);raise
     finally:context.close()
+
+def cart_scenario(page,label):
+    def select(name,qty):
+        page.locator('#note').fill(name);page.locator('[data-product-suggest]').click();page.locator('#qty').fill(str(qty))
+        page.locator('#holdBtn').click()
+    select('Parity Product',2);select('Cart Second Product',1)
+    page.locator('#holdList [data-hdel]').last.click()
+    assert page.locator('#holdList [data-cart-item]').count()==1
+    select('Cart Second Product',1)
+    expect(page.locator('#holdTotal')).to_have_text('₦725.00')
+    assert page.locator('#holdList [data-cart-item]').count()==2
+    first=page.locator('#holdList [data-cart-item]').first
+    first.locator('summary').click();first.locator('[data-item-qty]').fill('99')
+    expect(first.locator('[data-item-error]')).to_contain_text('Not enough stock')
+    page.locator('#addBtn').click()
+    assert len(page.evaluate('RoseachyStore.getObject("dsb_draft_v2").tx'))==1
+    first.locator('[data-item-qty]').fill('3')
+    expect(page.locator('#holdTotal')).to_have_text('₦1,025.00')
+    page.locator('#holdCustPaid').fill('1025');page.evaluate('RoseachyStore.whenSaved()')
+    held=page.evaluate('RoseachyStore.getObject("dsb_hold_v1")')
+    assert len(held['heldItems'])==2 and held['heldItems'][0]['qty']==3
+    page.reload(wait_until='networkidle');page.wait_for_function('window.__roseachyFirstUsableMs !== undefined')
+    expect(page.locator('#holdPanel')).to_be_visible();expect(page.locator('#holdCustPaid')).to_have_value('1025')
+    expect(page.locator('#holdTotal')).to_have_text('₦1,025.00')
+    assert page.evaluate('RoseachyStore.getObject("dsb_stock_v2").find(p=>p.name==="Parity Product").qty')==10
+    product_id=page.evaluate('RoseachyStore.getObject("dsb_stock_v2").find(p=>p.name==="Parity Product").id')
+    page.locator('#tabBtnStock').click();page.locator(f'#stockTable [data-sedit="{product_id}"]').click()
+    page.locator('#stockPrice').fill('350');page.locator('#stockAddBtn').click();page.evaluate('RoseachyStore.whenSaved()')
+    page.locator('#tabBtnTx').click();expect(page.locator('#holdTotal')).to_have_text('₦1,025.00')
+    held=page.evaluate('RoseachyStore.getObject("dsb_hold_v1")')
+    before=page.evaluate('({stock:RoseachyStore.getObject("dsb_stock_v2"),tx:RoseachyStore.getObject("dsb_draft_v2").tx})')
+    page.evaluate('''() => {const put=IDBObjectStore.prototype.put;let remaining=2;IDBObjectStore.prototype.put=function(...args){if(this.name==='stockRecords'&&remaining-- > 0){if(!remaining)IDBObjectStore.prototype.put=put;throw new DOMException('Cart failure test','QuotaExceededError')}return put.apply(this,args)};}''')
+    page.locator('#addBtn').click();expect(page.locator('#toast')).to_contain_text('Nothing saved:')
+    assert page.evaluate('({stock:RoseachyStore.getObject("dsb_stock_v2"),tx:RoseachyStore.getObject("dsb_draft_v2").tx})')==before
+    if label=='original':
+        # Characterized baseline defect: data rolls back, but the cart stays hidden until reload.
+        expect(page.locator('#holdPanel')).not_to_be_visible()
+        assert page.evaluate('RoseachyStore.getObject("dsb_hold_v1")')==held
+        page.reload(wait_until='networkidle');page.wait_for_function('window.__roseachyFirstUsableMs !== undefined')
+        print('KNOWN ORIGINAL DEFECT: failed cart save hides preserved draft until reload',flush=True)
+    expect(page.locator('#holdPanel')).to_be_visible();expect(page.locator('#holdCustPaid')).to_have_value('1025')
+    assert page.locator('#holdList [data-cart-item]').count()==2
+    page.locator('#addBtn').evaluate('(button)=>{button.click();button.click()}')
+    page.wait_for_function('RoseachyStore.getObject("dsb_draft_v2").tx.length===3');page.evaluate('RoseachyStore.whenSaved()')
+    rows=page.evaluate('RoseachyStore.getObject("dsb_draft_v2").tx');stock=page.evaluate('RoseachyStore.getObject("dsb_stock_v2")')
+    assert rows[1]['purchaseGroupId']==rows[2]['purchaseGroupId'] and rows[1]['purchaseGroupId']
+    assert rows[1]['amount']==900 and rows[2]['amount']==125
+    assert {p['name']:p['qty'] for p in stock}=={'Parity Product':7,'Cart Second Product':5}
+    expect(page.locator('#holdPanel')).not_to_be_visible();expect(page.locator('#mCash')).to_have_text('₦1,625.00')
+    assert page.evaluate('RoseachyStore.getObject("dsb_hold_v1")') is None
+    print('PASS two-product cart, removal, invalid edit guard, quantity edit, draft reload, captured price, failed-write rollback/retry, double-click completion and reconciliation',flush=True)
 
 def credit_scenario(page):
     page.locator('#creditAccountsBtn').click();page.locator('#creditNew').click()

@@ -12,17 +12,17 @@ The user supplied the original 2.17.2 standalone archive. It is preserved as `re
 
 - Stage 0 technical gate: PASS — real production build, 12 real IndexedDB checks, actual React dev/production UI smoke.
 - Stage 0 baseline: original archived and initial cash-sale/export parity PASS. The tested full-backup round trip passes. Comprehensive feature characterization remains incomplete.
-- Stage 3B: IN PROGRESS — Stock and retail Sales fields are React controlled; action guards prevent duplicate submissions; extracted inventory math is tested against original functions. Stock create/edit/cancel/pack/quantity-pricing and cash sale/edit/refund/failed-write recovery checks pass. Business commands still execute in the single legacy atomic controller. Stock and Sales tables now use explicit JSX and React events; product suggestions are React owned, including keyboard selection. A repository boundary publishes committed immutable snapshots with stale-tab notifications. Cart/POS conversion, complete form/workflow coverage and removal of the field compatibility facade remain required before the architecture is complete.
-- Stage 3C: NOT COMPLETE (cash edit and linked refund covered; credit purchase and repayment covered; supplier/other financial edge cases remain) — deterministic credit/refund/purchase/debt/edit/day-close reconciliation and failure coverage against original.
+- Stage 3B: IN PROGRESS — Stock, retail Sales and cart payment fields are React controlled; action guards prevent duplicate submissions; extracted inventory math is tested against original functions. Stock create/edit/cancel/pack/quantity-pricing and cash sale/edit/refund/failed-write recovery checks pass. Business commands still execute in the single legacy atomic controller. Stock and Sales tables now use explicit JSX and React events; product suggestions are React owned, including keyboard selection. A repository boundary publishes committed immutable snapshots with stale-tab notifications. Cart items/payment fields are now React owned with explicit command registration; POS conversion, complete form/workflow coverage and removal of the field compatibility facade remain required before the architecture is complete.
+- Stage 3C: NOT COMPLETE (cash edit, linked refund, cart and credit purchase/repayment covered; supplier/other financial edge cases remain) — deterministic credit/refund/purchase/debt/edit/day-close reconciliation and failure coverage against original.
 - Stage 4: NOT STARTED — Market, Finance, Reports/Analytics, Notes, Settings, backup/restore and signed-file sync; replace each controller only after parity.
 - Stage 5: NOT STARTED — shadcn/Radix design system and accessibility/visual coverage after functional parity.
 - Stage 6: PARTIAL foundational checks only — fresh offline production load and npm audit pass. Backup restore and a defined financial fixture pass; update/rollback and full workflow release gates remain incomplete.
 
 ## Next steps
 
-1. Keep the verified original immutable. Extend disposable deterministic fixtures to every transaction type, full backup/restore, stock moves, market and finance; no live data is needed.
-2. Extend the existing side-by-side cash-sale audit; extend FEATURE_PARITY_MATRIX.md to each action. Preserve a verified fixture export and prove round-trip recovery.
-3. Run `npm ci`, `npm run test:unit`, `npm run test:static`, `npm run build`, `npm run test:storage`, `npm run test:forms`, `npm run test:repository`, `npm run test:tables`, `npm run test:financial`, `npm run test:runtime:dev`, `npm run test:runtime`.
+1. Keep the verified original immutable. Next, characterize and convert POS forms, then supplier purchase/debt settlement and day-close workflows. Existing cart, credit/refund, stock move and full-backup fixtures must keep passing.
+2. Replace the remaining Stock/Sales field element facade with direct domain arguments and named layouts. Extend FEATURE_PARITY_MATRIX.md to every transaction/action, including Market, Finance, Reports, Notes, Settings and signed-file sync.
+3. Run `npm ci`, `npm run test:unit`, `npm run test:static`, `npm run build`, `npm run test:storage`, `npm run test:forms`, `npm run test:repository`, `npm run test:tables`, `npm run test:cart`, `npm run test:financial`, `npm run test:runtime:dev`, `npm run test:runtime`.
 4. Proceed through 3B, 3C, 4, 5 and 6 sequentially. Do not interpret smoke coverage as completed migration.
 
 ## Ownership map
@@ -34,7 +34,7 @@ The user supplied the original 2.17.2 standalone archive. It is preserved as `re
 | Eight filters | ReactFilterControls.js → legacy filter bridge | Preserve dynamic options and restoration semantics |
 | Stock/Sales tables | StockInventoryRows/SalesLedgerRows JSX, data models and explicit command methods | Expand edge-case coverage; retire fallback renderers when controller replacement is complete |
 | Stock/Sales draft fields | src/forms/* external draft snapshots + React controlled components | Replace remaining compatibility element facade with direct domain commands after complete characterization |
-| Inventory math | src/domain/inventory-math.mjs | Preserve original rounding, parsing and validation; expand domain extraction |
+| Inventory/sale math | src/domain/inventory-math.mjs + sales-pricing.mjs | Preserve original rounding, parsing and validation; expand domain extraction |
 | Product matching | public/legacy/02-product-match.js | Preserve matching and duplicate semantics |
 | All business workflows | public/legacy/03-core.js, 901,242 bytes, 880 named function declarations | Split by tested domain, single writer per operation |
 | Persistence | src/data/desk-repository.mjs over unchanged public/legacy/01-storage.js, IndexedDB v8 | Preserve schema, keys, normalization, atomic commit and stale-tab rules |
@@ -53,3 +53,7 @@ Machine-readable function and control inventory: tests/inventory.json. This is a
 - Medium: browser emulation is not physical Android/iOS validation; deployment headers are not exercised by Vite preview.
 
 For development rollback, use the untouched supplied ZIP or initial commit in a separate directory. Do not reset a checkout containing new work. Retain the package lock for reproducible dependency installation. No production cutover has occurred, so no live rollback is necessary. The original archive is preserved; original full-backup recovery into React is verified for the fixture; downgrade/production rollback still requires testing; never restore test records into a live origin.
+
+## Characterized recovery difference
+
+Original 2.17.2 rolls a failed cart save back in storage but leaves its restored cart hidden until reload. The React checkpoint reopens and redraws that preserved draft immediately after rollback, retaining payment values and allowing retry. The original fixture explicitly checks its hidden-panel behavior and reloads; the React fixture requires immediate visibility. Final persisted stock, transactions and totals still match. This is a documented recovery UI fix, not a change to financial arithmetic.

@@ -1,3 +1,5 @@
+import * as salesPricing from './domain/sales-pricing.mjs';
+import { cartEntry, heldCartView } from './forms/HeldCart.jsx';
 import { productSearchView } from './forms/ProductSearch.jsx';
 import { createDeskRepository } from './data/desk-repository.mjs';
 import * as inventoryMath from './domain/inventory-math.mjs';
@@ -6,7 +8,7 @@ import { SalesStockTablePortals } from './islands/SalesStockTables.js';
 import { LegacySurface } from './components/LegacySurface.jsx';
 import scripts from './legacy-scripts.json';
 import {salesEntry} from './forms/SalesEntryControls.jsx';
-import { stockFormElement } from './forms/stock-form-controller.js';
+import { stockEntry } from './forms/stock-form-controller.js';
 
 // Script dependencies are loaded sequentially, after React has committed the UI.
 // Loading them as ESM imports would change the timing and module execution semantics.
@@ -26,10 +28,16 @@ export function BridgeApp() {
   const [tables, setTables] = useState({ ledger: null, stock: null });
   useLayoutEffect(() => {
     window.RoseachyInventoryMath = inventoryMath;
+    window.RoseachySalesPricing = salesPricing;
+    window.RoseachyCartView = heldCartView;
     window.RoseachyProductSearchView = productSearchView;
-    window.RoseachyForms = { element: (id,el) => salesEntry.fields.has(id)||salesEntry.actions.has(id) ? salesEntry.element(id,el) : stockFormElement(id,el) };
-    // Register BEFORE any legacy controller executes. Only the table view is React-owned.
-    // React never mutates database values or initiates inventory/financial transactions.
+    const entries = [salesEntry, cartEntry, stockEntry];
+    window.RoseachyForms = {
+      element(id,el) { const entry=entries.find(e=>e.fields.has(id)||e.actions.has(id)); return entry?entry.element(id,el):el; },
+      registerCommand(id,execute) { const entry=entries.find(e=>e.actions.has(id)); if(!entry)return false; entry.registerCommand(id,execute); return true; },
+    };
+    // Register views before the business controller. React actions invoke the
+    // existing single command owner; views never write the database directly.
     window.RoseachyReactTables = {
       ledger: rows => setTables(prev => ({ ...prev, ledger: rows })),
       stock: rows => setTables(prev => ({ ...prev, stock: rows })),

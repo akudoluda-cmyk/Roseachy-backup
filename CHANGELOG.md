@@ -1,5 +1,13 @@
 # Changes
 
+## 2026-11-09 — Stage 3B cart checkpoint
+
+- Replaced held-cart HTML and delegated input/click listeners with React item components and controlled payment fields. Item commands resolve stable identities.
+- Extracted unchanged captured-price and cart-correction calculations; added 846 original-source comparisons.
+- Added explicit action registration for Stock, Sales and cart buttons while retaining the existing single business writer.
+- Added desktop/mobile cart parity tests covering removal, invalid quantity, edit, draft reload, inventory-price changes, atomic failure/retry and duplicate completion.
+- Fixed an original recovery UI defect: after a failed cart save, restored items/payment values now remain visible for retry. Tests document that the original requires reload and still verify final record/totals equality.
+
 ## 2026-11-09 — Stage 3B repository and interaction checkpoint
 
 - Added an observed repository boundary over unchanged IndexedDB v8; committed immutable snapshots, atomic failure isolation and stale-tab subscriptions pass real-browser checks.
@@ -8,7 +16,7 @@
 - Fixed the credit-account button overlap caused by losing inline CSS important priority during extraction.
 - Verified original-vs-React edited sale/refund/transfer/expense/credit/repayment totals, Full Backup restore and checksum rejection on desktop and narrow mobile.
 - Added repeatable repository, table and financial npm test commands. No environment draft edits or publishing.
-- Migration remains incomplete: cart/POS, most module UI/controllers, full financial characterization, redesign and release hardening remain.
+- Migration remains incomplete: POS, most module UI/controllers, full financial characterization, redesign and release hardening remain.
 
 ## 2026-11-07 — Stage 3B form checkpoint
 

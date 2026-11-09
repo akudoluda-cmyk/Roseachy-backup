@@ -20,7 +20,8 @@
     "test:forms": "python3 tests/verify-stock-form.py && python3 tests/verify-sales-form.py",
     "test:repository": "python3 tests/verify-repository.py",
     "test:tables": "python3 tests/verify-react-tables.py",
-    "test:financial": "python3 tests/verify-baseline.py --financial --credit --backup && python3 tests/verify-baseline.py --financial --credit --backup --mobile"
+    "test:financial": "python3 tests/verify-baseline.py --financial --credit --backup && python3 tests/verify-baseline.py --financial --credit --backup --mobile",
+    "test:cart": "python3 tests/verify-baseline.py --cart && python3 tests/verify-baseline.py --cart --mobile"
   },
   "dependencies": {
     "react": "^19.2.0",

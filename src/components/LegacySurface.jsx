@@ -1,3 +1,4 @@
+import {cartEntry,HeldCart,CartPaymentField,CartAction,CartError} from '../forms/HeldCart.jsx';
 import { ProductSuggestions } from '../forms/ProductSearch.jsx';
 import React, { memo } from 'react';
 import nodes from './legacy-tree.json';
@@ -11,6 +12,9 @@ import { ReactFilterControl, ReactFilterResetButton, FILTER_IDS } from '../islan
 // Never rerender this surface while imperative legacy controllers own its nodes.
 function renderNode(node, key) {
   if (typeof node === 'string') return node;
+  if (node.props?.id === 'holdList') return <HeldCart key={key} />;
+  if (cartEntry.fields.has(node.props?.id)) return <CartPaymentField key={key} node={node} />;
+  if (cartEntry.actions.has(node.props?.id)) return <CartAction key={key} node={node} />;
   if (node.props?.id === 'productSuggestions') return <ProductSuggestions key={key} />;
   if (salesEntry.fields.has(node.props?.id)) return <SalesEntryField key={key} node={node} />;
   if (salesEntry.actions.has(node.props?.id)) return <SalesEntryAction key={key} node={node} />;
@@ -26,6 +30,7 @@ function renderNode(node, key) {
       node.children.some(child => child?.props?.id === 'stockDiv')) {
     children.push(<ReactFilterResetButton key="react-stock-clear" desk="stock" />);
   }
+  if (node.props?.id === 'holdPanel') children.push(<CartError key="cart-react-error" />);
   if (node.props?.id === 'retailEntry') children.push(<SalesEntryError key="sales-react-error" />);
   if (node.props?.id === 'stockEntryBody') children.push(<StockEntryError key="stock-react-error" />);
   return React.createElement(node.tag, props, ...children);

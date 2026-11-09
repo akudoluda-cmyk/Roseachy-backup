@@ -22,9 +22,11 @@ const math=readFileSync(new URL('../src/domain/inventory-math.mjs',import.meta.u
 const mathBridge=`(()=>{${math};window.RoseachyInventoryMath={clampMarkup,roundMoney,priceFromMarkup,impliedMarkup,inventoryWhole,inventoryMoney};})();`;
 const pricing=readFileSync(new URL('../src/domain/sales-pricing.mjs',import.meta.url),'utf8').replace(/import[^;]+;/,'const {roundMoney}=window.RoseachyInventoryMath;').replaceAll('export function','function');
 const pricingBridge=`(()=>{${pricing};window.RoseachySalesPricing={validQuantityPricing,salePricing,ruleFromSaleRecord,reviseCartItem};})();`;
+const pos=readFileSync(new URL('../src/domain/pos-math.mjs',import.meta.url),'utf8').replaceAll('export ','');
+const posBridge=`(()=>{${pos};window.RoseachyPosMath={POS_FORM,posComponents,posBuild,posMovements,posValidate};})();`;
 const bridge=`window.RoseachyReactFilters=(()=>{const handlers=Object.create(null);return{register(next){Object.assign(handlers,next)},dispatch(id){if(!Object.hasOwn(handlers,id))return false;handlers[id]();return true},ready(id){return Object.hasOwn(handlers,id)},sync(desk){window.dispatchEvent(new CustomEvent('roseachy:filter-sync',{detail:{desk}}))}}})();`;
 const scripts=JSON.parse(readFileSync(new URL('../src/legacy-scripts.json',import.meta.url),'utf8')).filter(path=>path.includes('/legacy/'));
-const html=`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/src/legacy.css"><title>Test only - Roseachy Controller</title></head><body spellcheck="false"><script>${mathBridge}${pricingBridge}${bridge}</script>${body}${scripts.map(s=>`<script src="${s}"></script>`).join('')}</body></html>`;
+const html=`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="/src/legacy.css"><title>Test only - Roseachy Controller</title></head><body spellcheck="false"><script>${mathBridge}${pricingBridge}${posBridge}${bridge}</script>${body}${scripts.map(s=>`<script src="${s}"></script>`).join('')}</body></html>`;
 const dest=new URL('../__phase3_browser_harness.html',import.meta.url);
 writeFileSync(dest,html);
 console.log(`Created ${dest.pathname}: ${body.length} HTML bytes; ${scripts.length} controllers`);

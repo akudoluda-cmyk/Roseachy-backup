@@ -15,7 +15,7 @@ export function EntryField({ node, controller, desk, presentation = {} }) {
     if (node.tag !== 'select') props.onInput=e=>controller.dispatch(node.props.id,'input',e);
   }
   props.onBlur=e=>controller.dispatch(node.props.id,'blur',e);
-  return React.createElement(node.tag, {...props,...presentation}, field.options ? field.options.map((o,index)=><option key={`${o.value}:${index}`} value={o.value} disabled={o.disabled}>{o.label}</option>) : undefined);
+  return React.createElement(node.tag, {...props,...presentation}, field.options ? field.options.map((o,index)=><option key={`${o.value}:${index}`} value={o.value} disabled={o.disabled} data-legacy={o.legacy?'1':undefined}>{o.label}</option>) : undefined);
 }
 export function EntryAction({ node, controller, desk }) {
   const snapshot=useSyncExternalStore(controller.state.subscribe,controller.state.getSnapshot);

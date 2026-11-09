@@ -8,7 +8,7 @@ import json, zipfile, hashlib, sys
 from playwright.sync_api import sync_playwright, expect
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'tests/evidence' / (('baseline-mobile' if '--mobile' in sys.argv else 'baseline-desktop')+('-cart' if '--cart' in sys.argv else ''))
+OUT = ROOT / 'tests/evidence' / (('baseline-mobile' if '--mobile' in sys.argv else 'baseline-desktop')+('-cart' if '--cart' in sys.argv else '-supplier' if '--supplier' in sys.argv else ''))
 VIEWPORT = {'width':390,'height':844} if '--mobile' in sys.argv else {'width':1280,'height':900}
 class Quiet(SimpleHTTPRequestHandler):
     def log_message(self, *args): pass
@@ -45,8 +45,10 @@ def fixture(browser, root, label):
         page.evaluate('RoseachyStore.whenSaved()')
         if '--financial' in sys.argv: financial_scenario(page)
         if '--cart' in sys.argv: cart_scenario(page,label)
+        if '--supplier' in sys.argv: supplier_scenario(page,label)
         state=page.evaluate('({stock:RoseachyStore.getObject("dsb_stock_v2"), draft:RoseachyStore.getObject("dsb_draft_v2"),creditCustomers:RoseachyStore.getObject("roseachy_credit_customers_v1")})')
-        assert next(p for p in state['stock'] if p['name']=='Parity Product')['qty']==(7 if '--cart' in sys.argv else 6 if '--credit' in sys.argv else 8 if '--financial' in sys.argv else 10)
+        assert next(p for p in state['stock'] if p['name']=='Parity Product')['qty']==(14 if '--supplier' in sys.argv else 7 if '--cart' in sys.argv else 6 if '--credit' in sys.argv else 8 if '--financial' in sys.argv else 10)
+        if '--supplier' in sys.argv:state['market']=page.evaluate('RoseachyStore.getObject("roseachy_market_v1")')
         # A real export through the existing download UI, never private test hooks.
         page.locator('#tabBtnStock').click()
         toggle=page.locator('[data-target="stockTransferBody"]')
@@ -74,7 +76,7 @@ def fixture(browser, root, label):
                 return {ids.get(k,k):normalize(v,k) for k,v in value.items()}
             if isinstance(value,list): return [normalize(v) for v in value]
             if isinstance(value,str):
-                if key in ('ts','createdAt','editedAt','updatedAt','date'): return '<time>'
+                if key in ('ts','createdAt','editedAt','updatedAt','completedAt'): return '<time>'
                 return ids.get(value,value)
             return value
         state['totals']=page.evaluate('Object.fromEntries(["mSales","mNetSales","mReceived","mCash","mBank","mProfit","mCogs","mRefunds","mExpenses","mDebt","mPayable"].map(id=>[id,document.getElementById(id).textContent]))')
@@ -115,17 +117,68 @@ def restore_original_backup(browser,url):
         page.reload(wait_until='networkidle');page.wait_for_function('window.__roseachyFirstUsableMs !== undefined')
         assert page.evaluate('RoseachyStore.getObject("dsb_stock_v2")')==original['stock']
         assert page.evaluate('RoseachyStore.getObject("dsb_draft_v2").tx')==original['draft']['tx']
+        if '--supplier' in sys.argv:
+            assert page.evaluate('RoseachyStore.getObject("roseachy_market_v1")')==original['market']
+        restored=page.evaluate('({draft:RoseachyStore.getObject("dsb_draft_v2"),market:RoseachyStore.getObject("roseachy_market_v1")})')
         assert page.evaluate('RoseachyStore.verify()')['ok']
         changed=json.loads(json.dumps(original));changed['stock'][0]['qty']+=1
         malformed=OUT/'tampered-backup.json';malformed.write_text(json.dumps(changed))
         page.locator('#importFile').set_input_files(str(malformed))
         expect(page.locator('#toast')).to_contain_text('checksum mismatch')
         assert page.evaluate('RoseachyStore.getObject("dsb_stock_v2")')==original['stock']
+        assert page.evaluate('({draft:RoseachyStore.getObject("dsb_draft_v2"),market:RoseachyStore.getObject("roseachy_market_v1")})')==restored
         assert not errors,errors
         print('PASS original Full Backup → fresh React profile → reload; tampered backup rejected without changes',flush=True)
     except Exception:
         page.screenshot(path=str(OUT/'restore-failure.png'),full_page=True);raise
     finally:context.close()
+
+def supplier_scenario(page,label):
+    page.locator('#type').select_option('purchase_credit');page.locator('#note').fill('Parity Product');page.locator('[data-product-suggest]').click()
+    page.locator('#qty').fill('4');page.locator('#amount').fill('200');page.locator('#party').fill('Supplier fixture')
+    page.locator('#addBtn').click();page.wait_for_function('RoseachyStore.getObject("dsb_draft_v2").tx.length===2');page.evaluate('RoseachyStore.whenSaved()')
+    expect(page.locator('#mPayable')).to_have_text('₦800.00')
+    assert page.evaluate('RoseachyStore.getObject("dsb_stock_v2")[0].qty')==14
+    page.locator('#deskMenuBtn').click();page.locator('#marketDeskEntry').click();page.locator('#marketDebtSummary').click()
+    expect(page.locator('#supplierDebtList')).to_contain_text('₦800.00')
+    page.locator('#supplierDebtList [data-debt-pay]').click();page.locator('#supplierPaymentAmount').fill('900');page.locator('#supplierPaymentSave').click()
+    expect(page.locator('#supplierPaymentWarn')).to_contain_text('exceeds');assert page.evaluate('RoseachyStore.getObject("dsb_draft_v2").tx.length')==2
+    page.locator('#supplierPaymentAmount').fill('300');page.locator('#supplierPaymentNote').fill('First payment')
+    page.locator('#supplierPaymentSave').evaluate('(button)=>{button.click();button.click()}')
+    expect(page.locator('#supplierPaymentOverlay')).not_to_be_visible();page.evaluate('RoseachyStore.whenSaved()')
+    assert page.evaluate('RoseachyStore.getObject("dsb_draft_v2").tx.length')==3
+    expect(page.locator('#supplierDebtList')).to_contain_text('₦500.00')
+    page.locator('#supplierDebtList [data-debt-pay]').click();page.locator('#supplierPaymentAmount').fill('200');page.locator('#supplierPaymentNote').fill('Second payment')
+    before=page.evaluate('({draft:RoseachyStore.getObject("dsb_draft_v2"),market:RoseachyStore.getObject("roseachy_market_v1")})')
+    page.evaluate("""()=>{const put=IDBObjectStore.prototype.put;let count=2;IDBObjectStore.prototype.put=function(...args){if(this.name==='draft'&&args[0]?.tx?.length===4&&args[0].tx.at(-1)?.type==='supplier_pay_cash'&&args[0].tx.at(-1)?.amount===200&&count-->0){if(!count)IDBObjectStore.prototype.put=put;throw new DOMException('Supplier write fault','QuotaExceededError')}return put.apply(this,args)}}""")
+    page.locator('#supplierPaymentSave').click();expect(page.locator('#supplierPaymentWarn')).to_contain_text('not saved')
+    assert page.evaluate('({draft:RoseachyStore.getObject("dsb_draft_v2"),market:RoseachyStore.getObject("roseachy_market_v1")})')==before
+    expect(page.locator('#supplierPaymentAmount')).to_have_value('200');page.locator('#supplierPaymentSave').click()
+    expect(page.locator('#supplierPaymentOverlay')).not_to_be_visible();page.evaluate('RoseachyStore.whenSaved()')
+    expect(page.locator('#supplierDebtList')).to_contain_text('₦300.00')
+    rows=page.evaluate('RoseachyStore.getObject("dsb_draft_v2").tx');assert len(rows)==4 and [r['type'] for r in rows[-2:]]==['supplier_pay_cash','supplier_pay_cash']
+    assert rows[-2]['amount']==300 and rows[-1]['amount']==200
+    purchases=page.evaluate('RoseachyStore.getObject("roseachy_market_v1").marketPurchases');assert len(purchases)==1 and len(purchases[0]['payments'])==2
+    assert rows[-1]['supplierPurchaseId']==purchases[0]['id'] and rows[-2]['supplierPurchaseId']==purchases[0]['id']
+    page.locator('#supplierOtherPayment').click();expect(page.locator('#supplierPaymentManualWrap')).to_be_visible()
+    page.locator('#supplierPaymentName').fill('External Supplier');page.locator('#supplierPaymentAmount').fill('150');page.locator('#supplierPaymentNote').fill('Outside advance')
+    day=page.locator('#supplierPaymentDate').input_value();page.locator('#supplierPaymentDate').fill('2000-01-01');page.locator('#supplierPaymentSave').click()
+    expect(page.locator('#supplierPaymentWarn')).to_contain_text('payment business day');page.locator('#supplierPaymentDate').fill(day)
+    page.locator('#supplierPaymentSave').click();expect(page.locator('#supplierPaymentWarn')).to_contain_text('Insufficient business cash')
+    assert page.evaluate('RoseachyStore.getObject("dsb_draft_v2").tx.length')==4
+    page.locator('#supplierPaymentFunding').select_option('external')
+    expect(page.locator('#supplierPaymentMethodWrap')).to_have_class('hidden')
+    if label=='react':expect(page.locator('#supplierPaymentMethodWrap')).not_to_be_visible()
+    else:
+        expect(page.locator('#supplierPaymentMethodWrap')).to_be_visible()
+        print('KNOWN ORIGINAL DEFECT: external supplier funding hides the method logically but CSS keeps it visible',flush=True)
+    page.locator('#supplierPaymentAmount').fill('50')
+    page.locator('#supplierPaymentSave').click();expect(page.locator('#supplierPaymentOverlay')).not_to_be_visible();page.evaluate('RoseachyStore.whenSaved()')
+    external=page.evaluate('RoseachyStore.getObject("dsb_draft_v2").tx.at(-1)')
+    assert external['type']=='supplier_advance_cash' and external['paymentFunding']=='external' and external['amount']==50
+    page.locator('#deskMenuBtn').click();page.locator('#deskMenu [data-desk="sales"]').click()
+    expect(page.locator('#mCash')).to_have_text('₦100.00');expect(page.locator('#mPayable')).to_have_text('₦300.00')
+    print('PASS supplier credit purchase, linked partial payments, excess rejection, duplicate submit, failed write/retry, date/cash guards, external advance and reconciled payable',flush=True)
 
 def cart_scenario(page,label):
     def select(name,qty):

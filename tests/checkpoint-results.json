@@ -1,100 +1,122 @@
 {
   "date": "2026-11-09",
+  "version": "2.17.2-react-phase3b.2",
   "decision": "NO-GO: migration incomplete",
   "commands": [
     {
       "command": "node scripts/create-browser-harness.mjs",
-      "started": "2026-11-09T12:33:53.668287+00:00",
-      "elapsedSeconds": 0.05,
+      "started": "2026-11-09T18:01:12.103034+00:00",
+      "elapsedSeconds": 0.04,
       "exit": 0,
-      "log": "nov09-cart-scripts-create-browser-harness.mjs.log"
+      "log": "nov09-pos-scripts-create-browser-harness.mjs.log"
     },
     {
       "command": "npm run test:unit",
-      "started": "2026-11-09T12:33:53.717269+00:00",
-      "elapsedSeconds": 0.46,
+      "started": "2026-11-09T18:01:12.144312+00:00",
+      "elapsedSeconds": 0.52,
       "exit": 0,
-      "log": "nov09-cart-test-unit.log"
+      "log": "nov09-pos-test-unit.log"
     },
     {
       "command": "npm run test:static",
-      "started": "2026-11-09T12:33:54.177932+00:00",
+      "started": "2026-11-09T18:01:12.660063+00:00",
       "elapsedSeconds": 1.43,
       "exit": 0,
-      "log": "nov09-cart-test-static.log"
+      "log": "nov09-pos-test-static.log"
     },
     {
       "command": "npm run build",
-      "started": "2026-11-09T12:33:55.612910+00:00",
-      "elapsedSeconds": 1.46,
+      "started": "2026-11-09T18:01:14.087768+00:00",
+      "elapsedSeconds": 1.48,
       "exit": 0,
-      "log": "nov09-cart-build.log"
+      "log": "nov09-pos-build.log"
     },
     {
       "command": "npm run test:repository",
-      "started": "2026-11-09T12:23:02.584417+00:00",
-      "elapsedSeconds": 1.84,
+      "started": "2026-11-09T18:01:15.566663+00:00",
+      "elapsedSeconds": 1.74,
       "exit": 0,
-      "log": "nov09-test-repository.log"
+      "log": "nov09-pos-test-repository.log"
     },
     {
       "command": "npm run test:storage",
-      "started": "2026-11-09T12:23:04.423161+00:00",
-      "elapsedSeconds": 2.31,
+      "started": "2026-11-09T18:01:17.306881+00:00",
+      "elapsedSeconds": 2.36,
       "exit": 0,
-      "log": "nov09-test-storage.log"
+      "log": "nov09-pos-test-storage.log"
     },
     {
       "command": "npm run test:forms",
-      "started": "2026-11-09T12:33:57.075508+00:00",
-      "elapsedSeconds": 17.86,
+      "started": "2026-11-09T18:01:19.669357+00:00",
+      "elapsedSeconds": 17.87,
       "exit": 0,
-      "log": "nov09-cart-test-forms.log"
+      "log": "nov09-pos-test-forms.log"
     },
     {
       "command": "npm run test:tables",
-      "started": "2026-11-09T12:34:14.940026+00:00",
-      "elapsedSeconds": 9.09,
+      "started": "2026-11-09T18:01:37.537299+00:00",
+      "elapsedSeconds": 9.05,
       "exit": 0,
-      "log": "nov09-cart-test-tables.log"
+      "log": "nov09-pos-test-tables.log"
     },
     {
-      "command": "npm run test:financial",
-      "started": "2026-11-09T12:35:08.623289+00:00",
-      "elapsedSeconds": 39.97,
+      "command": "npm run test:pos",
+      "started": "2026-11-09T18:03:49.582735+00:00",
+      "elapsedSeconds": 114.08,
       "exit": 0,
-      "log": "nov09-cart-test-financial.log"
+      "log": "nov09-pos-test-pos.log"
     },
     {
-      "command": "npm run test:runtime:dev",
-      "started": "2026-11-09T12:35:48.591745+00:00",
-      "elapsedSeconds": 15.2,
+      "command": "npm run test:supplier",
+      "started": "2026-11-09T18:09:07.978565+00:00",
+      "elapsedSeconds": 43.15,
       "exit": 0,
-      "log": "nov09-cart-test-runtime-dev.log"
-    },
-    {
-      "command": "npm run test:runtime",
-      "started": "2026-11-09T12:36:03.793389+00:00",
-      "elapsedSeconds": 17.54,
-      "exit": 0,
-      "log": "nov09-cart-test-runtime.log"
+      "log": "nov09-pos-test-supplier.log"
     },
     {
       "command": "npm run test:cart",
-      "started": "2026-11-09T12:34:24.033086+00:00",
-      "elapsedSeconds": 44.59,
+      "started": "2026-11-09T18:06:25.457230+00:00",
+      "elapsedSeconds": 46.53,
       "exit": 0,
-      "log": "nov09-cart-test-cart.log"
+      "log": "nov09-pos-test-cart.log"
+    },
+    {
+      "command": "npm run test:financial",
+      "started": "2026-11-09T18:09:51.126196+00:00",
+      "elapsedSeconds": 37.71,
+      "exit": 0,
+      "log": "nov09-pos-test-financial.log"
+    },
+    {
+      "command": "npm run test:runtime:dev",
+      "started": "2026-11-09T18:07:50.933633+00:00",
+      "elapsedSeconds": 15.05,
+      "exit": 0,
+      "log": "nov09-pos-test-runtime-dev.log"
+    },
+    {
+      "command": "npm run test:runtime",
+      "started": "2026-11-09T18:08:05.983791+00:00",
+      "elapsedSeconds": 18.93,
+      "exit": 0,
+      "log": "nov09-pos-test-runtime.log"
     }
   ],
   "sha256": {
     "public/legacy/01-storage.js": "4f2a383a447cc12fda21203a9cfdec68b62e89d1cecdf58f15104526fba4f917",
-    "public/legacy/03-core.js": "37ef27128944fdfc2c9a10375b38b5b8407453fb1cf7be6122e69f6596516bd3",
+    "public/legacy/03-core.js": "92a9ef1a20ecabba5e20d7e44f9aa8449d2c409f2f0b5ed13342c63f5d5fc735",
     "src/data/desk-repository.mjs": "ebef00851db8c56870cf317f9c9dcd025f1ab7aa1c10725fdee866e5948c924a",
-    "src/forms/HeldCart.jsx": "f043c7949147e943ae65c373e5c80286003c4316e25d82292a799b742c3531ae",
-    "src/forms/entry-controller.js": "390913b7bbe0b8c3c71817a18206c641e298b6d908f5e29935217e3385ec4b06",
-    "src/domain/sales-pricing.mjs": "a84f7af55990ec6857db4e35ef2523846258745065c522cbbe264a51e13edd39",
+    "src/forms/entry-controller.js": "6dda16a2fe30d7473650ebba2f05a8cabaa6ef7ad3f49e3bdf5f16d13c29e9e3",
+    "src/forms/PosEntry.jsx": "e0a84da565bba3e36c0eab8ed99986a05c96f9391e836a822070151e280a1d88",
+    "src/forms/CashMoveDialog.jsx": "67c20b12199f90b8dfa840ab533e66550d9c265c43879f1bb69325e54318a787",
+    "src/forms/SupplierPaymentDialog.jsx": "9e036c37166ec74cc622b85ca5e107c9f42315357ab4aee86b95d6431ce812dc",
+    "src/domain/pos-math.mjs": "b40c5870ceb766623a124151196b8a9bc1a0fb67554b04fac968b85e0fd2830a",
+    "tests/verify-pos.py": "dd6205de55adb2b77494264b7e00d904a32bd8de79bffb9006ee4ffdca5e8c2e",
+    "tests/verify-baseline.py": "a7e5899a0077e3a4fdff5eabeb5608498b1677a9d8ec5a0a6a824083ffb21ffa",
     "reference/original-2.17.2.zip": "55a9a1ba418c910d2065240bffe4a385a449f285f8e973cd335e9722be9e1a04"
   },
-  "intentionalUIFix": "Failed cart completion now displays the preserved draft immediately; original requires reload."
+  "intentionalUIFixes": [
+    "Failed cart completion displays the preserved draft immediately; original requires reload.",
+    "External supplier funding hides the payment method as intended by the original handler; original grid CSS kept it visible."
+  ]
 }

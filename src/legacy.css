@@ -3524,3 +3524,8 @@ html{scrollbar-gutter:stable}
 .reactFilterClear { white-space: nowrap; align-self: center; }
 .reactFilterClear:disabled { opacity: .45; cursor: default; }
 @media (max-width: 600px) { .reactFilterClear { min-height: 38px; } }
+
+/* Respect the existing external-funding visibility rule over grid layout rules. */
+@layer roseachyPrecision {
+  #supplierPaymentMethodWrap.hidden {display:none!important}
+}

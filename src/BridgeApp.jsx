@@ -1,3 +1,7 @@
+import {supplierPaymentEntry,supplierPaymentView} from './forms/SupplierPaymentDialog.jsx';
+import {cashMoveEntry,cashMoveView} from './forms/CashMoveDialog.jsx';
+import * as posMath from './domain/pos-math.mjs';
+import {posEntry,posView} from './forms/PosEntry.jsx';
 import * as salesPricing from './domain/sales-pricing.mjs';
 import { cartEntry, heldCartView } from './forms/HeldCart.jsx';
 import { productSearchView } from './forms/ProductSearch.jsx';
@@ -28,10 +32,14 @@ export function BridgeApp() {
   const [tables, setTables] = useState({ ledger: null, stock: null });
   useLayoutEffect(() => {
     window.RoseachyInventoryMath = inventoryMath;
+    window.RoseachyPosMath = posMath;
+    window.RoseachyPosView = posView;
+    window.RoseachyCashMoveView = cashMoveView;
+    window.RoseachySupplierPaymentView = supplierPaymentView;
     window.RoseachySalesPricing = salesPricing;
     window.RoseachyCartView = heldCartView;
     window.RoseachyProductSearchView = productSearchView;
-    const entries = [salesEntry, cartEntry, stockEntry];
+    const entries = [salesEntry, cartEntry, stockEntry, posEntry, cashMoveEntry, supplierPaymentEntry];
     window.RoseachyForms = {
       element(id,el) { const entry=entries.find(e=>e.fields.has(id)||e.actions.has(id)); return entry?entry.element(id,el):el; },
       registerCommand(id,execute) { const entry=entries.find(e=>e.actions.has(id)); if(!entry)return false; entry.registerCommand(id,execute); return true; },

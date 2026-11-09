@@ -2,7 +2,7 @@ import { flushSync } from 'react-dom';
 import { createFormState } from './form-state.mjs';
 import tree from '../components/legacy-tree.json';
 
-export function createEntryController({rootId, actionIds}) {
+export function createEntryController({rootId, actionIds, initialNodes}) {
 
 // Transitional interop is confined to this entry form’s fields. Draft values live
 // in formState; the old business commands remain the only persistent writers.
@@ -21,7 +21,7 @@ function visit(node, inside = false) {
   if (ACTION_IDS.has(node.props?.id)) fields[node.props.id] = {label:textOf(node), disabled:!!node.props.disabled};
   for (const child of node.children) visit(child, inside);
 }
-tree.forEach(node => visit(node));
+(initialNodes || tree).forEach(node => visit(node, !!initialNodes));
 const FIELD_IDS = new Set(Object.keys(fields).filter(id => !ACTION_IDS.has(id)));
 const formState = createFormState(fields);
 const handlers = new Map();

@@ -1,5 +1,15 @@
 # Changes
 
+## 2026-11-09 — POS and supplier-payment checkpoint (phase3b.2)
+
+- Added explicit React POS, cash-move and supplier-payment layouts with controlled fields and guarded registered actions.
+- Extracted original POS calculation/validation functions and tested 1,944 scenarios across six supported/current and legacy types.
+- Preserved editing of historical POS options, captured IDs/timestamps, cash/electronic balances, shortage guards, deletion reversal and failed-write recovery.
+- Added original-vs-React POS/cash-move and supplier debt/payment tests on desktop/mobile, including external funding, backup restore, retry and duplicate-submit cases.
+- Fixed original grid CSS overriding the supplier method’s hidden state for external funding; no financial semantics changed.
+- Bumped package, HTML and service-worker cache version to 2.17.2-react-phase3b.2. No environment configuration or publication changes.
+- Migration remains incomplete: day-close/history and broader financial cases, remaining modules/controller replacement, redesign and release hardening still require work.
+
 ## 2026-11-09 — Stage 3B cart checkpoint
 
 - Replaced held-cart HTML and delegated input/click listeners with React item components and controlled payment fields. Item commands resolve stable identities.

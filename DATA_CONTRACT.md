@@ -1,6 +1,6 @@
-# Data contract — preserved Stage 3A
+# Data contract — Stage 3B boundaries
 
-Authoritative database: `roseachy_pwa_db`, version **8**. Storage implementation is unchanged from the supplied archive. No schema migration or new financial writer was introduced.
+Authoritative database: `roseachy_pwa_db`, version **8**. Storage implementation is unchanged from the supplied archive. No schema migration or new financial writer was introduced. Stock and retail Sales draft values now live in src/forms/form-state.mjs snapshots consumed by controlled React components. The compatibility facade translates existing reads/writes/event registration for those fields into draft operations. It never writes IndexedDB. The existing inventoryCommit/RoseachyStore.atomic path remains the only business writer. Each submit action has an in-flight guard; failed commits restore draft values through the same boundary.
 
 `RoseachyStore` normalizes records, maintains record indexes, serializes commit ordering, tracks revision/stale-tab state and exposes `whenSaved()`/`verify()`. UI operations must continue through the existing business command path until its replacement has parity tests. Direct writes in the storage fixture test the storage service only, not business validation.
 
@@ -25,4 +25,14 @@ The complete mapping is STORE_OF and COLLECTIONS in public/legacy/01-storage.js;
 
 Product IDs and transaction IDs are stable references. Product quantities, batches, cost snapshots, price modes, package representation and subdivision IDs carry business semantics. A cash sale in the smoke fixture stores amount 600, quantity 2, unit price 300, cost snapshot 200 and a product reference; quantity moves from 12 to 10 in the same business workflow. The resulting working transaction is persisted in the draft; the smoke does not claim day close or archived-day correctness.
 
-Preserve timestamps, historical snapshots, customer/supplier provenance, returns/batch allocations and backup format versions. Do not infer a new monetary rounding rule from the fixture. Full legacy backup compatibility remains unverified without the original artifact and representative exports.
+Preserve timestamps, historical snapshots, customer/supplier provenance, returns/batch allocations and backup format versions. Do not infer a new monetary rounding rule from the fixture. The original 2.17.2 artifact is now preserved. Working Stock export and persisted-state comparison pass for the financial/credit fixture. Original 2.17.2 Full Backup import, checksum validation, reload and tampered-file rejection pass. Other older backup versions still require representative fixtures.
+
+## Extracted math
+
+`src/domain/inventory-math.mjs` contains clampMarkup, roundMoney, priceFromMarkup, impliedMarkup, inventoryWhole and inventoryMoney. Their bodies are unchanged from original 2.17.2. The unit suite evaluates the actual original source from the immutable archive and compares 1,734 boundary combinations, including blank values, invalid strings, negatives, fractional values, nonfinite values and upper limits. This preserves legacy parsing/rounding instead of silently introducing new financial semantics.
+
+## Repository observation contract
+
+`src/data/desk-repository.mjs` delegates controller calls to the unchanged storage service. `getSnapshot(key)` returns a deeply frozen detached value with stable identity until persisted content changes; `subscribe(key, listener)` and `subscribeStatus(listener)` notify consumers. Pending and failed writes do not replace committed snapshots. Stale tabs retain their last snapshot, report stale status, and remain blocked by the original write guard. React must not use the mutable `controller.getObject` API as its state model. The compatibility controller is reserved for existing domain operations.
+
+The repository does not replace the Smart Sync commit observer, register a second error handler, open another database, change retries, or write business data independently. `tests/verify-repository.py` exercises actual IndexedDB atomic commits, both failed retry attempts, rollback, successful retry, ordinary queued writes, cross-tab staleness and reload.

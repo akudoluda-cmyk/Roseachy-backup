@@ -1,7 +1,12 @@
+import { productSearchView } from './forms/ProductSearch.jsx';
+import { createDeskRepository } from './data/desk-repository.mjs';
+import * as inventoryMath from './domain/inventory-math.mjs';
 import React, { useLayoutEffect, useState } from 'react';
 import { SalesStockTablePortals } from './islands/SalesStockTables.js';
 import { LegacySurface } from './components/LegacySurface.jsx';
 import scripts from './legacy-scripts.json';
+import {salesEntry} from './forms/SalesEntryControls.jsx';
+import { stockFormElement } from './forms/stock-form-controller.js';
 
 // Script dependencies are loaded sequentially, after React has committed the UI.
 // Loading them as ESM imports would change the timing and module execution semantics.
@@ -20,6 +25,9 @@ let started = false;
 export function BridgeApp() {
   const [tables, setTables] = useState({ ledger: null, stock: null });
   useLayoutEffect(() => {
+    window.RoseachyInventoryMath = inventoryMath;
+    window.RoseachyProductSearchView = productSearchView;
+    window.RoseachyForms = { element: (id,el) => salesEntry.fields.has(id)||salesEntry.actions.has(id) ? salesEntry.element(id,el) : stockFormElement(id,el) };
     // Register BEFORE any legacy controller executes. Only the table view is React-owned.
     // React never mutates database values or initiates inventory/financial transactions.
     window.RoseachyReactTables = {
@@ -44,7 +52,12 @@ export function BridgeApp() {
     if (started) return;
     started = true;
     (async () => {
-      for (const src of scripts) await loadClassicScript(src);
+      for (const src of scripts) {
+        await loadClassicScript(src);
+        if (src.endsWith('/01-storage.js')) {
+          window.RoseachyRepository = createDeskRepository(window.RoseachyStore, window);
+        }
+      }
     })().catch(err => {
       console.error('Roseachy React bridge initialization failed:', err);
       const panel = document.createElement('div');

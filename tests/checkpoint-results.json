@@ -1,0 +1,89 @@
+{
+  "date": "2026-11-09",
+  "decision": "NO-GO: migration incomplete",
+  "commands": [
+    {
+      "command": "node scripts/create-browser-harness.mjs",
+      "started": "2026-11-09T12:22:59.336851+00:00",
+      "elapsedSeconds": 0.05,
+      "exit": 0,
+      "log": "nov09-scripts-create-browser-harness.mjs.log"
+    },
+    {
+      "command": "npm run test:unit",
+      "started": "2026-11-09T12:22:59.382803+00:00",
+      "elapsedSeconds": 0.38,
+      "exit": 0,
+      "log": "nov09-test-unit.log"
+    },
+    {
+      "command": "npm run test:static",
+      "started": "2026-11-09T12:22:59.766470+00:00",
+      "elapsedSeconds": 1.33,
+      "exit": 0,
+      "log": "nov09-test-static.log"
+    },
+    {
+      "command": "npm run build",
+      "started": "2026-11-09T12:23:01.094159+00:00",
+      "elapsedSeconds": 1.49,
+      "exit": 0,
+      "log": "nov09-build.log"
+    },
+    {
+      "command": "npm run test:repository",
+      "started": "2026-11-09T12:23:02.584417+00:00",
+      "elapsedSeconds": 1.84,
+      "exit": 0,
+      "log": "nov09-test-repository.log"
+    },
+    {
+      "command": "npm run test:storage",
+      "started": "2026-11-09T12:23:04.423161+00:00",
+      "elapsedSeconds": 2.31,
+      "exit": 0,
+      "log": "nov09-test-storage.log"
+    },
+    {
+      "command": "npm run test:forms",
+      "started": "2026-11-09T12:23:41.110930+00:00",
+      "elapsedSeconds": 17.61,
+      "exit": 0,
+      "log": "nov09-test-forms.log"
+    },
+    {
+      "command": "npm run test:tables",
+      "started": "2026-11-09T12:23:58.718270+00:00",
+      "elapsedSeconds": 8.47,
+      "exit": 0,
+      "log": "nov09-test-tables.log"
+    },
+    {
+      "command": "npm run test:financial",
+      "started": "2026-11-09T12:24:07.190526+00:00",
+      "elapsedSeconds": 35.92,
+      "exit": 0,
+      "log": "nov09-test-financial.log"
+    },
+    {
+      "command": "npm run test:runtime:dev",
+      "started": "2026-11-09T12:24:43.110207+00:00",
+      "elapsedSeconds": 14.08,
+      "exit": 0,
+      "log": "nov09-test-runtime-dev.log"
+    },
+    {
+      "command": "npm run test:runtime",
+      "started": "2026-11-09T12:24:57.190218+00:00",
+      "elapsedSeconds": 17.16,
+      "exit": 0,
+      "log": "nov09-test-runtime.log"
+    }
+  ],
+  "sha256": {
+    "public/legacy/01-storage.js": "4f2a383a447cc12fda21203a9cfdec68b62e89d1cecdf58f15104526fba4f917",
+    "public/legacy/03-core.js": "f1988d99ad168164421e4d2b3c4c4630e4fff0e027a54c9f44e359be3c705f7f",
+    "src/data/desk-repository.mjs": "ebef00851db8c56870cf317f9c9dcd025f1ab7aa1c10725fdee866e5948c924a",
+    "reference/original-2.17.2.zip": "55a9a1ba418c910d2065240bffe4a385a449f285f8e973cd335e9722be9e1a04"
+  }
+}

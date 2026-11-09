@@ -1,7 +1,7 @@
 {
   "name": "roseachy-desk-react-migration",
   "private": true,
-  "version": "2.17.2-react-phase3a",
+  "version": "2.17.2-react-phase3b.1",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
@@ -14,7 +14,13 @@
     "test:static": "npm run verify:legacy && npm run verify:phase2 && npm run verify:phase3 && npm run test:filter-contract",
     "test:storage": "python tests/verify-indexeddb.py",
     "test:runtime": "python3 tests/verify-react-runtime.py --mode preview",
-    "test:runtime:dev": "python3 tests/verify-react-runtime.py --mode dev"
+    "test:runtime:dev": "python3 tests/verify-react-runtime.py --mode dev",
+    "test:unit": "node --test tests/*.test.mjs",
+    "test:baseline": "python3 tests/verify-baseline.py",
+    "test:forms": "python3 tests/verify-stock-form.py && python3 tests/verify-sales-form.py",
+    "test:repository": "python3 tests/verify-repository.py",
+    "test:tables": "python3 tests/verify-react-tables.py",
+    "test:financial": "python3 tests/verify-baseline.py --financial --credit --backup && python3 tests/verify-baseline.py --financial --credit --backup --mobile"
   },
   "dependencies": {
     "react": "^19.2.0",

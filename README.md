@@ -1,6 +1,8 @@
-# Current checkpoint — 2026-11-07
+# Current checkpoint — Stage 3B repository, forms and tables, 2026-11-09
 
-Build, real IndexedDB and actual React runtime smoke now pass. Full migration remains incomplete; the original 2.17.2 baseline is missing. See MIGRATION_PLAN.md, FEATURE_PARITY_MATRIX.md and tests/CURRENT_TEST_REPORT.md. Use `npm ci` with the committed lockfile. Run `npm run build` before `npm run test:runtime`; `npm run test:runtime:dev` exercises the development server. Python Playwright and /usr/bin/chromium are required. Tests start isolated servers and write evidence under tests/evidence/.
+Version `2.17.2-react-phase3b.1`. Migration remains incomplete and is NOT ready for production. The original 2.17.2 is now archived and the financial/credit/backup parity fixture passes at 1280px and 390px. Stock and retail Sales draft fields/actions, product suggestions, and explicit table rows are React owned; a repository exposes immutable committed snapshots, while the existing atomic business controller remains authoritative. See MIGRATION_PLAN.md, FEATURE_PARITY_MATRIX.md, DATA_CONTRACT.md and tests/CURRENT_TEST_REPORT.md for the exact coverage and retained bridges.
+
+Run `npm ci`, `npm run test:unit`, `npm run test:static`, `npm run build`, `npm run test:storage`, `npm run test:forms`, `npm run test:repository`, `npm run test:tables`, `npm run test:financial`, `npm run test:runtime:dev`, and `npm run test:runtime`. Tests require Python Playwright and /usr/bin/chromium, start disposable local servers and write evidence under tests/evidence/. Use `npm run dev` for development or `npm run preview` after a build.
 
 The handoff text below is historical and describes the earlier environment, not the current validation results.
 

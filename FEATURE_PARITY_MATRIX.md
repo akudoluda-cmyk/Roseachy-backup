@@ -1,22 +1,22 @@
 # Feature parity matrix
 
-Original 2.17.2 baseline is unavailable. PASS below means the stated current-app check passed; independent original-vs-React parity is BLOCKED for every row. No accepted deferrals or completed form migration are implied.
+Original 2.17.2 is archived in reference/. Independent persisted-state parity passes for the product creation, cash-sale edit/refund, transfer sale, expense, credit purchase/repayment, export/restore/reload fixture at 1280px and 390px. Other PASS entries describe the stated current-app checks only; they are not comprehensive original parity. No accepted deferrals or completed migration are implied.
 
 | Feature | Current owner | Current-app evidence | Remaining work |
 | --- | --- | --- | --- |
 | Boot and eight filters | React bridge/filter controls | PASS dev + built app, 1280/390px; stock search/reset | All filter combinations, persisted preferences |
-| Product create | Legacy core | PASS UI creation, 12 units, cost 200/price 300 | React form ownership, edits, invalid inputs, failed writes |
-| Cash sale | Legacy core + React table portal | PASS two units/600, one draft transaction, stock 10, reload | Exact daily UI totals, duplicate-submit, edit, saved-day close |
-| Storage v8 | Unchanged storage module | PASS 12 checks: migration, reload, index, stale-tab rejection | Full-app races, failure recovery and repository boundary |
+| Product create/edit | React draft fields + legacy atomic command | PASS create/edit/cancel, duplicate-submit, packs, quantity pricing, failed-write rollback/retry, reload; basic original fixture parity | Direct domain commands, all field combinations; division/subdivision move test now passes |
+| Cash sale | React draft fields/actions and JSX rows + legacy atomic command | PASS two units/600, duplicate-submit, edit quantity delta, cancel, overselling rejection, failed-write rollback/retry, reload; basic original fixture parity | Saved-day close, cart/POS conversion, all payment paths; tested daily totals and explicit JSX rows pass |
+| Storage v8 | Unchanged storage module | PASS 12 checks: migration, reload, index, stale-tab rejection | Repository boundary PASS: 7 real-IDB checks; broader full-app races remain |
 | Offline shell | Service worker + React build | PASS fresh install/control/offline reload at 1280/390px | Version updates, rollback, physical devices |
-| Divisions/subdivisions/bulk moves | Legacy core | NOT RUN in this React checkpoint | All grouping/move/selection behavior and React ownership |
-| Credit, repayments, refunds | Legacy core | NOT RUN | Financial parity fixtures and form migration |
+| Divisions/subdivisions/bulk moves | React rows/events + legacy classification commands | PASS group toggle, long press, Select All and move to subdivision; all nonclassification fields preserved | Dialog/form migration and broader group edge cases |
+| Credit, repayments, refunds | React retail draft fields + legacy core | PASS original-vs-React linked refund, credit account purchase with partial payment, repayment, exact cash/stock reconciliation | Full financial parity and ownership migration |
 | Market/supplier debts | Legacy core | NOT RUN | Purchase lists, stock integration, partial payments, debt settlement |
 | Finance/POS/cash movements | Legacy core | NOT RUN | Arithmetic, opening/closing, history, reconciliation |
 | Reports/Analytics/printing | Legacy core | NOT RUN | Deterministic report totals, filters, export and print |
 | Notes/settings/themes | Legacy core | NOT RUN | CRUD, persistence, keyboard and theme coverage |
-| Full/working backup restore | Legacy core | NOT RUN | Original export comparison, invalid-file refusal, round trip |
+| Full/working backup restore | Legacy core | PASS Working Stock export; original Full Backup restore into React, independent checksum, reload, tampered checksum rejection | Older backup versions, interrupted restore, Working Stock restore, React UI ownership |
 | Sync/file/device integrations | Legacy core + Android helper | NOT RUN | Signed-file exchange, conflicts, device authority, retry recovery |
-| Accessibility/responsive design | Legacy CSS/DOM | PASS smoke no horizontal overflow at 390/1280px | Dialog focus, full keyboard use, all screens/themes, tablet |
+| Accessibility/responsive design | Legacy CSS + React controls/rows | PASS smoke at 390/1280px, credit button reachable, React product picker arrows/Enter/Escape/focus | Dialog focus, full keyboard use, all screens/themes, tablet |
 
 Full acceptance baseline and feature-specific tests must be expanded before removing LegacySurface or the business controller.

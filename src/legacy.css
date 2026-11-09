@@ -3516,7 +3516,9 @@ html{scrollbar-gutter:stable}
 
 }
 /* Preserve a legacy inline style important declaration. */
-#creditAccountsBtn{left:auto!important}
+@layer roseachyPrecision {
+  #creditAccountsBtn{left:auto!important}
+}
 
 /* Phase 3A filter-only React additions; no changes to original design tokens. */
 .reactFilterClear { white-space: nowrap; align-self: center; }

@@ -1,15 +1,16 @@
 import { readFileSync } from 'node:fs';
-const core=readFileSync(new URL('../public/legacy/03-core.js',import.meta.url),'utf8');
-const bridge=readFileSync(new URL('../src/BridgeApp.jsx',import.meta.url),'utf8');
-const island=readFileSync(new URL('../src/islands/SalesStockTables.js',import.meta.url),'utf8');
+const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
+const core=read('public/legacy/03-core.js'),bridge=read('src/BridgeApp.jsx'),island=read('src/islands/SalesStockTables.js');
+const stock=read('src/tables/StockInventoryRows.jsx'),ledger=read('src/tables/SalesLedgerRows.jsx');
 const checks={
-  'ledger bridge dispatch':core.includes('RoseachyReactTables.ledger(roseachyTableRowModels(frag))'),
-  'stock bridge dispatch':core.includes('RoseachyReactTables.stock(roseachyTableRowModels(stockFrag))'),
-  'stock classification staging':core.includes('classificationStockGroups(arr,stockFrag)'),
-  'legacy fallback available':core.includes('if(!reactStock){b.appendChild(stockFrag);classificationStockGroups(arr)}'),
-  'React portal mounts':island.includes('createPortal(tables.stock.map')&&island.includes('createPortal(tables.ledger.map'),
-  'React registration precedes scripts':bridge.indexOf('window.RoseachyReactTables =')<bridge.indexOf('for (const src of scripts)'),
-  'service worker cache bumped':readFileSync(new URL('../public/sw.js',import.meta.url),'utf8').includes('react-phase3a')
+ 'ledger data model dispatch':core.includes('RoseachyReactTables.ledger(rows)'),
+ 'stock data model dispatch':core.includes('RoseachyReactTables.stock(rows)'),
+ 'stock group data models':core.includes("kind:'group'")&&core.includes('publishReactStock(arr)'),
+ 'React explicit table components':island.includes('StockInventoryRows')&&island.includes('SalesLedgerRows'),
+ 'React row actions':stock.includes("'stockEdit'")&&ledger.includes("'ledgerEdit'"),
+ 'no table HTML injection':![stock,ledger,island].some(s=>s.includes('dangerouslySetInnerHTML')||s.includes('.innerHTML')),
+ 'React registration precedes scripts':bridge.indexOf('window.RoseachyReactTables =')<bridge.indexOf('for (const src of scripts)'),
+ 'service worker cache version':read('public/sw.js').includes('react-phase3b.1')
 };
 console.log(JSON.stringify(checks,null,2));
 if(Object.values(checks).some(v=>!v))process.exit(1);

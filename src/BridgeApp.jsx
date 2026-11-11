@@ -1,3 +1,5 @@
+import * as dayRecords from './domain/day-records.mjs';
+import {dayEntry,savedDaysView} from './history/SavedDays.jsx';
 import {supplierPaymentEntry,supplierPaymentView} from './forms/SupplierPaymentDialog.jsx';
 import {cashMoveEntry,cashMoveView} from './forms/CashMoveDialog.jsx';
 import * as posMath from './domain/pos-math.mjs';
@@ -31,6 +33,8 @@ let started = false;
 export function BridgeApp() {
   const [tables, setTables] = useState({ ledger: null, stock: null });
   useLayoutEffect(() => {
+    window.RoseachyDayRecords = dayRecords;
+    window.RoseachySavedDaysView = savedDaysView;
     window.RoseachyInventoryMath = inventoryMath;
     window.RoseachyPosMath = posMath;
     window.RoseachyPosView = posView;
@@ -39,7 +43,7 @@ export function BridgeApp() {
     window.RoseachySalesPricing = salesPricing;
     window.RoseachyCartView = heldCartView;
     window.RoseachyProductSearchView = productSearchView;
-    const entries = [salesEntry, cartEntry, stockEntry, posEntry, cashMoveEntry, supplierPaymentEntry];
+    const entries = [salesEntry, cartEntry, stockEntry, posEntry, cashMoveEntry, supplierPaymentEntry, dayEntry];
     window.RoseachyForms = {
       element(id,el) { const entry=entries.find(e=>e.fields.has(id)||e.actions.has(id)); return entry?entry.element(id,el):el; },
       registerCommand(id,execute) { const entry=entries.find(e=>e.actions.has(id)); if(!entry)return false; entry.registerCommand(id,execute); return true; },

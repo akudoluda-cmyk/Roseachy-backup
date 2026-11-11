@@ -1,3 +1,4 @@
+import {SavedDays,DayActions,HistoryBanner} from '../history/SavedDays.jsx';
 import {SupplierPaymentDialog} from '../forms/SupplierPaymentDialog.jsx';
 import {CashMoveDialog} from '../forms/CashMoveDialog.jsx';
 import {PosEntry} from '../forms/PosEntry.jsx';
@@ -15,6 +16,9 @@ import { ReactFilterControl, ReactFilterResetButton, FILTER_IDS } from '../islan
 // Never rerender this surface while imperative legacy controllers own its nodes.
 function renderNode(node, key) {
   if (typeof node === 'string') return node;
+  if (node.props?.id === 'savedHistoryPane') return <SavedDays key={key}/>;
+  if (node.props?.id === 'dayManageRow') return <DayActions key={key}/>;
+  if (node.props?.id === 'historyBar') return <HistoryBanner key={key}/>;
   if (node.props?.id === 'supplierPaymentOverlay') return <SupplierPaymentDialog key={key} />;
   if (node.props?.id === 'xferOverlay') return <CashMoveDialog key={key} />;
   if (node.props?.id === 'posEntry') return <PosEntry key={key} />;

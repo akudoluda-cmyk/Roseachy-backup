@@ -1,5 +1,13 @@
 # Changes
 
+## 2026-11-11 — Saved Days and day-transition checkpoint (phase3b.3)
+
+- Converted saved-day rows, range/date filters, history banner and day action buttons to explicit React components and direct registered commands.
+- Extracted the original saved-day update guard, preserving missing-transaction rejection and saved/archive identity; added 432 original-source comparisons.
+- Added real-browser original-vs-React day-save, history, failure/retry, balance carry-forward, historical stock, debt deletion protection, reload and pagination fixtures.
+- Retained original two-step day-transition persistence and IndexedDB v8 unchanged. No deployment or environment configuration changes.
+- Migration remains incomplete; broader financial cases, Day Setup and remaining modules/controller removal, redesign and release hardening remain.
+
 ## 2026-11-09 — POS and supplier-payment checkpoint (phase3b.2)
 
 - Added explicit React POS, cash-move and supplier-payment layouts with controlled fields and guarded registered actions.

@@ -1,122 +1,132 @@
 {
-  "date": "2026-11-09",
-  "version": "2.17.2-react-phase3b.2",
+  "date": "2026-11-11",
+  "version": "2.17.2-react-phase3b.3",
   "decision": "NO-GO: migration incomplete",
   "commands": [
     {
       "command": "node scripts/create-browser-harness.mjs",
-      "started": "2026-11-09T18:01:12.103034+00:00",
-      "elapsedSeconds": 0.04,
+      "started": "2026-11-11T12:59:56.927752+00:00",
+      "elapsedSeconds": 0.08,
       "exit": 0,
-      "log": "nov09-pos-scripts-create-browser-harness.mjs.log"
+      "log": "nov11-days-scripts-create-browser-harness.mjs.log"
     },
     {
       "command": "npm run test:unit",
-      "started": "2026-11-09T18:01:12.144312+00:00",
-      "elapsedSeconds": 0.52,
+      "started": "2026-11-11T12:59:57.007457+00:00",
+      "elapsedSeconds": 0.79,
       "exit": 0,
-      "log": "nov09-pos-test-unit.log"
+      "log": "nov11-days-test-unit.log"
     },
     {
       "command": "npm run test:static",
-      "started": "2026-11-09T18:01:12.660063+00:00",
-      "elapsedSeconds": 1.43,
+      "started": "2026-11-11T12:59:57.794325+00:00",
+      "elapsedSeconds": 1.6,
       "exit": 0,
-      "log": "nov09-pos-test-static.log"
+      "log": "nov11-days-test-static.log"
     },
     {
       "command": "npm run build",
-      "started": "2026-11-09T18:01:14.087768+00:00",
-      "elapsedSeconds": 1.48,
+      "started": "2026-11-11T12:59:59.398630+00:00",
+      "elapsedSeconds": 2.11,
       "exit": 0,
-      "log": "nov09-pos-build.log"
+      "log": "nov11-days-build.log"
     },
     {
       "command": "npm run test:repository",
-      "started": "2026-11-09T18:01:15.566663+00:00",
-      "elapsedSeconds": 1.74,
+      "started": "2026-11-11T13:00:01.511736+00:00",
+      "elapsedSeconds": 1.93,
       "exit": 0,
-      "log": "nov09-pos-test-repository.log"
+      "log": "nov11-days-test-repository.log"
     },
     {
       "command": "npm run test:storage",
-      "started": "2026-11-09T18:01:17.306881+00:00",
-      "elapsedSeconds": 2.36,
+      "started": "2026-11-11T13:00:03.442939+00:00",
+      "elapsedSeconds": 2.38,
       "exit": 0,
-      "log": "nov09-pos-test-storage.log"
+      "log": "nov11-days-test-storage.log"
     },
     {
       "command": "npm run test:forms",
-      "started": "2026-11-09T18:01:19.669357+00:00",
-      "elapsedSeconds": 17.87,
+      "started": "2026-11-11T13:00:05.823492+00:00",
+      "elapsedSeconds": 17.39,
       "exit": 0,
-      "log": "nov09-pos-test-forms.log"
+      "log": "nov11-days-test-forms.log"
     },
     {
       "command": "npm run test:tables",
-      "started": "2026-11-09T18:01:37.537299+00:00",
-      "elapsedSeconds": 9.05,
+      "started": "2026-11-11T13:00:23.212931+00:00",
+      "elapsedSeconds": 9.66,
       "exit": 0,
-      "log": "nov09-pos-test-tables.log"
+      "log": "nov11-days-test-tables.log"
+    },
+    {
+      "command": "npm run test:days",
+      "started": "2026-11-11T13:01:47.811851+00:00",
+      "elapsedSeconds": 91.09,
+      "exit": 0,
+      "log": "nov11-days-test-days.log"
     },
     {
       "command": "npm run test:pos",
-      "started": "2026-11-09T18:03:49.582735+00:00",
-      "elapsedSeconds": 114.08,
+      "started": "2026-11-11T13:03:18.904726+00:00",
+      "elapsedSeconds": 111.33,
       "exit": 0,
-      "log": "nov09-pos-test-pos.log"
+      "log": "nov11-days-test-pos.log"
     },
     {
       "command": "npm run test:supplier",
-      "started": "2026-11-09T18:09:07.978565+00:00",
-      "elapsedSeconds": 43.15,
+      "started": "2026-11-11T13:05:10.233319+00:00",
+      "elapsedSeconds": 44.4,
       "exit": 0,
-      "log": "nov09-pos-test-supplier.log"
+      "log": "nov11-days-test-supplier.log"
     },
     {
       "command": "npm run test:cart",
-      "started": "2026-11-09T18:06:25.457230+00:00",
-      "elapsedSeconds": 46.53,
+      "started": "2026-11-11T13:05:54.633474+00:00",
+      "elapsedSeconds": 38.69,
       "exit": 0,
-      "log": "nov09-pos-test-cart.log"
+      "log": "nov11-days-test-cart.log"
     },
     {
       "command": "npm run test:financial",
-      "started": "2026-11-09T18:09:51.126196+00:00",
-      "elapsedSeconds": 37.71,
+      "started": "2026-11-11T13:06:33.327578+00:00",
+      "elapsedSeconds": 37.3,
       "exit": 0,
-      "log": "nov09-pos-test-financial.log"
+      "log": "nov11-days-test-financial.log"
     },
     {
       "command": "npm run test:runtime:dev",
-      "started": "2026-11-09T18:07:50.933633+00:00",
-      "elapsedSeconds": 15.05,
+      "started": "2026-11-11T13:07:10.630301+00:00",
+      "elapsedSeconds": 14.84,
       "exit": 0,
-      "log": "nov09-pos-test-runtime-dev.log"
+      "log": "nov11-days-test-runtime-dev.log"
     },
     {
       "command": "npm run test:runtime",
-      "started": "2026-11-09T18:08:05.983791+00:00",
-      "elapsedSeconds": 18.93,
+      "started": "2026-11-11T13:07:25.468825+00:00",
+      "elapsedSeconds": 17.64,
       "exit": 0,
-      "log": "nov09-pos-test-runtime.log"
+      "log": "nov11-days-test-runtime.log"
     }
   ],
   "sha256": {
     "public/legacy/01-storage.js": "4f2a383a447cc12fda21203a9cfdec68b62e89d1cecdf58f15104526fba4f917",
-    "public/legacy/03-core.js": "92a9ef1a20ecabba5e20d7e44f9aa8449d2c409f2f0b5ed13342c63f5d5fc735",
+    "public/legacy/03-core.js": "98dd92e6bc42f19850c1adb60a31ba1b655314dc28f7ed765d83969e27cecd6b",
     "src/data/desk-repository.mjs": "ebef00851db8c56870cf317f9c9dcd025f1ab7aa1c10725fdee866e5948c924a",
-    "src/forms/entry-controller.js": "6dda16a2fe30d7473650ebba2f05a8cabaa6ef7ad3f49e3bdf5f16d13c29e9e3",
-    "src/forms/PosEntry.jsx": "e0a84da565bba3e36c0eab8ed99986a05c96f9391e836a822070151e280a1d88",
-    "src/forms/CashMoveDialog.jsx": "67c20b12199f90b8dfa840ab533e66550d9c265c43879f1bb69325e54318a787",
-    "src/forms/SupplierPaymentDialog.jsx": "9e036c37166ec74cc622b85ca5e107c9f42315357ab4aee86b95d6431ce812dc",
-    "src/domain/pos-math.mjs": "b40c5870ceb766623a124151196b8a9bc1a0fb67554b04fac968b85e0fd2830a",
-    "tests/verify-pos.py": "dd6205de55adb2b77494264b7e00d904a32bd8de79bffb9006ee4ffdca5e8c2e",
-    "tests/verify-baseline.py": "a7e5899a0077e3a4fdff5eabeb5608498b1677a9d8ec5a0a6a824083ffb21ffa",
+    "src/history/SavedDays.jsx": "cedef53fc7a272eb49baac4c7e9fc69f18602c843e451a49247757a9b8719f1e",
+    "src/domain/day-records.mjs": "14fbc98844636b24eb50cf5c960d0ee63774a399ae9bca95cf58a2e1382611e1",
+    "tests/day-records.test.mjs": "4510adf9a88794bff00ce1da09e7edee99578ff746ce8a7a5c633a7fd7f64e65",
+    "tests/verify-days.py": "732908a4bdeee13c08d09a1bf7ad4c666a657026b7dd235f4a32a60af3b20d82",
     "reference/original-2.17.2.zip": "55a9a1ba418c910d2065240bffe4a385a449f285f8e973cd335e9722be9e1a04"
   },
-  "intentionalUIFixes": [
-    "Failed cart completion displays the preserved draft immediately; original requires reload.",
-    "External supplier funding hides the payment method as intended by the original handler; original grid CSS kept it visible."
-  ]
+  "dayFixture": {
+    "browserTimeZone": "Africa/Lagos",
+    "fixedTime": "2026-11-09T10:00:00Z",
+    "widths": [
+      1280,
+      390
+    ],
+    "checksPerAppPerWidth": 10,
+    "storageNormalization": "Original loader adds derived businessKey to saved records; all other reload fields compare exactly."
+  }
 }

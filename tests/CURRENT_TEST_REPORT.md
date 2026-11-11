@@ -1,58 +1,58 @@
-# Current test report — POS and supplier payments, 2026-11-09
+# Current test report — Saved Days and day transitions, 2026-11-11
 
-Version: `2.17.2-react-phase3b.2`. Decision: NO-GO for production; migration incomplete.
+Version: `2.17.2-react-phase3b.3`. Decision: NO-GO for production; migration incomplete.
 
-Executed in the cloud workspace with Node 24.22.1, npm 11.9.0, Python 3.12.14, Playwright 1.62.0 and Chromium 156.0.8078.79. Tests use disposable loopback origins, real IndexedDB v8, real browser interactions and synthetic records. No live records, deployment, or environment configuration changes. Times below are Africa/Lagos (UTC+1); machine-readable evidence retains UTC. The table lists the latest execution per command.
+Executed in the cloud workspace with Node 24.22.1, npm 11.9.0, Python 3.12.14, Playwright 1.62.0 and Chromium 156.0.8078.79. Tests use disposable loopback origins, real IndexedDB v8, production React builds and synthetic records. No live origin, deployment or environment configuration changes. Times below are execution times in Africa/Lagos (UTC+1); machine-readable evidence uses UTC. The day-history browser fixture fixes the clock at 2026-11-09T10:00Z with Africa/Lagos timezone to make business dates deterministic. The table lists the latest completed execution per command.
 
 | Command | Result | Started (Lagos) | Log under tests/evidence/ |
 | --- | --- | --- | --- |
-| `node scripts/create-browser-harness.mjs` | PASS (exit 0) | 2026-11-09T19:01:12.103034+01:00 | nov09-pos-scripts-create-browser-harness.mjs.log |
-| `npm run test:unit` | PASS (exit 0) | 2026-11-09T19:01:12.144312+01:00 | nov09-pos-test-unit.log |
-| `npm run test:static` | PASS (exit 0) | 2026-11-09T19:01:12.660063+01:00 | nov09-pos-test-static.log |
-| `npm run build` | PASS (exit 0) | 2026-11-09T19:01:14.087768+01:00 | nov09-pos-build.log |
-| `npm run test:repository` | PASS (exit 0) | 2026-11-09T19:01:15.566663+01:00 | nov09-pos-test-repository.log |
-| `npm run test:storage` | PASS (exit 0) | 2026-11-09T19:01:17.306881+01:00 | nov09-pos-test-storage.log |
-| `npm run test:forms` | PASS (exit 0) | 2026-11-09T19:01:19.669357+01:00 | nov09-pos-test-forms.log |
-| `npm run test:tables` | PASS (exit 0) | 2026-11-09T19:01:37.537299+01:00 | nov09-pos-test-tables.log |
-| `npm run test:pos` | PASS (exit 0) | 2026-11-09T19:03:49.582735+01:00 | nov09-pos-test-pos.log |
-| `npm run test:supplier` | PASS (exit 0) | 2026-11-09T19:09:07.978565+01:00 | nov09-pos-test-supplier.log |
-| `npm run test:cart` | PASS (exit 0) | 2026-11-09T19:06:25.457230+01:00 | nov09-pos-test-cart.log |
-| `npm run test:financial` | PASS (exit 0) | 2026-11-09T19:09:51.126196+01:00 | nov09-pos-test-financial.log |
-| `npm run test:runtime:dev` | PASS (exit 0) | 2026-11-09T19:07:50.933633+01:00 | nov09-pos-test-runtime-dev.log |
-| `npm run test:runtime` | PASS (exit 0) | 2026-11-09T19:08:05.983791+01:00 | nov09-pos-test-runtime.log |
+| `node scripts/create-browser-harness.mjs` | PASS (exit 0) | 2026-11-11T13:59:56.927752+01:00 | nov11-days-scripts-create-browser-harness.mjs.log |
+| `npm run test:unit` | PASS (exit 0) | 2026-11-11T13:59:57.007457+01:00 | nov11-days-test-unit.log |
+| `npm run test:static` | PASS (exit 0) | 2026-11-11T13:59:57.794325+01:00 | nov11-days-test-static.log |
+| `npm run build` | PASS (exit 0) | 2026-11-11T13:59:59.398630+01:00 | nov11-days-build.log |
+| `npm run test:repository` | PASS (exit 0) | 2026-11-11T14:00:01.511736+01:00 | nov11-days-test-repository.log |
+| `npm run test:storage` | PASS (exit 0) | 2026-11-11T14:00:03.442939+01:00 | nov11-days-test-storage.log |
+| `npm run test:forms` | PASS (exit 0) | 2026-11-11T14:00:05.823492+01:00 | nov11-days-test-forms.log |
+| `npm run test:tables` | PASS (exit 0) | 2026-11-11T14:00:23.212931+01:00 | nov11-days-test-tables.log |
+| `npm run test:days` | PASS (exit 0) | 2026-11-11T14:01:47.811851+01:00 | nov11-days-test-days.log |
+| `npm run test:pos` | PASS (exit 0) | 2026-11-11T14:03:18.904726+01:00 | nov11-days-test-pos.log |
+| `npm run test:supplier` | PASS (exit 0) | 2026-11-11T14:05:10.233319+01:00 | nov11-days-test-supplier.log |
+| `npm run test:cart` | PASS (exit 0) | 2026-11-11T14:05:54.633474+01:00 | nov11-days-test-cart.log |
+| `npm run test:financial` | PASS (exit 0) | 2026-11-11T14:06:33.327578+01:00 | nov11-days-test-financial.log |
+| `npm run test:runtime:dev` | PASS (exit 0) | 2026-11-11T14:07:10.630301+01:00 | nov11-days-test-runtime-dev.log |
+| `npm run test:runtime` | PASS (exit 0) | 2026-11-11T14:07:25.468825+01:00 | nov11-days-test-runtime.log |
 
-## Coverage
+## New day/history coverage
 
-- 13 Node tests: 4 filter contracts, 3 draft-state/command-guard tests, 2 original-source inventory arithmetic tests (1,734 comparisons), 2 captured-sale/cart-pricing tests (846 comparisons), and 2 POS tests (1,944 scenarios across all six current/legacy types; each compares build, validation, components and movements with original source).
-- 12 unchanged-storage checks and 7 repository checks against real IndexedDB v8, including atomic failure, rollback, retry, immutable snapshots and stale-tab write rejection.
-- 9 Stock form and 9 Sales form check groups: create/edit/cancel, keyboard picker, pack/quantity pricing, duplicate-submit guard, inventory effects, failed saves and reload.
-- 5 React table groups: literal text, grouping, long-press/multi-select/subdivision move, ledger detail, delete reversal.
-- POS: 10 named check groups per app per viewport, original and React at 1280px and 390px. Covers amount validation, both charge methods, double-click prevention, withdrawal/transfer/deposit, balance shortages, edit/cancel/delete, failure/rollback/retry, cash transfers/adjustments and their guards, failed cash-move edits, all three legacy POS editors, exact identity/timestamp preservation and reload. Final normalized working-day, transaction-trash, stock and balance fields match original at both widths. React additionally has no duplicate DOM IDs and contains Tab focus in the cash-move dialog.
-- Supplier: original and React at 1280px and 390px. Credit purchase, linked partial cash payments, overpayment refusal, duplicate submission, injected commit failure and retry, business-date/cash guards, external advance and exact stock/cash/payable reconciliation. All normalized Market supplier/purchase/payment data, draft and stock fields match. Original full-backup Market data and draft transactions restore exactly into a fresh React profile and survive reload; tampered checksum rejection leaves restored stock, draft and Market data unchanged.
-- Cart: original and React at 1280px and 390px. Two products, removal/re-addition, invalid edit blocked, quantity edit, draft reload, captured price after inventory-price edit, failed commit rollback/retry, duplicate-click completion. Final persisted stock/working-day fields and cash totals match.
-- Financial: original and React at 1280px and 390px. Cash sale edit, linked refund, transfer sale, expense, credit account purchase and partial payment, repayment. All normalized stock, working-day and customer fields plus exact UI totals match. Full Backup SHA-256 independently verified; original export restores into a fresh React profile and survives reload. Tampering leaves stock, draft and Market records unchanged.
-- 12 development and 14 production runtime check groups, including service-worker control/offline reload in production at both widths.
+- Two new pure-function tests compare 432 saved-day update scenarios with the immutable original source: normalized business/date matching, retained saved ID/archive status, missing/duplicate transaction guards and old-record immutability. Total unit test count is 15, including the previous inventory, sale/POS math, field-state and filter checks.
+- Ten named browser check groups per app per viewport (original and React at 1280px and 390px), followed by complete normalized saved-day/draft/stock equality at each width.
+- A failed closing-day commit leaves the saved collection, current draft and stock unchanged; retry and duplicate clicks produce exactly one saved record. Repeat save retains the day/transaction IDs and opening/closing stock snapshots.
+- Recent/week/month/custom/archive filters, archive/restore and Enter/Space history opening work. Historical inputs/actions are locked; returning to current day preserves the active draft and live inventory. A closed day shows 10 historical units even after the next-day purchase raises live stock to 11.
+- Unsubmitted item and invalid counted-cash guards prevent day close. Failure of both storage attempts for the next-day draft preserves the previous active draft while its closing snapshot remains durable. Retry carries counted retail/POS/electronic balances, debt and opening stock exactly once; a following transition with blank counts uses expected balances.
+- Supplier-debt history cannot be deleted. Confirmed deletion of a synthetic non-debt saved snapshot leaves current stock unchanged. Reload preserves all data, subject only to the original loader's derived businessKey index field; real database verification passes.
+- Thirty-five synthetic older records are inserted through the public original storage API to exercise pagination, archived filters, reset to the first page, keyboard opening and retention of custom metadata. These pagination fixtures are separate from the preceding UI-created financial parity snapshot.
+- React additionally has no duplicate DOM IDs in the tested history flow. The current history surface uses explicit JSX and data-only summary models, retaining the existing financial calculator and single authoritative command/storage owner.
 
-## Findings and evidence
+## Regression coverage rerun
 
-The initial POS mobile fault-injection test also intercepted background draft autosaves, allowing the actual transaction to succeed after the injected failures were consumed. Faults now target the submitted transaction payload on both storage commit attempts. The cash-move and supplier tests use the same targeted approach. No application persistence behavior changed for this test correction. The initial failed log is retained as `nov09-pos-test-pos-initial-fault-target.log`; command history retains the failed run, and the current POS rerun passes at both widths.
+- 12 storage and 7 repository check groups: real IndexedDB v8, migration, durable writes, atomic failure/retry, immutable committed snapshots and stale-tab rejection.
+- 9 Stock and 9 Sales form check groups; 5 React table groups, including inventory effects, failed saves, keyboard picker, bulk move and deletion reversal.
+- POS: 10 groups per app per viewport at 1280/390px, including legacy editors, charges, shortages, cash moves, edit/delete, failure/retry and exact final original-state parity.
+- Supplier: original-vs-React credit purchases, linked partial payments, overpayment/date/cash guards, external advance, failure/retry and stock/cash/payable parity at both widths. Original Market/payment data restores exactly from Full Backup; tampered checksum rejection leaves restored data unchanged.
+- Cart: original-vs-React quantity/remove/re-add, captured pricing, failure/recovery/retry and duplicate completion at both widths.
+- Financial: original-vs-React cash-sale edit, linked refund, transfer, expense, customer credit purchase/partial payment/repayment and exact totals at both widths; independently verified Full Backup checksums and restore/reload/tamper rejection.
+- 12 development and 14 production runtime check groups, including production service-worker control and offline reload at 1280/390px.
 
-Historical POS records are synthetic fixtures inserted through the original storage API because current original UI no longer creates those three types. After reload, their editing is exercised through the actual UI in both apps. Generated IDs/timestamps are normalized only for cross-app comparison; edit identity/timestamp retention is asserted exactly within each app, and business dates are compared unchanged.
+Detailed earlier fixture coverage and intentional cart/supplier CSS fixes are retained in [POS_SUPPLIER_TEST_REPORT_2026_11_09.md](POS_SUPPLIER_TEST_REPORT_2026_11_09.md). Those fixes remain; this batch changes no financial semantics.
 
-Original external supplier funding adds a hidden class to the payment-method section, but grid CSS keeps it visible. React fixes that CSS priority defect; the fixture explicitly checks the original defect and React visibility while preserving the original payment semantics. The original shared navigation can reopen the last cash-move overlay after reload; the fixture dismisses it through Cancel. Navigation restoration remains legacy and needs dedicated migration/coverage.
+## Test development findings and evidence
 
-Logs: `nov09-pos-*.log`; complete command history: `nov09-pos-commands.json`. Summaries: repository-results.json, stock-form-results.json, sales-form-results.json, react-table-results.json, dev-results.json, preview-results.json. POS data/screenshots are in pos-1280/ and pos-390/. Original exports and normalized comparisons are in baseline-desktop/, baseline-mobile/, baseline-desktop-cart/, baseline-mobile-cart/, baseline-desktop-supplier/ and baseline-mobile-supplier/. Historical failure evidence is not current pass evidence. Evidence files are generated/ignored; this report and checkpoint-results.json are versioned.
+The initial next-day failure assertion matched an earlier validation toast before the injected write had finished. It now waits for the specific injected-failure message before checking both failed attempts and state. The original schema-v8 loader adds businessKey to saved records at hydration; the reload check accounts for exactly that normalization. The historical quantity assertion uses the original label `10 units`. Reload can restore working-form inputs in the original, so the second blank-count transition clears those inputs through UI before starting a day. These fixture corrections did not change application persistence, business rules or guard behavior.
 
-The unchanged storage and immutable original archive hashes are asserted and recorded in tests/checkpoint-results.json, together with current source/test hashes. No new dependency audit was performed; the historical 2026-11-07 audit is not a current result.
+Current logs: `nov11-days-*.log`; complete command history: `nov11-days-commands.json`. Historical failed development runs remain identified by their log filenames/command-history entries and are not pass evidence. Day screenshots, before/after reload records, normalized comparisons and check summaries are under `days-1280/` and `days-390/`. Other evidence lives in the existing POS/baseline directories and repository/form/table/runtime result JSON files. Generated evidence is ignored by Git and included in the checkpoint archive. Source/test and unchanged-original/storage hashes are recorded in `checkpoint-results.json`.
 
-## Remaining work
+## Remaining work and limitations
 
-Not complete/not run: all financial boundaries; supplier bank verification/reversal; day close/history parity; remaining Market/Finance/Notes/Settings/Reports conversion; signed two-device sync; old-version backups; interrupted restores; service-worker upgrade/downgrade; full accessibility/theme/physical-device coverage; shadcn/Radix redesign; Cloudflare deployment headers.
+Day Setup/reconciliation input ownership, midnight automatic preservation, date/month/year rollover boundaries, failure after a successfully committed next-day write during verification, archive/delete write-failure recovery and broader financial reconciliation are not covered by the new browser fixture. Supplier bank verification/reversal, remaining Market/Finance/Reports/Notes/Settings conversion, signed-file sync, older/interrupted backups, service-worker update/rollback, full accessibility/theme/physical-device coverage, shadcn/Radix redesign and deployment checks remain incomplete. No fresh dependency audit was performed.
 
-Retained bridges: LegacySurface/legacy-tree, classic loader, uncontrolled filter compatibility, draft-field element facade, shared overlay navigation and legacy business commands. The original single atomic business writer and IndexedDB v8 schema remain unchanged. POS and payment dialogs use explicit JSX with data-only presentation models; other legacy modules still construct HTML. This is a runnable migration checkpoint, not a completed migration.
-
-## Cart recovery finding and intentional UI fix
-
-The expanded baseline test reproduced an original 2.17.2 defect: a failed cart completion restores the persisted held draft, but leaves the cart panel hidden. The original fixture checks that condition, verifies the preserved draft, then reloads to retry. React must recover the visible cart immediately, retain its payment values, and retry without duplicate transactions. Both versions finish with identical normalized stock, transaction fields and cash totals. Test products are matched by identity/name; IndexedDB iteration order is not assumed to be insertion order after reload.
-
-The second batch also replaces captured action click listeners with explicit command registration and converts cart item/payment state. These paths remain backed by the existing business command owner. The data-access service itself remains byte-identical to original 2.17.2. No production upgrade/rollback or migration-completion claim is made.
+LegacySurface/legacy-tree, classic loading, field compatibility facades, shared navigation and the domain/storage controller remain transitional. This checkpoint expands real parity coverage and React ownership; it does not complete the migration or establish production readiness. The immutable original and prior checkpoint remain rollback sources; no production cutover occurred.

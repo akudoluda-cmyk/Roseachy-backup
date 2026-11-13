@@ -4056,6 +4056,8 @@ const CartCorrections=(()=>{
 var DailySetup=(()=>{
  const fields=['business','date','openingCash','posOpeningCash','posOpeningElectronic','openingDebt'];
  const amounts=fields.slice(2);let applying=false,session=null,busy=false;
+ const view=window.RoseachySetupCorrectionView;
+ function message(error){if(view)view.patch({error});else $('setupCorrectionError').textContent=error;}
  function confirmed(){return !historical&&!!finPublic().confirmed[$('date').value];}
  function protect(){
   if(historical||applying)return;
@@ -4066,10 +4068,10 @@ var DailySetup=(()=>{
  function open(){
   if(currentDesk!=='settings'||historical)return toast('Open Settings on the active business day to edit Daily Setup.');
   protect();session={date:$('date').value,fields:Object.fromEntries(fields.map(id=>[id,$(id).value]))};
-  $('setupCorrectionTitle').textContent=confirmed()?'Edit Confirmed Daily Setup':'Edit Daily Setup';
-  $('setupCorrectionDate').textContent='Business day '+session.date+' · '+($('business').value||'Current business');
+  const title=confirmed()?'Edit Confirmed Daily Setup':'Edit Daily Setup',date='Business day '+session.date+' · '+($('business').value||'Current business');
+  if(view)view.patch({title,date});else{$('setupCorrectionTitle').textContent=title;$('setupCorrectionDate').textContent=date;}
   for(const id of amounts)$('setupEdit_'+id).value=$(id).value||0;
-  $('setupCorrectionError').textContent='';$('setupCorrectionOverlay').classList.remove('hidden');$('setupEdit_openingCash').focus();
+  message('');$('setupCorrectionOverlay').classList.remove('hidden');$('setupEdit_openingCash').focus();
  }
  async function save(){if(busy||!session||$('setupCorrectionOverlay').classList.contains('hidden'))return;busy=true;$('setupCorrectionSave').disabled=true;
   try{
@@ -4082,12 +4084,14 @@ var DailySetup=(()=>{
    const ok=await inventoryCommit(()=>{if(fields.some(id=>$(id).value!==session.fields[id]))throw Error('Setup changed. Close and reopen Settings.');applying=true;try{for(const id of amounts)$(id).value=String(values[id]);saveDraft();}finally{applying=false;}return true;},'Daily Setup correction');
    if(ok!==true)throw Error('Setup was not saved. Original values were kept.');
    session=null;$('setupCorrectionOverlay').classList.add('hidden');render();toast('Daily Setup corrected and locked');
-  }catch(e){$('setupCorrectionError').textContent=e.message;}finally{busy=false;$('setupCorrectionSave').disabled=false;}
+  }catch(e){message(e.message);}finally{busy=false;$('setupCorrectionSave').disabled=false;}
  }
- const el=document.createElement('div');el.id='setupCorrectionOverlay';el.className='marketOverlay hidden noPrint';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-labelledby','setupCorrectionTitle');
- el.innerHTML='<div class="marketPanel"><div class="marketPanelHead"><h3 id="setupCorrectionTitle">Edit Daily Setup</h3><button id="setupCorrectionClose" type="button" class="ghost">Close</button></div><p id="setupCorrectionDate" class="help"></p><p class="help">Settings correction only. The normal Daily Setup stays locked after confirmation. Saved financial days remain protected.</p><div class="split">'+amounts.map(id=>'<label>'+esc({openingCash:'Opening Retail cash',posOpeningCash:'Opening POS cash',posOpeningElectronic:'Opening POS electronic',openingDebt:'Opening customer debt'}[id])+'<input spellcheck="false" id="setupEdit_'+id+'" type="number" min="0" step="0.01"></label>').join('')+'</div><p id="setupCorrectionError" role="alert" class="help"></p><button type="button" class="primary" id="setupCorrectionSave">Save Setup Correction</button></div>';document.body.append(el);
- $('setupCorrectionClose').onclick=()=>{if(!busy){session=null;el.classList.add('hidden')}};$('setupCorrectionSave').onclick=save;
- correctionDialogKeys(el,'setupCorrectionClose');
+ let el=$('setupCorrectionOverlay');
+ if(!el){el=document.createElement('div');el.id='setupCorrectionOverlay';el.className='marketOverlay hidden noPrint';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-labelledby','setupCorrectionTitle');
+ el.innerHTML='<div class="marketPanel"><div class="marketPanelHead"><h3 id="setupCorrectionTitle">Edit Daily Setup</h3><button id="setupCorrectionClose" type="button" class="ghost">Close</button></div><p id="setupCorrectionDate" class="help"></p><p class="help">Settings correction only. The normal Daily Setup stays locked after confirmation. Saved financial days remain protected.</p><div class="split">'+amounts.map(id=>'<label>'+esc({openingCash:'Opening Retail cash',posOpeningCash:'Opening POS cash',posOpeningElectronic:'Opening POS electronic',openingDebt:'Opening customer debt'}[id])+'<input spellcheck="false" id="setupEdit_'+id+'" type="number" min="0" step="0.01"></label>').join('')+'</div><p id="setupCorrectionError" role="alert" class="help"></p><button type="button" class="primary" id="setupCorrectionSave">Save Setup Correction</button></div>';document.body.append(el);}
+ bindEntryAction('setupCorrectionClose',()=>{if(!busy){session=null;el.classList.add('hidden')}});
+ bindEntryAction('setupCorrectionSave',save);
+ if(!view)correctionDialogKeys(el,'setupCorrectionClose');
  return{confirmed,protect,open,save};
 })();
 

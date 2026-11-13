@@ -1,3 +1,9 @@
+# Stage 3B.5 addition
+
+| Feature | Owner | Verification | Remaining |
+| --- | --- | --- | --- |
+| Settings opening correction | `SetupCorrectionDialog.jsx` + single original business command | Desktop/mobile original parity: keyboard/cancel, invalid precision, failed save retains draft, duplicate retry, saved-day protection | Shared navigation, field facade and controller retained |
+
 # Stage 3B.4 addition — 2026-11-13
 
 | Feature | Migrated owner | Evidence | Remaining |

@@ -1,3 +1,9 @@
+# Current checkpoint — Settings Daily Setup correction
+
+Version `2.17.2-react-phase3b.5`; Stage 3B remains in progress. The Settings correction dialog now has explicit React markup, controlled amounts and guarded actions. Run `npm run test:day-setup` for desktop/mobile original parity, including failed-save recovery and saved-day protection. See MIGRATION_STATUS.md and tests/SETUP_CORRECTION_TEST_REPORT_2026_11_13.md. Production remains NO-GO.
+
+---
+
 # Current checkpoint — Day Setup and reconciliation, 2026-11-13
 
 Version `2.17.2-react-phase3b.4`; Stage 3B remains in progress and production is NO-GO. Explicit React components now own Day Setup and reconciliation field state and the confirmation action. Existing calculations, storage, navigation and Settings correction remain behind the single controller. Run `npm ci`, `npm run build`, `npm run test:day-setup` and `npm run test:days`; see MIGRATION_STATUS.md and tests/DAY_SETUP_TEST_REPORT_2026_11_13.md for continuity and verification.

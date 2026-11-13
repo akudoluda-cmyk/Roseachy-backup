@@ -1,3 +1,7 @@
+# Stage 3B.5 — Settings correction
+
+Explicit React correction UI is implemented with original validation and atomic persistence preserved. Keyboard, failure/retry and saved-day guards are covered against the immutable original. Remaining work: midnight/verification/archive/delete failure characterization, remaining form facades, Stage 3C financial edges and later module/release gates.
+
 # Current checkpoint — Stage 3B.4, 2026-11-13
 
 Day Setup and reconciliation field ownership are now migrated to explicit React components. Confirmation dispatch uses one registered command and awaits its existing persistence promise. Settings correction continues through the original controller and hydrates React state through the scoped facade. See MIGRATION_STATUS.md for the recovery audit and next slice. The prior plan below remains historical; the overall architecture and release gates are still incomplete.

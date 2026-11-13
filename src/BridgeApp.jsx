@@ -1,3 +1,4 @@
+import {SetupCorrectionDialog,setupCorrectionEntry,setupCorrectionView} from './history/SetupCorrectionDialog.jsx';
 import {setupEntry} from './history/DaySetup.jsx';
 import * as dayRecords from './domain/day-records.mjs';
 import {dayEntry,savedDaysView} from './history/SavedDays.jsx';
@@ -34,6 +35,7 @@ let started = false;
 export function BridgeApp() {
   const [tables, setTables] = useState({ ledger: null, stock: null });
   useLayoutEffect(() => {
+    window.RoseachySetupCorrectionView = setupCorrectionView;
     window.RoseachyDayRecords = dayRecords;
     window.RoseachySavedDaysView = savedDaysView;
     window.RoseachyInventoryMath = inventoryMath;
@@ -44,7 +46,7 @@ export function BridgeApp() {
     window.RoseachySalesPricing = salesPricing;
     window.RoseachyCartView = heldCartView;
     window.RoseachyProductSearchView = productSearchView;
-    const entries = [salesEntry, cartEntry, stockEntry, posEntry, cashMoveEntry, supplierPaymentEntry, dayEntry, setupEntry];
+    const entries = [salesEntry, cartEntry, stockEntry, posEntry, cashMoveEntry, supplierPaymentEntry, dayEntry, setupEntry, setupCorrectionEntry];
     window.RoseachyForms = {
       element(id,el) { const entry=entries.find(e=>e.fields.has(id)||e.actions.has(id)); return entry?entry.element(id,el):el; },
       registerCommand(id,execute) { const entry=entries.find(e=>e.actions.has(id)); if(!entry)return false; entry.registerCommand(id,execute); return true; },
@@ -89,5 +91,5 @@ export function BridgeApp() {
       document.body.appendChild(panel);
     });
   }, []);
-  return <><LegacySurface /><SalesStockTablePortals tables={tables} /></>;
+  return <><LegacySurface /><SetupCorrectionDialog /><SalesStockTablePortals tables={tables} /></>;
 }

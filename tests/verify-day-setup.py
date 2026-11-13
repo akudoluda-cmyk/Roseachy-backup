@@ -64,13 +64,46 @@ def fixture(browser, root, label, width):
         for key in ['date', *OPENINGS, 'finDayConfirm']: expect(page.locator('#'+key)).to_be_disabled()
         ok('confirmation normalizes blank opening, locks fields and persists once across reload')
         settings()
+        if label == 'react': expect(page.locator('[data-react-setup-correction-field]')).to_have_count(4)
+        expect(page.locator('#setupEdit_openingCash')).to_be_focused()
+        page.locator('#setupCorrectionSave').focus(); page.keyboard.press('Tab')
+        expect(page.locator('#setupCorrectionClose')).to_be_focused()
+        page.keyboard.press('Shift+Tab'); expect(page.locator('#setupCorrectionSave')).to_be_focused()
+        page.locator('#setupEdit_openingCash').fill('999'); page.keyboard.press('Escape')
+        expect(page.locator('#setupCorrectionOverlay')).not_to_be_visible()
+        assert draft()['fields']['openingCash'] == '100.25'
+        page.locator('#openingUnlockBtn').click()
+        expect(page.locator('#setupEdit_openingCash')).to_have_value('100.25')
+        ok('correction focus containment, Escape cancellation and reopen preserve persisted opening')
         page.locator('#setupEdit_openingCash').fill('123.456'); page.locator('#setupCorrectionSave').click()
         expect(page.locator('#setupCorrectionError')).to_contain_text('two decimal places')
-        page.locator('#setupEdit_openingCash').fill('125.50'); page.locator('#setupCorrectionSave').click()
+        before_correction = draft()
+        page.locator('#setupEdit_openingCash').fill('125.50')
+        page.evaluate('''()=>{const put=IDBObjectStore.prototype.put;let remaining=2;window.__setupFaults=0;
+          IDBObjectStore.prototype.put=function(...args){
+            if(this.name==='draft' && args[0]?.fields?.openingCash==='125.5' && remaining-->0){
+              window.__setupFaults++;if(!remaining)IDBObjectStore.prototype.put=put;
+              throw new DOMException('Setup fixture write fault','QuotaExceededError');
+            }return put.apply(this,args);
+          }}''')
+        page.locator('#setupCorrectionSave').click()
+        expect(page.locator('#setupCorrectionError')).to_contain_text('Original values were kept')
+        settled(); assert page.evaluate('__setupFaults') == 2 and draft() == before_correction
+        expect(page.locator('#setupEdit_openingCash')).to_have_value('125.50')
+        expect(page.locator('#setupCorrectionSave')).to_be_enabled()
+        ok('failed correction rolls back persisted setup and retains editable retry draft')
+        page.locator('#setupCorrectionSave').evaluate('(button)=>{button.click();button.click()}')
         expect(page.locator('#setupCorrectionOverlay')).not_to_be_visible(); settled(); sales(); open_setup()
         expect(page.locator('#openingCash')).to_have_value('125.5'); expect(page.locator('#openingCash')).to_be_disabled()
         assert draft()['fields']['openingCash'] == '125.5'
         ok('Settings correction validates precision and refreshes locked setup fields')
+        page.locator('#saveBtn').click(); expect(page.locator('#toast')).to_contain_text('Day saved successfully'); settled()
+        protected = draft(); saved_before = page.evaluate('RoseachyStore.getObject("dsb_saved_v2")')
+        settings(); page.locator('#setupEdit_openingCash').fill('130'); page.locator('#setupCorrectionSave').click()
+        expect(page.locator('#setupCorrectionError')).to_contain_text('saved financial record')
+        assert draft() == protected and page.evaluate('RoseachyStore.getObject("dsb_saved_v2")') == saved_before
+        page.locator('#setupCorrectionClose').click(); sales()
+        ok('saved-day correction guard leaves both the active draft and historical snapshot unchanged')
         page.locator('#actualCash').fill('120.25'); page.locator('#actualBankMovement').fill('-10.50')
         page.locator('#sumView [data-v="pos"]').click()
         page.locator('#actualPosCash').fill('190.50'); page.locator('#actualPosElectronic').fill('295.75')

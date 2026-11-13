@@ -1,3 +1,9 @@
+# Latest verification — Stage 3B.5
+
+See [Settings correction report](SETUP_CORRECTION_TEST_REPORT_2026_11_13.md) for the latest slice and [Day Setup report](DAY_SETUP_TEST_REPORT_2026_11_13.md) for the preceding same-session regressions. Overall migration remains incomplete.
+
+---
+
 # Latest verification — Stage 3B.4
 
 See [Day Setup report](DAY_SETUP_TEST_REPORT_2026_11_13.md) for fresh November 13 results and remaining limits. The November 11 report below is preserved as history.

@@ -1,3 +1,9 @@
+# 2.17.2-react-phase3b.5 — 2026-11-13
+
+- Convert Settings Daily Setup correction to React fields, presentation and actions.
+- Preserve original atomic command and saved-day protections.
+- Extend desktop/mobile parity with focus/cancel, injected persistence failure, retry and saved-day protection.
+
 # 2.17.2-react-phase3b.4 — 2026-11-13
 
 - Migrate Day Setup and retail/POS reconciliation layouts and ten fields to explicit React components.

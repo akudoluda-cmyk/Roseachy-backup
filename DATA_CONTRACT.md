@@ -1,3 +1,7 @@
+# Stage 3B.5 contract note
+
+Settings correction draft values and presentation now reside in React stores. Validation, source-record guards and `inventoryCommit` are unchanged; no schema, persisted keys or financial arithmetic changed. Save/Close use registered commands. Navigation still owns overlay visibility; a fallback keeps the controller-only harness runnable.
+
 # Stage 3B.4 contract note
 
 `DaySetup.jsx` owns the ten existing state fields and confirmation UI. Persisted keys, schema v8, blank-vs-zero conventions, signed bank movement, business date semantics and calculation rules are preserved. The existing business controller remains the only persistent writer. Returning `finConfirmDay`'s existing promise extends the React busy guard through save completion; it does not add a second save or change confirmation storage semantics. Settings correction still writes through the same atomic command and field facade.

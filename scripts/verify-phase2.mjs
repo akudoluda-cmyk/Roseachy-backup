@@ -10,7 +10,7 @@ const checks={
  'React row actions':stock.includes("'stockEdit'")&&ledger.includes("'ledgerEdit'"),
  'no table HTML injection':![stock,ledger,island].some(s=>s.includes('dangerouslySetInnerHTML')||s.includes('.innerHTML')),
  'React registration precedes scripts':bridge.indexOf('window.RoseachyReactTables =')<bridge.indexOf('for (const src of scripts)'),
- 'service worker cache version':read('public/sw.js').includes('react-phase3b.4')
+ 'service worker cache version':read('public/sw.js').includes('react-phase3b.5')
 };
 console.log(JSON.stringify(checks,null,2));
 if(Object.values(checks).some(v=>!v))process.exit(1);

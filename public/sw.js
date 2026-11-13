@@ -1,5 +1,5 @@
 /* React bridge offline shell. Business records stay exclusively in IndexedDB. */
-const VERSION = '2.17.2-react-phase3b.4';
+const VERSION = '2.17.2-react-phase3b.5';
 const CACHE = 'roseachy-shell-react-bridge-' + VERSION;
 const FIXED = [
  '/manifest.json', '/js/pwa.js', '/js/android-sync-files.js',

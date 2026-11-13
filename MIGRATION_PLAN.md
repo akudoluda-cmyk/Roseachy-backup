@@ -1,3 +1,9 @@
+# Current checkpoint — Stage 3B.4, 2026-11-13
+
+Day Setup and reconciliation field ownership are now migrated to explicit React components. Confirmation dispatch uses one registered command and awaits its existing persistence promise. Settings correction continues through the original controller and hydrates React state through the scoped facade. See MIGRATION_STATUS.md for the recovery audit and next slice. The prior plan below remains historical; the overall architecture and release gates are still incomplete.
+
+---
+
 # Migration status — 2026-11-11
 
 Decision: NO-GO for production. Migration is incomplete.

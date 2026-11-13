@@ -1,3 +1,7 @@
+# Stage 3B.4 contract note
+
+`DaySetup.jsx` owns the ten existing state fields and confirmation UI. Persisted keys, schema v8, blank-vs-zero conventions, signed bank movement, business date semantics and calculation rules are preserved. The existing business controller remains the only persistent writer. Returning `finConfirmDay`'s existing promise extends the React busy guard through save completion; it does not add a second save or change confirmation storage semantics. Settings correction still writes through the same atomic command and field facade.
+
 # Data contract — Stage 3B boundaries
 
 Authoritative database: `roseachy_pwa_db`, version **8**. Storage implementation is unchanged from the supplied archive. No schema migration or new financial writer was introduced. Stock, retail Sales and cart payment draft values now live in src/forms/form-state.mjs snapshots consumed by controlled React components. The compatibility facade translates existing reads/writes/event registration for those fields into draft operations. It never writes IndexedDB. The existing inventoryCommit/RoseachyStore.atomic path remains the only business writer. Each submit action has an in-flight guard; failed commits restore draft values through the same boundary.

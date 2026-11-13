@@ -1,3 +1,4 @@
+import {setupEntry} from './history/DaySetup.jsx';
 import * as dayRecords from './domain/day-records.mjs';
 import {dayEntry,savedDaysView} from './history/SavedDays.jsx';
 import {supplierPaymentEntry,supplierPaymentView} from './forms/SupplierPaymentDialog.jsx';
@@ -43,7 +44,7 @@ export function BridgeApp() {
     window.RoseachySalesPricing = salesPricing;
     window.RoseachyCartView = heldCartView;
     window.RoseachyProductSearchView = productSearchView;
-    const entries = [salesEntry, cartEntry, stockEntry, posEntry, cashMoveEntry, supplierPaymentEntry, dayEntry];
+    const entries = [salesEntry, cartEntry, stockEntry, posEntry, cashMoveEntry, supplierPaymentEntry, dayEntry, setupEntry];
     window.RoseachyForms = {
       element(id,el) { const entry=entries.find(e=>e.fields.has(id)||e.actions.has(id)); return entry?entry.element(id,el):el; },
       registerCommand(id,execute) { const entry=entries.find(e=>e.actions.has(id)); if(!entry)return false; entry.registerCommand(id,execute); return true; },

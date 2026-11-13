@@ -1,3 +1,11 @@
+# Current checkpoint — Day Setup and reconciliation, 2026-11-13
+
+Version `2.17.2-react-phase3b.4`; Stage 3B remains in progress and production is NO-GO. Explicit React components now own Day Setup and reconciliation field state and the confirmation action. Existing calculations, storage, navigation and Settings correction remain behind the single controller. Run `npm ci`, `npm run build`, `npm run test:day-setup` and `npm run test:days`; see MIGRATION_STATUS.md and tests/DAY_SETUP_TEST_REPORT_2026_11_13.md for continuity and verification.
+
+The following checkpoint reports are retained as history.
+
+---
+
 # Current checkpoint — Saved Days and day transitions, 2026-11-11
 
 Version `2.17.2-react-phase3b.3`. Migration remains incomplete and is NOT ready for production. The original 2.17.2 is now archived and the financial/credit/backup parity fixture passes at 1280px and 390px. Stock and retail Sales draft fields/actions, product suggestions, held-cart items/payment fields, explicit table rows, and named POS/cash-move/supplier-payment layouts, Saved Days/history controls and day action buttons are React owned; a repository exposes immutable committed snapshots, while the existing atomic business controller remains authoritative. See MIGRATION_PLAN.md, FEATURE_PARITY_MATRIX.md, DATA_CONTRACT.md and tests/CURRENT_TEST_REPORT.md for the exact coverage and retained bridges.

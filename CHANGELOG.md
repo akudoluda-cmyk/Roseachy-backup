@@ -1,3 +1,10 @@
+# 2.17.2-react-phase3b.4 — 2026-11-13
+
+- Migrate Day Setup and retail/POS reconciliation layouts and ten fields to explicit React components.
+- Register the confirmation action and hold its duplicate-submit guard until the existing save promise settles.
+- Add original-vs-React desktop/mobile Day Setup and year-boundary parity tests.
+- Preserve schema, financial rules and controller ownership; retain migration continuity and verification reports.
+
 # Changes
 
 ## 2026-11-11 — Saved Days and day-transition checkpoint (phase3b.3)

@@ -1,7 +1,7 @@
 {
   "name": "roseachy-desk-react-migration",
   "private": true,
-  "version": "2.17.2-react-phase3b.3",
+  "version": "2.17.2-react-phase3b.4",
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
@@ -24,7 +24,8 @@
     "test:cart": "python3 tests/verify-baseline.py --cart && python3 tests/verify-baseline.py --cart --mobile",
     "test:pos": "python3 tests/verify-pos.py && python3 tests/verify-pos.py --mobile",
     "test:supplier": "python3 tests/verify-baseline.py --supplier --backup && python3 tests/verify-baseline.py --supplier --backup --mobile",
-    "test:days": "python3 tests/verify-days.py && python3 tests/verify-days.py --mobile"
+    "test:days": "python3 tests/verify-days.py && python3 tests/verify-days.py --mobile",
+    "test:day-setup": "python3 tests/verify-day-setup.py"
   },
   "dependencies": {
     "react": "^19.2.0",

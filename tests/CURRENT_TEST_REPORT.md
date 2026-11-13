@@ -1,3 +1,9 @@
+# Latest verification — Stage 3B.4
+
+See [Day Setup report](DAY_SETUP_TEST_REPORT_2026_11_13.md) for fresh November 13 results and remaining limits. The November 11 report below is preserved as history.
+
+---
+
 # Current test report — Saved Days and day transitions, 2026-11-11
 
 Version: `2.17.2-react-phase3b.3`. Decision: NO-GO for production; migration incomplete.

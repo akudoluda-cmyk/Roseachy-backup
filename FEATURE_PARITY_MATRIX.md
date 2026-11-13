@@ -1,3 +1,14 @@
+# Stage 3B.4 addition — 2026-11-13
+
+| Feature | Migrated owner | Evidence | Remaining |
+| --- | --- | --- | --- |
+| Day Setup and closing counts | `src/history/DaySetup.jsx` | `test:day-setup` compares original/production React at desktop/mobile; `test:days` exercises history and failed transitions | Legacy business controller and field facade retained |
+| Confirmation and persisted locks | React registered action; existing controller command | Invalid/blank amounts, double click, reload locks | Confirmation write-failure recovery not characterized by new fixture |
+| Settings opening correction | Existing legacy dialog → controlled setup state | Precision validation and persisted corrected amount | Dialog conversion and broader failure coverage |
+| Year-end transition | Existing controller; React fields | Dec 31 → Jan 1, exact counted carry-forward and reset | Automatic midnight and other calendar cases |
+
+The previous matrix follows as historical context.
+
 # Feature parity matrix
 
 Original 2.17.2 is archived in reference/. Independent persisted-state parity passes for the product creation, cash-sale edit/refund, transfer sale, expense, credit purchase/repayment, export/restore/reload fixture at 1280px and 390px. Other PASS entries describe the stated current-app checks only; they are not comprehensive original parity. No accepted deferrals or completed migration are implied.

@@ -1,3 +1,11 @@
+# 2.17.2-react-phase3b.6 — 2026-11-13
+
+- Make saved-day Archive/Restore/Delete commit atomically; preserve working history and transaction indexes on failure.
+- Add a nonmutating history-change planner and pending state for React history actions.
+- Pause editing and offer reload when next-day verification and restoring the prior draft both fail.
+- Prevent queued working-form autosave from overwriting the persisted draft during day operations or recovery.
+- Add real IndexedDB failure characterization and midnight/calendar coverage against the immutable original.
+
 # 2.17.2-react-phase3b.5 — 2026-11-13
 
 - Convert Settings Daily Setup correction to React fields, presentation and actions.

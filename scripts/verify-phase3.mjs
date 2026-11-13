@@ -19,8 +19,8 @@ const checks = {
   'Sales adapter registers before controller fallback': core.includes('register(roseachySalesFilterHandlers)'),
   'Stock adapter registers before controller fallback': core.includes('register(roseachyStockFilterHandlers)'),
   'Reset does not call inventory commit': !core.slice(core.indexOf('window.RoseachyClearFilters=function'), core.indexOf("$('stockTable').addEventListener('click',e=>",core.indexOf('window.RoseachyClearFilters=function'))).includes('inventoryCommit'),
-  'PWA version separates Phase 3 caches': sw.includes('react-phase3b.5'),
-  'Package version and verification match Phase 3': p.version.endsWith('react-phase3b.5') && !!p.scripts['verify:phase3'],
+  'PWA version separates Phase 3 caches': sw.includes('react-phase3b.6'),
+  'Package version and verification match Phase 3': p.version.endsWith('react-phase3b.6') && !!p.scripts['verify:phase3'],
   'IndexedDB module preserved': read('public/legacy/01-storage.js').includes('indexedDB'),
 };
 console.log(JSON.stringify(checks, null, 2));

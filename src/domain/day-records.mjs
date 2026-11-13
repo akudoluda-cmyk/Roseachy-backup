@@ -16,3 +16,16 @@ export function normalizedDayRecord(rec,records){
  }
  return {existing,record:rec};
 }
+
+/** Plan a history-only change without mutating the working storage collection.
+ * The command owner must enforce debt/deletion permissions and persist atomically.
+ */
+export function planSavedDayChange(records,id,action){
+ if(!['archive','delete'].includes(action))throw Error('Unsupported saved-day change.');
+ const index=records.findIndex(record=>String(record.id)===String(id));
+ if(index<0)return null;
+ const previous=records[index],next=records.slice();
+ if(action==='archive')next[index]={...previous,archived:!previous.archived};
+ else next.splice(index,1);
+ return {records:next,previous,record:action==='archive'?next[index]:null};
+}

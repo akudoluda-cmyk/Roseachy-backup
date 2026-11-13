@@ -1,3 +1,9 @@
+# Latest verification — Stage 3B.6
+
+See [Day recovery report](DAY_RECOVERY_TEST_REPORT_2026_11_13.md) for current results, known original defects, intentional recovery fixes and limitations. Earlier reports below are historical.
+
+---
+
 # Latest verification — Stage 3B.5
 
 See [Settings correction report](SETUP_CORRECTION_TEST_REPORT_2026_11_13.md) for the latest slice and [Day Setup report](DAY_SETUP_TEST_REPORT_2026_11_13.md) for the preceding same-session regressions. Overall migration remains incomplete.

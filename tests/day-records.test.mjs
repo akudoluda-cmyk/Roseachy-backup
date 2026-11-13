@@ -25,3 +25,17 @@ test('updates retain archive identity and reject missing or duplicate committed 
  assert.throws(()=>normalizedDayRecord({...next,tx:[]},[previous]),/missing 1 previously saved/);
  assert.throws(()=>normalizedDayRecord({...next,tx:[{id:'payment'},{id:'payment'}]},[previous]),/missing or duplicate/);
 });
+
+test('history changes do not mutate stored records before a successful commit',async()=>{
+ const {planSavedDayChange}=await import('../src/domain/day-records.mjs');
+ const original=[{id:'day',archived:false,tx:[{id:'sale',amount:600}],custom:{keep:true}},{id:2,archived:true,tx:[]}];
+ const before=structuredClone(original);
+ Object.freeze(original);original.forEach(Object.freeze);
+ const archive=planSavedDayChange(original,'day','archive');
+ assert.equal(archive.record.archived,true);assert.equal(archive.record.id,'day');
+ assert.deepEqual(archive.record.tx,before[0].tx);assert.deepEqual(archive.record.custom,{keep:true});
+ const restore=planSavedDayChange(archive.records,'day','archive');assert.deepEqual(restore.records,before);
+ const deletion=planSavedDayChange(original,'2','delete');assert.deepEqual(deletion.records,[before[0]]);
+ assert.deepEqual(original,before);assert.equal(planSavedDayChange(original,'missing','delete'),null);
+ assert.throws(()=>planSavedDayChange(original,'day','replace'),/Unsupported/);
+});

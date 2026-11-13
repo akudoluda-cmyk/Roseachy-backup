@@ -1,3 +1,9 @@
+# Current checkpoint — Day-operation recovery
+
+Version `2.17.2-react-phase3b.6`; Stage 3B remains in progress. History changes now commit atomically. If a day transition cannot restore the prior draft, editing pauses until saved records are reloaded. `npm run test:day-recovery` exercises real IndexedDB failures and Nigeria-local midnight preservation at desktop/mobile widths. See MIGRATION_STATUS.md and tests/DAY_RECOVERY_TEST_REPORT_2026_11_13.md. Production remains NO-GO.
+
+---
+
 # Current checkpoint — Settings Daily Setup correction
 
 Version `2.17.2-react-phase3b.5`; Stage 3B remains in progress. The Settings correction dialog now has explicit React markup, controlled amounts and guarded actions. Run `npm run test:day-setup` for desktop/mobile original parity, including failed-save recovery and saved-day protection. See MIGRATION_STATUS.md and tests/SETUP_CORRECTION_TEST_REPORT_2026_11_13.md. Production remains NO-GO.

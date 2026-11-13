@@ -1,3 +1,9 @@
+# Stage 3B.6 — Durable history commands and day recovery
+
+Archive/Restore/Delete now use a nonmutating domain plan and the existing atomic storage writer. A React recovery notice blocks stale editing after a double failure; background working-state saves wait for day operations and stop during required recovery. These deliberately fix characterized original failure behavior without changing financial arithmetic or successful day-transition semantics.
+
+Next: inventory remaining transaction/cart correction form ownership and migrate a characterized slice; separately cover confirmation write failures, timer-triggered midnight behavior and additional financial boundaries. Legacy controllers/facades and Stage 3C–6 completion gates remain.
+
 # Stage 3B.5 — Settings correction
 
 Explicit React correction UI is implemented with original validation and atomic persistence preserved. Keyboard, failure/retry and saved-day guards are covered against the immutable original. Remaining work: midnight/verification/archive/delete failure characterization, remaining form facades, Stage 3C financial edges and later module/release gates.

@@ -1,3 +1,9 @@
+# Stage 3B.6 durability note
+
+History changes prepare a separate array (and a separate record for archive/restore) before passing it to the existing `RS.atomic` writer. Failure restores the original collection; successful changes update saved records and transaction indexes together. IDs, custom metadata, debt-deletion guards, live stock and active draft semantics are preserved.
+
+When next-day persistence succeeded but verification and rollback both fail, the displayed previous day is no longer authoritative. A runtime-only recovery latch prevents further editing/autosave and requests reload from IndexedDB. No new persisted key/schema or second business writer is introduced. Original early-success/unsafe-recovery behavior is an intentional defect correction, not claimed parity.
+
 # Stage 3B.5 contract note
 
 Settings correction draft values and presentation now reside in React stores. Validation, source-record guards and `inventoryCommit` are unchanged; no schema, persisted keys or financial arithmetic changed. Save/Close use registered commands. Navigation still owns overlay visibility; a fallback keeps the controller-only harness runnable.

@@ -5,7 +5,7 @@ const RS=window.RoseachyRepository?.controller||window.RoseachyStore;
 const { clampMarkup, roundMoney, priceFromMarkup, impliedMarkup, inventoryWhole, inventoryMoney } = window.RoseachyInventoryMath;
 const {validQuantityPricing,salePricing,ruleFromSaleRecord,reviseCartItem}=window.RoseachySalesPricing;
 const {POS_FORM,posComponents,posBuild,posMovements,posValidate}=window.RoseachyPosMath;
-const {normalizedDayRecord}=window.RoseachyDayRecords;
+const {normalizedDayRecord,planSavedDayChange}=window.RoseachyDayRecords;
 const $=id=>{const el=document.getElementById(id);return window.RoseachyForms?.element(id,el)||el};
 function bindEntryAction(id,execute){if(!window.RoseachyForms?.registerCommand(id,execute))$(id)?.addEventListener('click',execute)}
 const KEY={classifications:'roseachy_classifications_v1',stock:'dsb_stock_v2',saved:'dsb_saved_v2',draft:'dsb_draft_v2',trash:'dsb_stock_trash_v2',txtrash:'dsb_tx_trash_v2',notes:'dsb_notes_v1',hold:'dsb_hold_v1',preimport:'dsb_preimport_v1',market:'roseachy_market_v1',appearance:'roseachy_appearance_v1',ui:'roseachy_ui_v1',financeVault:'roseachy_finance_vault_v1',financeReview:'roseachy_finance_review_v1',working:'roseachy_working_forms_v1'};
@@ -264,7 +264,7 @@ function consumeBatches(s,qty,t=null){if(!Number.isFinite(qty)||qty<=0||((s.batc
 function restoreAllocations(s,alloc){(alloc||[]).forEach(a=>{let b=(s.batches||[]).find(x=>x.id===a.batchId);if(b){b.qty=n(b.qty)+n(a.qty);if(a.packStateKnown){b.packStateKnown=true;b.packUnitSize=n(a.packUnitSize);b.sealedPacks=n(a.sealedPacks);b.looseUnits=n(a.looseUnits)}}else addBatch(s,n(a.qty),n(a.costPrice),a.expiryDate,a.batchId)})}
 function recalcProduct(s){s.batches=(s.batches||[]).map(b=>normalizeBatch(b,s.costPrice)).filter(b=>b.qty>0);s.qty=s.batches.reduce((a,b)=>a+n(b.qty),0);s.totalUnits=s.qty;reconcilePhysicalPackState(s);if(s.qty>0)s.costPrice=s.batches.reduce((a,b)=>a+n(b.qty)*n(b.costPrice),0)/s.qty;if(s.currentCostPrice==null||!isFinite(Number(s.currentCostPrice)))s.currentCostPrice=n(s.costPrice);if(s.priceMode==='markup')s.price=priceFromMarkup(n(s.currentCostPrice),s.markupMode==='default'?divisionDefaultMarkup(divOf(s)):s.markupPercent);s.expiryDate=nearestExpiry(s);s.targetQty=Math.max(n(s.targetQty||0),s.qty);return s}
 
-function saveDraft(){if(historical)return;DailySetup?.protect();const fields={};stateFields.forEach(id=>{const el=$(id);if(el)fields[id]=el.value});storeSet(KEY.draft,JSON.stringify({tx,fields,openingStock}))}
+function saveDraft(){if(historical||dayRecoveryRequired)return;DailySetup?.protect();const fields={};stateFields.forEach(id=>{const el=$(id);if(el)fields[id]=el.value});storeSet(KEY.draft,JSON.stringify({tx,fields,openingStock}))}
 function loadDraft(){try{const d=JSON.parse(safeGet(KEY.draft)||'null');if(!d)return false;const z=normalizeTxIds(d.tx);tx=z.list;openingStock=d.openingStock||{};if(d.fields)stateFields.forEach(id=>{const el=$(id);if(el&&d.fields[id]!==undefined)el.value=d.fields[id]});if(z.changed){d.tx=tx;storeSet(KEY.draft,JSON.stringify(d))}return true}catch{return false}}
 function saveHoldState(){if(!holdMode){storeRemove(KEY.hold);return}const form={creditDeskCustomer:$('creditDeskCustomer').value,creditDeskPaid:$('creditDeskPaid').value,creditDeskMethod:$('creditDeskMethod').value,txDiv:$('txDiv').value,type:$('type').value,note:$('note').value,party:$('party').value,amount:$('amount').value,qty:$('qty').value,totalAmount:$('totalAmount').value,selectedProductId:selectedProductId||null,splitCash:$('splitCash').value,splitBank:$('splitBank').value,splitCredit:$('splitCredit').value,refundReturn:$('refundReturn').checked,holdCustPaid:$('holdCustPaid').value,holdCustReturned:$('holdCustReturned').value,holdCustOwed:$('holdCustOwed').value,holdRecoverChangeCheck:!!$('holdRecoverChangeCheck')?.checked,txPackEnabled:$('txPackEnabled')?.checked||false,txPacks:$('txPacks')?.value||'',txUnitsPerPack:$('txUnitsPerPack')?.value||'',txPackTotal:$('txPackTotal')?.value||''};storeSet(KEY.hold,JSON.stringify({holdMode:true,holdType,heldItems:clone(heldItems),form,date:$('date').value,business:$('business').value}))}
 function loadHoldState(){try{const h=JSON.parse(safeGet(KEY.hold)||'null');if(!h?.holdMode||!TYPES[h.holdType]||TYPES[h.holdType].cat!=='sale'||h.holdType==='sale_account')return false;holdMode=true;holdType=h.holdType;heldItems=Array.isArray(h.heldItems)?h.heldItems:[];if(!tx.length){if(h.date)$('date').value=h.date;if(h.business!=null)$('business').value=h.business}const f=h.form||{};CreditAccounts.deskOptions();$('creditDeskCustomer').value=f.creditDeskCustomer||'';$('creditDeskPaid').value=f.creditDeskPaid??'0';$('creditDeskMethod').value=f.creditDeskMethod||'cash';const wanted=f.selectedProductId&&getStock().some(x=>x.id===f.selectedProductId)?f.selectedProductId:null;$('type').value=holdType;$('txDiv').value=f.txDiv||'';$('party').value=f.party||'';$('amount').value=f.amount||'';$('qty').value=f.qty||'';$('splitCash').value=f.splitCash||'0';$('splitBank').value=f.splitBank||'0';$('splitCredit').value=f.splitCredit||'0';$('refundReturn').checked=!!f.refundReturn;$('holdCustPaid').value=f.holdCustPaid||'';$('holdCustReturned').value=f.holdCustReturned||'';if($('holdRecoverChangeCheck'))$('holdRecoverChangeCheck').checked=!!f.holdRecoverChangeCheck;selectedProductId=wanted;const wp=wanted?getStock().find(x=>x.id===wanted):null;$('note').value=wp?wp.name:(f.note||'');refreshTypeUI();if($('txPackEnabled'))$('txPackEnabled').checked=!!f.txPackEnabled;if($('txPacks'))$('txPacks').value=f.txPacks||'';if($('txUnitsPerPack'))$('txUnitsPerPack').value=f.txUnitsPerPack||'';$('totalAmount').value=f.totalAmount||'';updateTxPackUI(false);computeTotal();$('holdPanel').classList.remove('hidden');renderHoldPanel();return true}catch{return false}}
@@ -1223,13 +1223,31 @@ if(!window.RoseachySavedDaysView)$('savedRangeFilter')?.addEventListener('click'
 function currentDayIsSaved(){const rec=getSaved().find(x=>x.date===$('date').value&&businessKey(x.business)===businessKey($('business').value));if(!rec)return false;if(rec.dayFingerprint)return rec.dayFingerprint===fingerprintCurrentDay();const f=rec.fields||{};return JSON.stringify(rec.tx||[])===JSON.stringify(tx)&&Math.abs(n(f.openingCash)-n($('openingCash').value))<.005&&Math.abs(n(f.posOpeningCash)-n($('posOpeningCash').value))<.005&&Math.abs(n(f.posOpeningElectronic)-n($('posOpeningElectronic').value))<.005&&Math.abs(n(f.openingDebt)-n($('openingDebt').value))<.005}
 /* Business-day saves are durable before user feedback. Never clear the active day
    or replace its draft until IndexedDB has committed the Saved Days snapshot. */
-let dayOperationBusy=false,dayPreviousInert=false;
+let dayOperationBusy=false,dayPreviousInert=false,dayRecoveryRequired=false;
 function dayOperationState(busy){
- dayOperationBusy=busy;
+ busy=busy||dayRecoveryRequired;
+ const wasBusy=dayOperationBusy;dayOperationBusy=busy;
+ window.RoseachySavedDaysView?.patch({busy});
  const app=document.querySelector('.app');
- if(busy){dayPreviousInert=!!app?.inert;if(app)app.inert=true;}
+ if(busy){if(!wasBusy)dayPreviousInert=!!app?.inert;if(app)app.inert=true;}
  else if(app)app.inert=dayPreviousInert||RS.status().stale;
  for(const id of ['saveBtn','clearBtn']){const el=$(id);if(el){el.disabled=busy;el.setAttribute('aria-busy',String(busy));}}
+}
+function requireDayRecovery(){
+ dayRecoveryRequired=true;
+ clearTimeout(backupWorkTimer);backupWorkTimer=0;backupWorkGeneration++;
+ if(window.RoseachySavedDaysView)window.RoseachySavedDaysView.patch({recoveryRequired:true});
+ else if(!document.getElementById('dayRecoveryOverlay')){
+  const overlay=document.createElement('div');overlay.id='dayRecoveryOverlay';overlay.className='marketOverlay noPrint';overlay.style.zIndex='100001';overlay.setAttribute('role','alertdialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-labelledby','dayRecoveryTitle');
+  const panel=document.createElement('div');panel.className='marketPanel';
+  const title=document.createElement('h3');title.id='dayRecoveryTitle';title.textContent='Reload saved records to continue';
+  const message=document.createElement('p');message.textContent='The day change could not finish safely. Your previous day has been saved. Editing is paused. Reload the saved records, then review Saved Days before entering transactions.';
+  const reload=document.createElement('button');reload.id='dayRecoveryReload';reload.type='button';reload.className='primary';reload.textContent='Reload saved records';reload.onclick=()=>location.reload();
+  overlay.addEventListener('keydown',event=>{if(event.key==='Tab'){event.preventDefault();reload.focus();}});
+  panel.append(title,message,reload);overlay.append(panel);document.body.append(overlay);
+ }
+ const root=document.getElementById('root');if(root)root.inert=true;
+ document.getElementById('dayRecoveryReload')?.focus();
 }
 function dayDraftFields(){DailySetup?.protect();const fields={};for(const id of stateFields){const el=$(id);if(el)fields[id]=el.value;}return fields}
 
@@ -1261,7 +1279,30 @@ async function runManualDaySave(){
 }
 bindEntryAction('saveBtn',runManualDaySave);
 function setHistoryVisible(visible){if(window.RoseachySavedDaysView)window.RoseachySavedDaysView.patch({historical:visible});else $('historyBar').classList.toggle('hidden',!visible)}
-function savedDayAction(action,id){const load=action==='load',arc=action==='archive',del=action==='delete',a=getSaved();if(!id)return;const i=a.findIndex(x=>String(x.id)===String(id));if(i<0)return;if(load){if(holdMode)return toast('Finish or cancel the cart first');if(!historical){currentSnapshot={tx:clone(tx),openingStock:clone(openingStock),fields:{}};stateFields.forEach(fid=>{const el=$(fid);if(el)currentSnapshot.fields[fid]=el.value})}const r=a[i];historical=true;historicalRecordId=r.id;historicalSupplierOpening=r.fields?.openingSupplierPayable??supplierOpeningFor(r.date,r.business);tx=clone(r.tx||[]);openingStock=clone(r.openingStock||{});historicalClosingStock=clone(r.closingStock||{});$('business').value=r.business||'';$('date').value=r.date||'';$('openingCash').value=r.fields?.openingCash||0;$('posOpeningCash').value=r.fields?.posOpeningCash||0;$('posOpeningElectronic').value=r.fields?.posOpeningElectronic||0;$('actualPosCash').value=r.fields?.actualPosCash??'';$('actualPosElectronic').value=r.fields?.actualPosElectronic??'';$('openingDebt').value=r.fields?.openingDebt||0;$('actualCash').value=r.fields?.actualCash??'';$('actualBankMovement').value=r.fields?.actualBankMovement??'';setHistoryVisible(true);resetLedgerWindow();render();setTab('Tx');return}if(arc){a[i].archived=!a[i].archived;setSaved(a,[id]);resetSavedWindow();renderSaved();renderAnalytics();renderWeekly();toast(a[i].archived?'Saved day archived':'Saved day restored');return}if(del){if((a[i].tx||[]).some(t=>CreditAccounts.isCredit(t)||['sale_credit','sale_split','debt_cash','debt_transfer','purchase_credit','supplier_pay_cash','supplier_pay_bank','supplier_pay_transfer'].includes(t.type)&&(t.type!=='sale_split'||n(t.splitCredit)>0)||n(t.recoverableChange)>0||t.supplierPaymentId||t.supplierPurchaseId||t.marketPurchaseId))return toast('This day contains customer or supplier debt history. Archive it to preserve purchases, payments and outstanding balances.');if(!confirm('Delete this saved day? Current stock will not be changed.'))return;a.splice(i,1);setSaved(a,[id]);resetSavedWindow();renderSaved();renderAnalytics();renderWeekly()}}
+async function savedDayAction(action,id){
+ if(dayOperationBusy||inventoryBusy)return toast('A business save is already in progress. Try again shortly.');
+ const load=action==='load',arc=action==='archive',del=action==='delete',a=getSaved();
+ if(!id)return;
+ const i=a.findIndex(x=>String(x.id)===String(id));if(i<0)return;
+ if(load){if(holdMode)return toast('Finish or cancel the cart first');if(!historical){currentSnapshot={tx:clone(tx),openingStock:clone(openingStock),fields:{}};stateFields.forEach(fid=>{const el=$(fid);if(el)currentSnapshot.fields[fid]=el.value})}const r=a[i];historical=true;historicalRecordId=r.id;historicalSupplierOpening=r.fields?.openingSupplierPayable??supplierOpeningFor(r.date,r.business);tx=clone(r.tx||[]);openingStock=clone(r.openingStock||{});historicalClosingStock=clone(r.closingStock||{});$('business').value=r.business||'';$('date').value=r.date||'';$('openingCash').value=r.fields?.openingCash||0;$('posOpeningCash').value=r.fields?.posOpeningCash||0;$('posOpeningElectronic').value=r.fields?.posOpeningElectronic||0;$('actualPosCash').value=r.fields?.actualPosCash??'';$('actualPosElectronic').value=r.fields?.actualPosElectronic??'';$('openingDebt').value=r.fields?.openingDebt||0;$('actualCash').value=r.fields?.actualCash??'';$('actualBankMovement').value=r.fields?.actualBankMovement??'';setHistoryVisible(true);resetLedgerWindow();render();setTab('Tx');return}
+ if(!arc&&!del)return;
+ if(del){
+  if((a[i].tx||[]).some(t=>CreditAccounts.isCredit(t)||['sale_credit','sale_split','debt_cash','debt_transfer','purchase_credit','supplier_pay_cash','supplier_pay_bank','supplier_pay_transfer'].includes(t.type)&&(t.type!=='sale_split'||n(t.splitCredit)>0)||n(t.recoverableChange)>0||t.supplierPaymentId||t.supplierPurchaseId||t.marketPurchaseId))return toast('This day contains customer or supplier debt history. Archive it to preserve purchases, payments and outstanding balances.');
+  if(!confirm('Delete this saved day? Current stock will not be changed.'))return;
+ }
+ // Never mutate getSaved() in place: atomic rollback needs its original values.
+ const plan=planSavedDayChange(a,id,action);
+ dayOperationState(true);
+ try{
+  await RS.atomic(()=>setSaved(plan.records,[id]));
+  resetSavedWindow();renderSaved();renderAnalytics();renderWeekly();
+  toast(del?'Saved day deleted':plan.record.archived?'Saved day archived':'Saved day restored');
+ }catch(error){
+  PERF.parsed.delete(KEY.saved);markSavedChanged();
+  renderSaved();renderAnalytics();renderWeekly();
+  toast('Saved-day change not saved: '+(error?.message||error)+'. History is unchanged; retry when storage is available.');
+ }finally{dayOperationState(false);updateLocks();}
+}
 window.RoseachyDayCommands={record:savedDayAction,range:selectSavedRange,more(){PERF.savedLimit+=PERF.savedPage;renderSaved()}};
 if(!window.RoseachySavedDaysView){
  $('savedList').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-load-id][role=button]')){e.preventDefault();e.target.click()}});
@@ -1319,7 +1360,7 @@ async function startNewBusinessDay(){
   // When the second write succeeded but verification failed, restore that draft.
   if(nextDraftCommitted&&!uiStarted&&previousDraft!=null){
    try{await RS.atomic(()=>storeSet(KEY.draft,previousDraft));await RS.whenSaved()}
-   catch(recoveryError){showToast('Day transition needs attention: restore the previous draft from Saved Days or Backup before proceeding.');dayOperationState(false);return}
+   catch(recoveryError){requireDayRecovery();showToast('Day transition needs attention: reload saved records before proceeding.');dayOperationState(false);return}
   }
   showToast('New day not started: '+(e?.message||e));
  }finally{dayOperationState(false)}
@@ -1425,9 +1466,9 @@ async function backupCaptureWorking(){
  if(finKey){const text=JSON.stringify({fields:backupReadFields(true),view:finView,page:finPage,unmasked:finUnmasked});if(!backupFinanceCache||backupFinanceCache.key!==finKey||backupFinanceCache.text!==text)backupFinanceCache={key:finKey,text,box:await finSeal(finKey,new TextEncoder().encode(text))};state.financial=clone(backupFinanceCache.box)}else state.financial=previous?.financial||null;
  return state;
 }
-async function backupWaitForBusiness(){const start=performance.now();while(inventoryBusy||finBusy||noteSaving||retailSubmitBusy||auditCleanupBusy||pricingSavePending||pricingCommitTimers.size){if(performance.now()-start>10000)throw Error('A business save is still running. Wait and try again.');await new Promise(r=>setTimeout(r,25))}await RS.whenSaved()}
-function backupPersistWorking({atomic=true}={}){const run=async()=>{await backupWaitForBusiness();let state;for(let attempt=0;attempt<4;attempt++){const generation=backupWorkGeneration,revision=RS.status().revision;state=await backupCaptureWorking();if(generation===backupWorkGeneration&&revision===RS.status().revision&&!inventoryBusy&&!finBusy&&!noteSaving&&!retailSubmitBusy&&!auditCleanupBusy)break;if(attempt===3)throw Error('Work changed during capture. Please retry.');await backupWaitForBusiness()}const write=()=>{if(!historical){saveDraft();if(holdMode)saveHoldState()}else if(currentSnapshot){storeSet(KEY.draft,JSON.stringify({tx:currentSnapshot.tx,fields:currentSnapshot.fields,openingStock:currentSnapshot.openingStock}))}const text=JSON.stringify(state);if(safeGet(BACKUP_WORK_KEY)!==text)storeSet(BACKUP_WORK_KEY,text)};if(atomic)await RS.atomic(write);else{write();await RS.whenSaved()}return state};const result=backupWorkChain.then(run,run);backupWorkChain=result.catch(()=>{});return result}
-function backupScheduleWorking(){backupWorkGeneration++;if(!backupWorkReady||backupWorkApplying||roseachyBackupBusy)return;clearTimeout(backupWorkTimer);backupWorkTimer=setTimeout(()=>{backupWorkTimer=0;backupPersistWorking({atomic:false}).catch(e=>showToast('Unfinished work was not saved: '+(e.message||e)))},450)}
+async function backupWaitForBusiness(){const start=performance.now();while(dayOperationBusy||inventoryBusy||finBusy||noteSaving||retailSubmitBusy||auditCleanupBusy||pricingSavePending||pricingCommitTimers.size){if(dayRecoveryRequired)throw Error('Reload saved records before saving unfinished work.');if(performance.now()-start>10000)throw Error('A business save is still running. Wait and try again.');await new Promise(r=>setTimeout(r,25))}await RS.whenSaved()}
+function backupPersistWorking({atomic=true}={}){const run=async()=>{await backupWaitForBusiness();let state;for(let attempt=0;attempt<4;attempt++){const generation=backupWorkGeneration,revision=RS.status().revision;state=await backupCaptureWorking();if(generation===backupWorkGeneration&&revision===RS.status().revision&&!inventoryBusy&&!finBusy&&!noteSaving&&!retailSubmitBusy&&!auditCleanupBusy)break;if(attempt===3)throw Error('Work changed during capture. Please retry.');await backupWaitForBusiness()}const write=()=>{if(dayRecoveryRequired)throw Error('Reload saved records before saving unfinished work.');if(!historical){saveDraft();if(holdMode)saveHoldState()}else if(currentSnapshot){storeSet(KEY.draft,JSON.stringify({tx:currentSnapshot.tx,fields:currentSnapshot.fields,openingStock:currentSnapshot.openingStock}))}const text=JSON.stringify(state);if(safeGet(BACKUP_WORK_KEY)!==text)storeSet(BACKUP_WORK_KEY,text)};if(atomic)await RS.atomic(write);else{write();await RS.whenSaved()}return state};const result=backupWorkChain.then(run,run);backupWorkChain=result.catch(()=>{});return result}
+function backupScheduleWorking(){backupWorkGeneration++;if(!backupWorkReady||backupWorkApplying||roseachyBackupBusy||dayRecoveryRequired)return;clearTimeout(backupWorkTimer);backupWorkTimer=setTimeout(()=>{backupWorkTimer=0;backupPersistWorking({atomic:false}).catch(e=>showToast('Unfinished work was not saved: '+(e.message||e)))},450)}
 async function backupRestoreFinancialWorking(){const state=parsedJson(BACKUP_WORK_KEY,null);if(!finKey||!state?.financial)return;try{const data=JSON.parse(new TextDecoder().decode(await finOpen(finKey,state.financial)));backupValidateFields(data.fields,'Financial unfinished form',{financial:true});if(!['overview','history','review','admin','form','report'].includes(data.view))throw Error('Invalid financial working view');finShow(data.view);backupWriteFields(data.fields,true);finPage=Number.isInteger(data.page)?data.page:0;finUnmasked=data.unmasked!==false;backupFinanceCache={key:finKey,text:JSON.stringify(data),box:clone(state.financial)}}catch(e){showToast('Financial records unlocked, but the unfinished form could not be restored: '+e.message)}}
 function backupRestoreWorking(state){
  if(!state)return;backupWorkApplying=true;

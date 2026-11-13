@@ -1,6 +1,6 @@
-# Migration continuity — Stage 3B.5
+# Migration continuity — Stage 3B.6
 
-Current phase: **Stage 3B, in progress**. Version: `2.17.2-react-phase3b.5`.
+Current phase: **Stage 3B, in progress**. Version: `2.17.2-react-phase3b.6`.
 Production decision: **NO-GO**; this is an isolated development checkpoint.
 Branch: `migration/stage3b-forms` in `akudoluda-cmyk/Roseachy-backup`.
 
@@ -10,26 +10,22 @@ The remote checkpoint `c0abfd2ded04435910ad113a7a856f1d724fb3c4` contains Stage 
 
 ## Completed in this checkpoint
 
-- Settings Daily Setup correction now uses explicit React markup, four controlled amounts, registered Save/Close commands, presentation state and keyboard handling. Existing validation and the atomic save remain authoritative.
-- Expanded original-vs-React tests cover focus containment, cancel/reopen, injected persistence failure with retained retry values, duplicate retry and saved-day correction protection on desktop/mobile.
-
-## Retained Day Setup slice
-
-- Explicit React Day Setup and retail/POS reconciliation layouts, with ten controlled fields (including hidden business identity), associated labels and confirmation action.
-- The existing single business controller supplies committed values, calculations and locks through the existing field facade. Confirmation now returns its persistence promise to the React action guard and uses registered command dispatch.
-- Production original-vs-React coverage of invalid inputs, decimal drafts, confirmation/reload locks, Settings correction, reconciliation retention, and duplicate year-boundary transition at 1280px and 390px.
-- Existing day-history checks cover failed writes, historical locks, reload, duplicate submissions and counted/expected carry-forward with the new fields.
+- Saved-day Archive/Restore/Delete now use a nonmutating domain plan and the existing atomic persistence writer; React reports busy state and waits for commit before changing the list.
+- Failed history writes preserve both saved records and their transaction index; debt/deletion confirmation rules are unchanged.
+- A React recovery notice pauses editing if next-day verification and restoring the old draft both fail. Reload restores the authoritative persisted state.
+- Working-form autosave waits for day operations and cannot overwrite saved records from an obsolete screen during required recovery.
+- The preceding React Day Setup, reconciliation and Settings correction components remain intact.
 
 ## Validation and remaining work
 
-See `tests/SETUP_CORRECTION_TEST_REPORT_2026_11_13.md` and `tests/DAY_SETUP_TEST_REPORT_2026_11_13.md` for this session's commands and outcomes. November 11 reports remain historical evidence. Storage schema v8 and the storage source are unchanged. No live data or production deployment was accessed.
+Fresh named checks passed: see `tests/DAY_RECOVERY_TEST_REPORT_2026_11_13.md` for test counts, known original defects, evidence collection limits and remaining work. All tests use synthetic records and disposable local origins. Storage schema v8 and the original storage source are unchanged. No live data or production deployment was accessed.
 
-Still partial: the broader Stage 3B architecture and field compatibility facade. Calculations, navigation, legacy tree and persistence controller remain legacy owned. The correction dialog has a fallback for the controller-only harness, but the React app renders the explicit component. Stage 3C financial parity is incomplete; Stage 4 modules, Stage 5 design system and Stage 6 release gates remain outstanding.
+Still partial: broader Stage 3B architecture, remaining transaction/cart correction forms and field compatibility facades. Calculations, navigation, legacy tree and persistence controller remain legacy owned. Stage 3C financial parity is incomplete; Stage 4 modules, Stage 5 design system and Stage 6 release gates remain outstanding.
 
-Next slice: characterize midnight automatic preservation, archive/delete write-failure recovery and verification failure after a committed next-day write. Broader form/controller ownership still needs inventory before choosing the next conversion. Full sync, service-worker upgrade/rollback, old/interrupted backups and physical devices are unverified. Do not interpret the tested December-to-January transition as coverage of automatic midnight processing or every calendar boundary.
+Next slice: inventory transaction/cart correction forms and migrate a characterized slice. Confirmation persistence failures, the actual interval trigger at midnight (visibility-triggered preservation is covered), additional calendar/payment cases, full sync, service-worker update/rollback, older/interrupted backups and physical devices remain unverified.
 
 ## Recovery and backups
 
-The preceding Day Setup checkpoint `f77b02d859c44c1aba707129b95ea05358ae2ddb` was pushed and its exact remote SHA verified before this slice. The commit containing this document is the new checkpoint; resolve its exact SHA with `git log -1 --format=%H -- MIGRATION_STATUS.md` and verify it against `git ls-remote origin refs/heads/migration/stage3b-forms`. A local commit alone is not proof of a remote backup. Push verification is reported separately in the session handoff. Do not force-push or merge into main automatically.
+The preceding Settings correction checkpoint `68315a9d07bb2f3497a9259fc439dd3c516a3a11` was pushed and its exact remote SHA verified before this slice. The commit containing this document is the new checkpoint; resolve its exact SHA with `git log -1 --format=%H -- MIGRATION_STATUS.md` and verify it against `git ls-remote origin refs/heads/migration/stage3b-forms`. A local commit alone is not proof of a remote backup. Push verification is reported separately in the session handoff. Do not force-push or merge into main automatically.
 
 For rollback, preserve new work and use the preceding checkpoint or archived original in a separate directory. Do not restore synthetic test records into a live origin. There has been no production cutover.

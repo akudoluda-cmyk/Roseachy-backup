@@ -1,7 +1,7 @@
 import {SetupCorrectionDialog,setupCorrectionEntry,setupCorrectionView} from './history/SetupCorrectionDialog.jsx';
 import {setupEntry} from './history/DaySetup.jsx';
 import * as dayRecords from './domain/day-records.mjs';
-import {dayEntry,savedDaysView} from './history/SavedDays.jsx';
+import {dayEntry,savedDaysView,DayRecoveryNotice} from './history/SavedDays.jsx';
 import {supplierPaymentEntry,supplierPaymentView} from './forms/SupplierPaymentDialog.jsx';
 import {cashMoveEntry,cashMoveView} from './forms/CashMoveDialog.jsx';
 import * as posMath from './domain/pos-math.mjs';
@@ -91,5 +91,5 @@ export function BridgeApp() {
       document.body.appendChild(panel);
     });
   }, []);
-  return <><LegacySurface /><SetupCorrectionDialog /><SalesStockTablePortals tables={tables} /></>;
+  return <><LegacySurface /><DayRecoveryNotice /><SetupCorrectionDialog /><SalesStockTablePortals tables={tables} /></>;
 }

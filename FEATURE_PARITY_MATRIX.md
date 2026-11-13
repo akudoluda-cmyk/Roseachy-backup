@@ -1,3 +1,12 @@
+# Stage 3B.6 addition
+
+| Feature | Owner | Coverage | Difference/limit |
+| --- | --- | --- | --- |
+| History Archive/Restore/Delete | Pure `planSavedDayChange` + atomic controller command + React busy state | Failed writes, rollback, duplicate retry, transaction index and reload | Intentional fix: original updates working/UI history before durable commit |
+| Passive midnight preservation | Existing single controller | Nigeria midnight via visibility event, unfinished input/history guards, write failure/retry | Interval trigger and physical device lifecycle remain untested |
+| Next-day verification recovery | Existing controller + React `DayRecoveryNotice` | Committed-next-draft read mismatch, successful rollback and failed rollback | Intentional fix: failed rollback pauses editing until reload |
+| Working-form autosave | Existing controller | Pending timer cannot overwrite next-day draft during recovery | Financial arithmetic/schema unchanged |
+
 # Stage 3B.5 addition
 
 | Feature | Owner | Verification | Remaining |
